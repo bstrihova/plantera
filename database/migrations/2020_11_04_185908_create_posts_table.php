@@ -17,9 +17,10 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string("name");
             $table->string("description");
-            $table->string("price")->nullable();
+            $table->integer("price")->nullable();
+            $table->string("currency")->nullable();
             $table->string("transaction");
-            $table->string("status");
+            $table->boolean("available");
             $table->text("photo");
             $table->timestamps();
         });
