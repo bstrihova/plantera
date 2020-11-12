@@ -5,6 +5,7 @@ import MuiSelect from "@material-ui/core/Select";
 import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import { FormControl } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 
 function ExampleComponent() {
@@ -30,6 +31,7 @@ function ExampleComponent() {
                     <MuiMenuItem value="2">amoooordfdfiio</MuiMenuItem>
                 </MuiSelect>
             </FormControl>
+            <DeleteIcon />
         
 
         </div>
