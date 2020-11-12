@@ -16,20 +16,23 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::get('/dummy', "DummyController@index")->middleware("auth");
-Route::get('/dummy', "DummyController@index");
+// Route::get('/dummy', "DummyController@index");
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
 
-Route::group(['prefix' => 'messages', "middleware" => "auth"], function () {
-    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
-    Route::get('/create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
-    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
-    Route::get('/{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
-    Route::put('/{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
-});;
+// Route::group(['prefix' => 'messages', "middleware" => "auth"], function () {
+//     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+//     Route::get('/create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+//     Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+//     Route::get('/{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+//     Route::put('/{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+// });;
+
+Route::get('/user/profile', 'IndexController@index');
+Route::get('/user/settings', 'IndexController@index');
 
 Route::get('/{path?}', "IndexController@index")->where('path', '.*');
