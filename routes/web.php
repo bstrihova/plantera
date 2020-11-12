@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 // Route::get('/dummy', "DummyController@index")->middleware("auth");
 Route::get('/dummy', "DummyController@index");
@@ -33,3 +31,5 @@ Route::group(['prefix' => 'messages', "middleware" => "auth"], function () {
     Route::get('/{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
     Route::put('/{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
 });;
+
+Route::get('/{path?}', "IndexController@index")->where('path', '.*');
