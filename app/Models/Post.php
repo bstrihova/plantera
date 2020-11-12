@@ -10,6 +10,7 @@ use App\Models\User;
 class Post extends Model
 {
     use HasFactory;
+    
     public function threads() {
         return $this->hasMany(Thread::class);
     }

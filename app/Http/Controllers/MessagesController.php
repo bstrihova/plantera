@@ -25,7 +25,7 @@ class MessagesController extends Controller
         $threads = Thread::getAllLatest()->get();
 
         // All threads that user is participating in
-        // $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
+        $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
 
         // All threads that user is participating in, with new messages
         // $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
@@ -66,9 +66,11 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
+    //public function create($id)
     public function create()
     {
         $users = User::where('id', '!=', Auth::id())->get();
+        // $users = User::where('id', '!=', Auth::id())->where("id", "=", $id)->get();
 
         return view('messenger.create', compact('users'));
     }
