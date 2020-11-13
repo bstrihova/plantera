@@ -31,7 +31,7 @@ body {
 
 div#columns figure {
   background: white;
-  margin: 0;
+  margin: 20px;
   padding-bottom: 30px;
   display: inline-block;
 }
