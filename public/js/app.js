@@ -84006,7 +84006,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Post() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Post", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExampleComponent_ExampleComponent__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "container-post"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214",
+    alt: ""
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figcaption", null, "Fig.1 - Trulli, Puglia, Italy.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "price_user"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "150 KC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "https://i1.wp.com/nutrikiran.com/wp-content/uploads/2019/09/my_image.png?w=451&ssl=1",
+    alt: ""
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta aut rem necessitatibus quam consequuntur, repellendus non earum molestias dolorum officiis quisquam esse, iure eos, officia voluptatum exercitationem eum! Enim, veritatis?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Location:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Prague, Cz"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExampleComponent_ExampleComponent__WEBPACK_IMPORTED_MODULE_1__["default"], null));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Post);
@@ -84175,8 +84185,8 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/bara/web/bootcamp/projects/plantera/resources/js/app/index.jsx */"./resources/js/app/index.jsx");
-module.exports = __webpack_require__(/*! /Users/bara/web/bootcamp/projects/plantera/resources/scss/app.scss */"./resources/scss/app.scss");
+__webpack_require__(/*! C:\Web\Bootcamp\Projects\final-project\plantera\resources\js\app\index.jsx */"./resources/js/app/index.jsx");
+module.exports = __webpack_require__(/*! C:\Web\Bootcamp\Projects\final-project\plantera\resources\scss\app.scss */"./resources/scss/app.scss");
 
 
 /***/ })
