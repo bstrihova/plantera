@@ -31,7 +31,7 @@ function ExampleComponent() {
                     <MuiMenuItem value="2">amoooordfdfiio</MuiMenuItem>
                 </MuiSelect>
             </FormControl>
-            <DeleteIcon />
+            <Button color="primary"><DeleteIcon /></Button>
         
 
         </div>

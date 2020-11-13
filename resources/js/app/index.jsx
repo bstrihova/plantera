@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from "react-dom"
 import App from "./App/App"
-import {ThemeProvider, createMuiTheme} from "@material-ui/core/styles"
+import {ThemeProvider, createMuiTheme, responsiveFontSizes} from "@material-ui/core/styles"
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
     palette: {
         primary: {
             main: "#246b43",
@@ -15,8 +15,21 @@ const theme = createMuiTheme({
             light: "#ffffff",
             dark: "#cccccc",
         }
-    }
+    },
+    overrides: {
+        MuiAvatar: {
+          img: {
+            // handle correctly non-square images
+            objectFit: 'cover',
+            height: '100%',
+          },
+        },
+      },
+
 })
+
+theme = responsiveFontSizes(theme);
+
 
 
 ReactDOM.render(
