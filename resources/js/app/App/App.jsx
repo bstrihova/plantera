@@ -21,13 +21,13 @@ function App() {
                 {/* // BARA ONLY */}
                 <Route exact path="/" children={<Home/>}/> 
 
-                {/* // STEFANO ONLY */}
                 <Route path="/posts/create" children={<PostCreate/>}/>
 
                 <Route path="/posts/edit" children={<PostEdit/>}/>
 
                 <Route path="/posts/delete" children={<PostDelete/>}/>
 
+                {/* // STEFANO ONLY */}
                 <Route path="/posts" children={<Post/>}/>
 
                 <Route path="/user/profile" children={<UserProfile/>}/>

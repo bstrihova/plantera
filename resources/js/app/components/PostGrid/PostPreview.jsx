@@ -8,7 +8,7 @@ function PostPreview({postImg}) {
         <figure>
             <img src={postImg}/>
             <figcaption>
-                <Typography variant="h6" component="h3">
+                <Typography variant="h6" >
                     Snake plant little baby
                 </Typography>
                 <Box display="flex" alignItems="center" justifyContent="space-between" mt={-1}>
@@ -20,9 +20,10 @@ function PostPreview({postImg}) {
                             bramborienka
                         </Typography>
                     </Box>
-                        <Box component="h3" variant="body1" fontWeight={700}>
+                        {/* <Box component="h3" variant="body1" fontWeight={700}>
                             150 Kč
-                        </Box>
+                        </Box> */}
+                        <Typography color="primary" variant="h6">150 Kč</Typography>
                 </Box>
             </figcaption>
         </figure>
