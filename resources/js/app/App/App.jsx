@@ -35,9 +35,11 @@ function App() {
                 <Route path="/user/settings" children={<UserSettings/>}/>
 
                 {/* EVA ONLY */}
-                <Route path="/messages" children={<Messages/>}/>
 
                 <Route path="/messages/create" children={<MessageCreate/>}/>
+                <Route path="/messages" children={<Messages/>}/>
+
+                
             </Switch>
             </main>
         </Router>
