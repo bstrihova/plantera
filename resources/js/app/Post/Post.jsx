@@ -22,7 +22,7 @@ function Post() {
                 <section className="containerRight">
                     <div className="postPrice">
                         <Typography variant="h2" color="primary">
-                            150 Kč
+                            1500 Kč
                         </Typography>
                         <Avatar
                             className="userAvatar"

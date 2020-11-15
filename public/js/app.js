@@ -85292,14 +85292,13 @@ function Post() {
     alt: "Snake plant",
     src: "https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "main"
+    className: "containerRight"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "postPrice"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
     variant: "h2",
-    color: "primary",
-    fontSize: "bold"
-  }, "150 K\u010D"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    color: "primary"
+  }, "1500 K\u010D"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: "userAvatar",
     alt: "user",
     src: "https://i1.wp.com/nutrikiran.com/wp-content/uploads/2019/09/my_image.png?w=451&ssl=1",
@@ -85671,8 +85670,8 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/bara/web/bootcamp/projects/plantera/resources/js/app/index.jsx */"./resources/js/app/index.jsx");
-module.exports = __webpack_require__(/*! /Users/bara/web/bootcamp/projects/plantera/resources/scss/app.scss */"./resources/scss/app.scss");
+__webpack_require__(/*! C:\Web\Bootcamp\Projects\final-project\plantera\resources\js\app\index.jsx */"./resources/js/app/index.jsx");
+module.exports = __webpack_require__(/*! C:\Web\Bootcamp\Projects\final-project\plantera\resources\scss\app.scss */"./resources/scss/app.scss");
 
 
 /***/ })
