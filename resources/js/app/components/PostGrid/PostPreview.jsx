@@ -16,14 +16,13 @@ function PostPreview({postImg}) {
                         <Box mr={0.6}>
                             <Avatar alt="username" src="/storage/profile-photos/08d0IhlaomLIg3XBk0XDZ7ahfMgmTB5zEs82m6Un.jpeg" variant="circle"/>
                         </Box>
-                        <Typography variant="body1" >
+                        <Typography variant="body2" >
                             bramborienka
                         </Typography>
                     </Box>
-                        {/* <Box component="h3" variant="body1" fontWeight={700}>
+                        <Box component="h3" variant="body1" fontWeight={700} color="primary.main">
                             150 Kč
-                        </Box> */}
-                        <Typography color="primary" variant="h6">150 Kč</Typography>
+                        </Box>
                 </Box>
             </figcaption>
         </figure>

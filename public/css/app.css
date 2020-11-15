@@ -7,6 +7,62 @@ body {
   padding: 0;
 }
 
+.container {
+  margin-top: 5em;
+  margin-left: 20em;
+  margin-right: 20em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  box-shadow: 10px 10px 60px #888888;
+  border-radius: 15px;
+  height: 70vh;
+}
+
+.containerRight {
+  margin-right: 5em;
+}
+
+.postPrice {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.description {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 30vw;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+img {
+  height: 100%;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.myPictures {
+  display: flex;
+  justify-content: center;
+}
+
+.myPictures img {
+  justify-self: center;
+  border-radius: 15px;
+  width: 20%;
+  height: 80%;
+  margin: 1%;
+}
+
 .banner {
   background-image: url("/homepage_main_bg.jpg");
   background-size: cover;
@@ -22,17 +78,17 @@ body {
 #columns {
   -moz-column-width: 230px;
        column-width: 230px;
-  -moz-column-gap: 30px;
-       column-gap: 30px;
-  width: 90%;
-  max-width: 1100px;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  max-width: 80%;
   margin: 50px auto;
 }
 
 div#columns figure {
-  background: white;
-  margin: 20px;
-  padding-bottom: 30px;
+  background: #fefefe;
+  margin: 0 2px 15px;
+  padding-bottom: 10px;
+  transition: opacity 0.4s ease-in-out;
   display: inline-block;
 }
 
@@ -41,15 +97,29 @@ div#columns figure img {
   height: auto;
   margin-bottom: 5px;
   border-radius: 15px;
-  transition: opacity 0.25s ease-in-out;
 }
 
 div#columns figure figcaption {
-  padding: 0 0.5em;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.5;
 }
 
-figure img:hover {
-  opacity: 0.5;
+div#columns small {
+  font-size: 1rem;
+  float: right;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+div#columns small a {
+  color: #666;
+  text-decoration: none;
+  transition: 0.4s color;
+}
+
+div#columns:hover figure:not(:hover) {
+  opacity: 0.4;
 }
 
 @media screen and (max-width: 750px) {

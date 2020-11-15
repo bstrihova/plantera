@@ -12,7 +12,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import MoreIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -22,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    display: 'none',
+    display: 'block',
+    maxWidth: "120px",
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -138,14 +138,7 @@ export default function Header() {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      {/* <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem> */}
+
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -162,20 +155,9 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
-          {/* hamburger button */}
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Plantera
-          </Typography>
+        <img src="/logo_plantera.png" alt="logo" className={classes.title}/>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -196,11 +178,6 @@ export default function Header() {
                 <MailIcon />
               </Badge>
             </IconButton>
-            {/* <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -213,14 +190,17 @@ export default function Header() {
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
+
+            {/* hamburger button */}
             <IconButton
-              aria-label="show more"
+              aria-label="open mobile menu"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
+              edge="start"
             >
-              <MoreIcon />
+              <MenuIcon />
             </IconButton>
           </div>
         </Toolbar>

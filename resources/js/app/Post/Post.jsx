@@ -1,41 +1,51 @@
 import React from "react";
+import Box from "@material-ui/core/Box";
 import ExampleComponent from "../ExampleComponent/ExampleComponent";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
+import PostGrid from "../components/PostGrid/PostGrid";
+import Container from "@material-ui/core/Container";
+import Button from "@material-ui/core/Button";
+import PostDescription from "../components/PostDescription/PostDescription";
 
 function Post() {
     return (
-        <div>
-            <div id="container-post">
+        <main>
+            <section className="container">
                 <figure>
                     <img
+                        className="imagePost"
+                        alt="Snake plant"
                         src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
-                        alt=""
                     />
-                    <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
                 </figure>
-                <section>
-                    <div className="price_user">
-                        <h1>150 KC</h1>
-                        <img
+                <section className="containerRight">
+                    <div className="postPrice">
+                        <Typography variant="h2" color="primary">
+                            1500 Kč
+                        </Typography>
+                        <Avatar
+                            className="userAvatar"
+                            alt="user"
                             src="https://i1.wp.com/nutrikiran.com/wp-content/uploads/2019/09/my_image.png?w=451&ssl=1"
-                            alt=""
+                            variant="circle"
                         />
                     </div>
-                    <h3>Description</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Dicta aut rem necessitatibus quam consequuntur,
-                        repellendus non earum molestias dolorum officiis
-                        quisquam esse, iure eos, officia voluptatum
-                        exercitationem eum! Enim, veritatis?
-                    </p>
-                    <h3>Location:</h3>
-                    <br />
-                    <p>Prague, Cz</p>
+                    <div className="description">
+                        <PostDescription />
+                    </div>
                 </section>
-            </div>
 
-            <ExampleComponent />
-        </div>
+                {/* <Box
+                        className="description"
+                        display="flex"
+                        flexDirection="column"
+                    >
+                        <PostDescription />
+                    </Box> */}
+            </section>
+            <PostGrid />
+        </main>
     );
 }
 

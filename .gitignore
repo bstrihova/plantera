@@ -4,6 +4,7 @@
 /public/css/*.css
 /public/css/*.css.map
 /public/js/*.js
+/public/js/*.js.map
 /public/mix-manifest.json
 
 /storage/*.key
