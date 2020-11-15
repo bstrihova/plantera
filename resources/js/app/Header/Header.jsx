@@ -157,7 +157,8 @@ export default function Header() {
     <div className={classes.grow}>
       <AppBar position="fixed">
         <Toolbar>
-        <img src="/logo_plantera.png" alt="logo" className={classes.title}/>
+        {/* <img src="/logo_plantera.png" alt="logo" className={classes.title}/> */}
+        <Typography className={classes.title}>Plantera</Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
