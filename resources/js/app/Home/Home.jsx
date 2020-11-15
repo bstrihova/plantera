@@ -4,11 +4,11 @@ import Typography from "@material-ui/core/Typography"
 import Box from "@material-ui/core/Box"
 import 'fontsource-roboto';
 import PostGrid from '../components/PostGrid/PostGrid';
+import { Link } from 'react-router-dom';
 
 function Home() {
     return (
-        <div>
-            <main>
+        <>
                 <section className="banner">
                 <Box component="div" whiteSpace="normal" className="banner__headings">
                     <Typography variant="h3" color="primary" gutterBottom>
@@ -17,8 +17,10 @@ function Home() {
                     <Typography variant="h5" color="primary">
                     Give your plants a second life
                     </Typography>
-                    <Box mt={5}> 
-                        <Button color="primary" variant="contained" size="large">Get Started</Button>
+                    <Box mt={5}>
+                        <Link to="/posts/create"> 
+                            <Button color="primary" variant="contained" size="large">Get Started</Button>
+                       </Link> 
                     </Box>
                 </Box>
                 </section>
@@ -29,9 +31,8 @@ function Home() {
 
 
                 </section>
-            </main>
 
-        </div>
+        </>
     )
 }
 

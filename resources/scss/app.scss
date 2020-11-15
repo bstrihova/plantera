@@ -17,17 +17,5 @@ body {
 
 ///BARA'S CSS
 
-.banner {
-    background-image: url("/homepage_main_bg.jpg");
-    background-size: cover;
-    background-position: left;
-    height: 300px;
-    padding: 4em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
 @import "../js/app/components/PostGrid/postgrid";
 @import "../js/app/Home/home";

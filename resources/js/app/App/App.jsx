@@ -15,7 +15,6 @@ import Header from '../Header/Header';
 function App() {
     return (
         <Router>
-            {/* <React.Fragment> */}
                 <Header/>
                 <main>
                 <Switch>

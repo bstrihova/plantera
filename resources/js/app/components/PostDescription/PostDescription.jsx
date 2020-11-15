@@ -3,6 +3,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 function PostDescription() {
     return (
@@ -26,7 +27,8 @@ function PostDescription() {
                 <Typography variant="h4" component="h2">
                     Description:{" "}
                 </Typography>
-                <Typography variant="subtitle1" component="h2" color="primary">
+
+                <Typography variant="subtitle1" component="h2" color="primary" className="description__text">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. In,
                     tempore quo impedit unde optio repellat et incidunt
                     doloremque sunt quaerat, quas sit autem, itaque pariatur
@@ -36,6 +38,7 @@ function PostDescription() {
                     aliquid cumque commodi explicabo debitis, voluptatibus unde
                     nisi quo rem, sit ad facilis quae placeat, dolor dignissimos
                 </Typography>
+
                 <Box>
                     <Typography variant="h5" component="h2">
                         Location:{" "}
@@ -49,15 +52,18 @@ function PostDescription() {
                     </Typography>
                 </Box>
 
-                <Button
-                    className="button--post"
-                    color="primary"
-                    variant="contained"
-                    size="medium"
-                    disableRipple
-                >
-                    Contact seller
-                </Button>
+                <Link to="/messages/create">
+                    <Button
+                        className="button--post"
+                        color="primary"
+                        variant="contained"
+                        size="medium"
+                        disableRipple
+                        style={{textTransform: 'none'}}
+                    >
+                        Contact seller
+                    </Button>
+                </Link>
             </div>
         </section>
     );

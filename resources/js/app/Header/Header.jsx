@@ -3,15 +3,18 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Box from '@material-ui/core/Box';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
+import { Link } from 'react-router-dom';
+import GoogleLocation from "../components/GoogleLocation/GoogleLocation"
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -22,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     display: 'block',
-    maxWidth: "120px",
+    textDecoration: "none",
+    // maxWidth: "120px",
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -105,6 +109,7 @@ export default function Header() {
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
+    //profile menu on desktop
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -114,13 +119,21 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {/* pop up menu item Profile */}
+      <Link to="/user/profile">
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      </Link>
+
+       {/* pop up menu item Account Settings */}
+      <Link to="/user/settings">
+        <MenuItem onClick={handleMenuClose}>Account Settings</MenuItem>
+      </Link>
     </Menu>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
+    // whole hamburger mobile menu
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -130,15 +143,19 @@ export default function Header() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
+      {/* messages icon inside hamburger mobile menu */}
+      <Link to="/messages">
+        <MenuItem>
+          <IconButton aria-label="show 4 new mails" color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <p>Messages</p>
+        </MenuItem>
+      </Link>
 
+    {/* open profile menu on mobile */}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -155,41 +172,66 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="fixed">
+
+      {/* the whole nav bar, can be set to fixed so it will stay on top */}
+      <AppBar position="static">
+
+        {/* content of whole navbar */}
         <Toolbar>
-        {/* <img src="/logo_plantera.png" alt="logo" className={classes.title}/> */}
-        <Typography className={classes.title}>Plantera</Typography>
+
+        {/* Logo */}
+        <Link to="/">
+        <img src="/logo_plantera.png" alt="logo" width="100px"/>
+        </Link>
+        
+
+        {/* Search */}
+            
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search your plant…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <Box display="flex">
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="Search your plant…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+                <GoogleLocation/>
+              </Box>
           </div>
+
           <div className={classes.grow} />
+
+          {/* shows desktop menu on right side of nav */}
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+
+            {/* icon for messages on desktop */}
+           <Link to="/messages">
+              <IconButton aria-label="show 4 new mails" color="secondary">
+                <Badge badgeContent={4} color="secondary">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
+           </Link>
+            
+            {/* profile icon on desktop */}
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="secondary"
+              >
+                <AccountCircle />
+              </IconButton>
           </div>
+          
+          {/* shows mobile menu on right side of nav */}
           <div className={classes.sectionMobile}>
 
             {/* hamburger button */}

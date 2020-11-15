@@ -5,7 +5,7 @@ import PostDescription from "../components/PostDescription/PostDescription";
 
 function Post() {
     return (
-        <main>
+        <div className="main--post">
             <section className="container">
                 <img
                     className="imagePost"
@@ -23,7 +23,7 @@ function Post() {
                     </Box> */}
             </section>
             <PostGrid />
-        </main>
+        </div>
     );
 }
 
