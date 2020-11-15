@@ -23,12 +23,12 @@ function Home() {
                 </Box>
                 </section>
 
-                <section className="content">
+                <section className="content content--home">
 
                     <PostGrid/>
 
 
-                     </section>
+                </section>
             </main>
 
         </div>

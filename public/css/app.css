@@ -22,17 +22,17 @@ body {
 #columns {
   -moz-column-width: 230px;
        column-width: 230px;
-  -moz-column-gap: 30px;
-       column-gap: 30px;
-  width: 90%;
-  max-width: 1100px;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  max-width: 80%;
   margin: 50px auto;
 }
 
 div#columns figure {
-  background: white;
-  margin: 20px;
-  padding-bottom: 30px;
+  background: #fefefe;
+  margin: 0 2px 15px;
+  padding-bottom: 10px;
+  transition: opacity 0.4s ease-in-out;
   display: inline-block;
 }
 
@@ -41,15 +41,29 @@ div#columns figure img {
   height: auto;
   margin-bottom: 5px;
   border-radius: 15px;
-  transition: opacity 0.25s ease-in-out;
 }
 
 div#columns figure figcaption {
-  padding: 0 0.5em;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.5;
 }
 
-figure img:hover {
-  opacity: 0.5;
+div#columns small {
+  font-size: 1rem;
+  float: right;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+div#columns small a {
+  color: #666;
+  text-decoration: none;
+  transition: 0.4s color;
+}
+
+div#columns:hover figure:not(:hover) {
+  opacity: 0.4;
 }
 
 @media screen and (max-width: 750px) {

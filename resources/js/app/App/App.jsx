@@ -15,31 +15,33 @@ import Header from '../Header/Header';
 function App() {
     return (
         <Router>
-            <Header/>
-            <main>
-            <Switch>
-                {/* // BARA ONLY */}
-                <Route exact path="/" children={<Home/>}/> 
+            {/* <React.Fragment> */}
+                <Header/>
+                <main>
+                <Switch>
+                    {/* // BARA ONLY */}
+                    <Route exact path="/" children={<Home/>}/> 
 
-                <Route path="/posts/create" children={<PostCreate/>}/>
+                    <Route path="/posts/create" children={<PostCreate/>}/>
 
-                <Route path="/posts/edit" children={<PostEdit/>}/>
+                    <Route path="/posts/edit" children={<PostEdit/>}/>
 
-                <Route path="/posts/delete" children={<PostDelete/>}/>
+                    <Route path="/posts/delete" children={<PostDelete/>}/>
 
-                {/* // STEFANO ONLY */}
-                <Route path="/posts" children={<Post/>}/>
+                    {/* // STEFANO ONLY */}
+                    <Route path="/posts" children={<Post/>}/>
 
-                <Route path="/user/profile" children={<UserProfile/>}/>
+                    <Route path="/user/profile" children={<UserProfile/>}/>
 
-                <Route path="/user/settings" children={<UserSettings/>}/>
+                    <Route path="/user/settings" children={<UserSettings/>}/>
 
-                {/* EVA ONLY */}
-                <Route path="/messages" children={<Messages/>}/>
+                    {/* EVA ONLY */}
+                    <Route path="/messages" children={<Messages/>}/>
 
-                <Route path="/messages/create" children={<MessageCreate/>}/>
-            </Switch>
-            </main>
+                    <Route path="/messages/create" children={<MessageCreate/>}/>
+                </Switch>
+                </main>
+            {/* </React.Fragment>     */}
         </Router>
         )
 }
