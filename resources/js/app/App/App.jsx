@@ -35,7 +35,6 @@ function App() {
 
                     <Route path="/user/settings" children={<UserSettings/>}/>
 
-<<<<<<< HEAD
                 {/* EVA ONLY */}
 
                 <Route path="/messages/create" children={<MessageCreate/>}/>
@@ -44,15 +43,6 @@ function App() {
                 
             </Switch>
             </main>
-=======
-                    {/* EVA ONLY */}
-                    <Route path="/messages" children={<Messages/>}/>
-
-                    <Route path="/messages/create" children={<MessageCreate/>}/>
-                </Switch>
-                </main>
-            {/* </React.Fragment>     */}
->>>>>>> e4f493a2a8b92012290a9f6a35ed378650904a18
         </Router>
         )
 }
