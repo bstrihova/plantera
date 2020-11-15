@@ -9,65 +9,6 @@ body {
 
 ///STEFANO'S CSS
 
-.container {
-    margin-top: 5em;
-    margin-left: 20em;
-    margin-right: 20em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    box-shadow: 10px 10px 60px #888888;
-    border-radius: 15px;
-    height: 70vh;
-    // width: 90vw;
-}
-
-.containerRight {
-    margin-right: 5em;
-    // margin-left: -250px;
-}
-
-.postPrice {
-    margin-top: 2em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    // width: 400px;
-}
-
-.description {
-    margin-top: 3em;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    max-width: 30vw;
-}
-
-.button {
-    display: flex;
-    justify-content: center;
-    border-radius: 15px;
-}
-
-img {
-    height: 100%;
-    // width: 100%;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.myPictures {
-    display: flex;
-    justify-content: center;
-}
-
-.myPictures img {
-    justify-self: center;
-    border-radius: 15px;
-    width: 20%;
-    height: 80%;
-    margin: 1%;
-}
 @import "../js/app/Post/post";
 
 ///EVA'S CSS
