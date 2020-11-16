@@ -24,7 +24,7 @@ let theme = createMuiTheme({
             height: '100%',
           },
         },
-      },
+      }, 
 
 })
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Grid from '@material-ui/core/Grid';
@@ -25,6 +25,15 @@ const autocompleteService = { current: null };
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
+  },
+  locationIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }));
 
@@ -114,7 +123,11 @@ export default function GoogleMaps() {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Add a location" variant="outlined" fullWidth color="secondary"/>
+      <div ref={params.InputProps.ref}>
+      <label {...params.InputLabelProps}></label>
+      <Input {...params.inputProps} autoFocus placeholder="Location" color="secondary"/>
+    </div>
+
       )}
       renderOption={(option) => {
         const matches = option.structured_formatting.main_text_matched_substrings;
