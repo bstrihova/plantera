@@ -12,10 +12,6 @@
   }
 
 
-  img {
-      height: 50%;
-  }
-
   .section_heading {
       margin-top: 64px;
       width: 25rem;
@@ -54,7 +50,7 @@
   
   .message__text {
     flex: 0 0 auto;
-    max-width: 14rem;
+    max-width: 80%;
     padding: 1rem;
     border-radius: 4px;
     margin: 0 0.5rem 0.5rem 0.5rem;
