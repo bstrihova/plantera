@@ -14,7 +14,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import { Link } from 'react-router-dom';
-import GoogleLocation from "../components/GoogleLocation/GoogleLocation"
+import GoogleLocation from "../common/GoogleLocation/GoogleLocation"
 
 const useStyles = makeStyles((theme) => ({
   grow: {

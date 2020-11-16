@@ -1,7 +1,7 @@
 import React from "react";
-import PostGrid from "../components/PostGrid/PostGrid";
+import PostGrid from "../common/PostGrid/PostGrid";
 
-import PostDescription from "../components/PostDescription/PostDescription";
+import PostDescription from "../common/PostDescription/PostDescription";
 
 function Post() {
     return (
