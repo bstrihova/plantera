@@ -1,10 +1,20 @@
 import React from 'react'
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 
-function MessageContent() {
+function MessageContent({role}) {
+
+    const specificRole = `message--${role}`
+
+  
+
     return (
-        <ListItem className="message--remote" alignItems="flex-start">
+        <ListItem className={specificRole} alignItems="flex-start">
             <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
             </ListItemAvatar>
 
             <ListItemText className="message__text" >                
@@ -16,8 +26,6 @@ function MessageContent() {
                     {"I am a sender / I want your plant"} 
                 </Typography>
             </ListItemText>
-                                  
-                
         </ListItem>
 
     )
