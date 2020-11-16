@@ -10,7 +10,7 @@ function PostDescription() {
         <section className="containerRight">
             <div className="containerRight__upperPart">
                 <Box variant="h3" fontWeight={900} color="primary.main">
-                    <Typography variant="h3">1900 Kč</Typography>
+                    <Typography variant="h3">1800 Kč</Typography>
                 </Box>
                 <Box display="flex" flexDirection="column" alignItems="center">
                     <Box mr={0.6}>
