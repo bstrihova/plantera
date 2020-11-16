@@ -5,8 +5,8 @@ import PostDescription from "../components/PostDescription/PostDescription";
 
 function Post() {
     return (
-        <div className="main--post">
-            <section className="container">
+        <div className="main__container">
+            <section className="main__container__shadow">
                 <img
                     className="imagePost"
                     alt="Snake plant"

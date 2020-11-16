@@ -1,4 +1,4 @@
-.main--post {
+.main__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,7 +7,7 @@
     padding: 1em;
 }
 
-.container {
+.main__container__shadow {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

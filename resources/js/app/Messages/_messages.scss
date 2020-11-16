@@ -1,0 +1,85 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+  }
+  
+  body {
+    background: #ffffff;
+  }
+
+
+  img {
+      height: 50%;
+  }
+
+  .section_heading {
+      margin-top: 64px;
+      width: 25rem;
+      text-align: center;
+       }
+  .main__container__shadow--messages {
+    width: 40%;
+  }
+  .chat {
+    width: 50%;
+    background: white;
+    margin: 4rem auto;
+    border-radius: 4px;
+    min-height: 4rem;
+    padding: 1rem;
+  }
+  
+  .message {
+    display: flex;
+    margin-bottom: 0.5rem;
+  }
+  
+  .message--remote {
+    flex-direction: row;
+    }
+  
+  .message--local {
+    flex-direction: row-reverse;
+     }
+  
+  .message__head {
+    flex: 0 0 auto;
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .message__text {
+    flex: 0 0 auto;
+    max-width: 14rem;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 0 0.5rem 0.5rem 0.5rem;
+  }
+  
+  .message--local .message__text {
+    background-color:#246b43;
+    color: white;
+  }
+  
+  .message--remote .message__text {
+    background-color: #cccccc;
+    color: black;
+  }
+  
+/*   .btn-like {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    border: none;
+    outline: none;
+    background-color: orange;
+    color: white;
+  }
+  
+  .btn-like--liked {
+    background-color: red;
+  } */
