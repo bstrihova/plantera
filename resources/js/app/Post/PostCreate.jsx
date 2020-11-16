@@ -11,9 +11,9 @@ import { Link } from "react-router-dom";
 
 function PostCreate() {
     return (
-        <div>
-            <Box textAlign="center" mt={4}>
-                <Typography variant="h1" color="primary" fontSize="bold">
+        <div className="main__container">
+            <Box mt={4}>
+                <Typography variant="h3" color="primary" gutterBottom>
                     Post new plant
                 </Typography>
             </Box>
@@ -42,38 +42,48 @@ function PostCreate() {
                     >
                         + Add plant picture
                     </Button>
-                    <TextField
-                        color="primary"
-                        label="Name of the plant"
-                        placeholder="Add the name of your plant"
-                    />
-                    <Box display="flex" justifyContent="space-around">
-                        <FormControl>
-                            <InputLabel id="status">Selling?</InputLabel>
-                            <MuiSelect labelId="status">
-                                <MuiMenuItem value="1">Donate</MuiMenuItem>
-                                <MuiMenuItem value="2">Sell</MuiMenuItem>
-                                <MuiMenuItem value="2">Swap</MuiMenuItem>
-                            </MuiSelect>
-                        </FormControl>
+                    <div className="texField--postName">
+                        <TextField
+                            color="primary"
+                            label="Name of the plant"
+                            placeholder="Add the name of your plant"
+                            variant="filled"
+                        />
+                    </div>
+                    <div className="input__group--post">
+                        <Box>
+                            <FormControl>
+                                <InputLabel id="status">Selling?</InputLabel>
+                                <MuiSelect labelId="status" variant="filled">
+                                    <MuiMenuItem value="1">Donate</MuiMenuItem>
+                                    <MuiMenuItem value="2">Sell</MuiMenuItem>
+                                    <MuiMenuItem value="2">Swap</MuiMenuItem>
+                                </MuiSelect>
+                            </FormControl>
+                        </Box>
+
                         <TextField
                             color="primary"
                             label="Price"
                             placeholder="Add your price"
-                        />
-                    </Box>
-                    <Box display="flex" justifyContent="center">
-                        <TextField
-                            id="filled-multiline-static"
-                            label="Description"
-                            multiline
-                            rows={4}
-                            placeholder="Add your description"
                             variant="filled"
                         />
-                    </Box>
-
+                    </div>
+                    <div className="texField--postDescription">
+                        <Box>
+                            <TextField
+                                // inputProps={{ style: { width: 600 } }}
+                                id="filled-multiline-static"
+                                label="Description"
+                                multiline
+                                rows={6}
+                                placeholder="Add your description"
+                                variant="filled"
+                            />
+                        </Box>
+                    </div>
                     {/* <Link to="/messages/create">  */}
+
                     <Button
                         className="button--post"
                         color="primary"
@@ -84,6 +94,7 @@ function PostCreate() {
                     >
                         Post new plant
                     </Button>
+
                     {/* </Link> */}
                 </div>
             </Box>

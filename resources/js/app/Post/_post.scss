@@ -89,3 +89,28 @@
     height: 80%;
     margin: 1%;
 }
+
+.input__group--post {
+    margin-top: 2%;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.texField--postName {
+    margin-top: 2%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.texField--postDescription {
+    margin-top: 2%;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%;
+}
+
+// post/delete
