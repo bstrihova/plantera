@@ -11,6 +11,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
+import MuiSelect from "@material-ui/core/Select";
+import MuiMenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
   
 function MessageCreate() {
     return (
@@ -31,46 +34,50 @@ function MessageCreate() {
 
    
     
-      <img src="https://images.unsplash.com/photo-1517848568502-d03fa74e1964?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" style={{ width:"60px"}}/>
-   
-      <Typography variant="h6" >
-          Snake plant little baby
-      </Typography>
-      <Box display="flex" alignItems="center" justifyContent="space-evenly">
-                  <Box component="h3" variant="body1" fontWeight={700} color="primary.main">
-              150 Kč
-          </Box>
-      </Box>
+        <img className="imagePost" src="https://images.unsplash.com/photo-1517848568502-d03fa74e1964?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
 
-    <FormControl>
-      <InputLabel id="status">Status</InputLabel>
-      <MuiSelect labelId="status">
-          <MuiMenuItem value="1">Available</MuiMenuItem>
-          <MuiMenuItem value="2">Sold</MuiMenuItem>
-      </MuiSelect>
-    </FormControl>         
+        <Box display="flex" flexDirection="column" p={2} mr={2}>
+    
+        <Typography variant="h6" >
+            Snake plant little baby
+        </Typography>
+        <Box display="flex" alignItems="center" justifyContent="space-evenly">
+                    <Box component="h3" variant="body1" fontWeight={700} color="primary.main">
+                150 Kč
+            </Box>
+        </Box>
+
+      <FormControl>
+        <InputLabel id="status">Status</InputLabel>
+        <MuiSelect labelId="status">
+            <MuiMenuItem value="1">Available</MuiMenuItem>
+            <MuiMenuItem value="2">Sold</MuiMenuItem>
+        </MuiSelect>
+      </FormControl> 
+    </Box>
+
     </div>
 
-   <div className="chat">
+  
 
-   <List>
+   <List className="chat">
    <ListItem className="message--remote" alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
-        <ListItemText className="message--remote message__text"
-           primary={
-            <React.Fragment>
-              <Typography
+        <ListItemText className="message__text" >
+         
+        <Typography
                 component="span"
                 variant="body2"
                 
               >
               {"I am a sender / I want your plant"} 
               </Typography>
-            </React.Fragment>
-          }
-          />
+        </ListItemText>
+    
+                   
+         
       </ListItem>
       <ListItem className="message--local" alignItems="flex-start">
         <ListItemAvatar>
@@ -116,8 +123,7 @@ function MessageCreate() {
           />
         </FormControl>
      </section>
-      
-     </div>
+
   
    </div>
     )
