@@ -14,7 +14,7 @@ function Post() {
                 />
                 <PostDescription />
             </section>
-            <PostGrid />
+                <PostGrid />
         </div>
     );
 }

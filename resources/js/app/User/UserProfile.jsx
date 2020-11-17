@@ -10,10 +10,10 @@ import PostGrid from "../common/PostGrid/PostGrid"
 
 const useStyles = makeStyles((theme) => ({
     large: {
-      width: theme.spacing(20),
-      height: theme.spacing(20),
+        width: theme.spacing(20),
+        height: theme.spacing(20),
     },
-  }));
+}));
 
 function UserProfile() {
 
@@ -47,12 +47,8 @@ function UserProfile() {
                 </Box>
             </Container>
 
-            <section className="content">
-
                     <PostGrid/>
 
-
-            </section>
         </div>
     )
 }
