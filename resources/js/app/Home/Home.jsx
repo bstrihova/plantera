@@ -25,12 +25,15 @@ function Home() {
         </Box>
         </section>
 
-        <section className="content content--home">
+        <section>
+
+
+       
 
             <PostGrid/>
 
-
-        </section>
+            </section>
+      
 
 
   
