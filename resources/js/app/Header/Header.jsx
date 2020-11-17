@@ -3,12 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuIcon from '@material-ui/icons/Menu';
 import MailIcon from '@material-ui/icons/Mail';
+import LoginIcon from '@material-ui/icons/Lock';
+import LogoutIcon from '@material-ui/icons/ExitToApp';
+import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from 'react-router-dom';
 import Search from "./Search"
 
@@ -77,15 +81,35 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {/* pop up menu item Profile */}
-      <Link to="/user/profile">
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      </Link>
 
-       {/* pop up menu item Account Settings */}
-      <Link to="/user/settings">
-        <MenuItem onClick={handleMenuClose}>Account Settings</MenuItem>
-      </Link>
+      {/* popup menu profile menu item */}
+     <Link to="/user/profile">
+        <MenuItem>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="primary"
+          >
+            <AccountCircle />
+          </IconButton>
+          <p>Profile</p>
+        </MenuItem>
+      </Link>  
+
+      {/* popup menu account settings menu item */}
+      <Link to="/user/settings">   
+        <MenuItem>
+          <IconButton
+            aria-label="account settings"
+            aria-haspopup="true"
+            color="primary"
+          >
+            <SettingsIcon />
+          </IconButton>
+          <p>Account Settings</p>
+        </MenuItem> 
+      </Link> 
     </Menu>
   );
 
@@ -102,12 +126,16 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
 
+ 
+
     <Search/>
       {/* messages icon inside hamburger mobile menu */}
+
+      
       <Link to="/messages">
         <MenuItem>
-          <IconButton aria-label="show 4 new mails" color="inherit">
-            <Badge badgeContent={4} color="secondary">
+          <IconButton aria-label="show 4 new mails" color="primary">
+            <Badge badgeContent={4} color="primary">
               <MailIcon />
             </Badge>
           </IconButton>
@@ -115,17 +143,50 @@ export default function Header() {
         </MenuItem>
       </Link>
 
-    {/* open profile menu on mobile */}
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
+
+      {/* profile mobile menu */}
+      <Link to="/user/profile">
+        <MenuItem>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="primary"
+          >
+            <AccountCircle />
+          </IconButton>
+          <p>Profile</p>
+        </MenuItem>
+      </Link>  
+
+       {/* account settings mobile menu */}
+      <Link to="/user/settings">   
+        <MenuItem>
+          <IconButton
+            aria-label="account settings"
+            aria-haspopup="true"
+            color="primary"
+          >
+            <SettingsIcon />
+          </IconButton>
+          <p>Account Settings</p>
+        </MenuItem> 
+      </Link> 
+
+      {/* LOGIN/LOGOUT */}
+      <MenuItem>
+        <IconButton>
+            <LogoutIcon color="primary"/>
         </IconButton>
-        <p>Profile</p>
+        <p>Logout</p>
+      </MenuItem>
+
+      <MenuItem>
+      
+        <Button color="primary" variant="contained" size="large">
+          <Link to="/posts/create">Get Started</Link> 
+        </Button> 
+      
       </MenuItem>
     </Menu>
   );
@@ -150,9 +211,10 @@ export default function Header() {
     
         {/* desktop menu - right side */}
         <div className={classes.sectionDesktop}>
-          
-        <Search/>
 
+        {/* SEARCH */}
+        <Search/>
+     
           {/* icon for messages on desktop */}
         <Link to="/messages">
             <IconButton aria-label="show 4 new mails" color="secondary">
@@ -173,7 +235,21 @@ export default function Header() {
             >
               <AccountCircle />
             </IconButton>
+
+        {/* LOGIN/LOGOUT */}
+        <IconButton aria-label="login" color="secondary">
+          <LogoutIcon/>
+        </IconButton>  
+
+        
+          <Button color="secondary" variant="contained">
+          <Link to="/posts/create">Get Started</Link> 
+          </Button>  
+        
+   
+
         </div>
+
         
         {/* shows mobile menu on right side of nav */}
         <div className={classes.sectionMobile}>
