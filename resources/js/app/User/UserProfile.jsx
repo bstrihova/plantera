@@ -25,7 +25,7 @@ function UserProfile() {
                 direction="row"
                 justify="space-evenly"
                 alignItems="center"
-                spacing={2}
+                spacing={"auto"}
                 >
                     <Grid item>
                         <Avatar alt="username" src="/storage/profile-photos/08d0IhlaomLIg3XBk0XDZ7ahfMgmTB5zEs82m6Un.jpeg" variant="circle" className={classes.large}/>
@@ -34,7 +34,7 @@ function UserProfile() {
                         <Typography variant="h3" color="primary" gutterBottom>
                             Bramborienka
                         </Typography>
-                        <Typography variant="body1" color="primary.light" gutterBottom>
+                        <Typography variant="body1"  gutterBottom>
                             Prague, Czech Republic
                         </Typography>
                     </Grid>
