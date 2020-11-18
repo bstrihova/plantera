@@ -1,26 +1,17 @@
 #columns {
     column-width: 230px;
     column-gap: 15px;
-    max-width: 80%;
-    // max-width: 1100px;
-    margin: 50px auto;
+    max-width: 85%;
+    margin: 2em auto;
+    padding: 0 3em;
 }
 
 div#columns figure {
-    // background: #fefefe;
     margin: 0 2px 15px;
-    // padding: 15px;
-    padding-bottom: 10px;
-    transition: opacity 0.4s ease-in-out;
+    margin-bottom: 10px;
     display: inline-block;
 }
 
-div#columns figure img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 5px;
-    border-radius: 15px;
-}
 
 div#columns figure figcaption {
     font-size: 0.9rem;
@@ -28,28 +19,27 @@ div#columns figure figcaption {
     line-height: 1.5;
 }
 
-div#columns small {
-    font-size: 1rem;
-    float: right;
-    text-transform: uppercase;
-    color: #aaa;
+
+.postgrid__img {
+    transition: opacity 0.4s ease-in-out;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
 }
 
-div#columns small a {
-    color: #666;
-    text-decoration: none;
-    transition: 0.4s color;
-}
 
-div#columns:hover figure:not(:hover) {
+.postgrid__figure:hover .postgrid__img {
     opacity: 0.4;
 }
 
-@media screen and (max-width: 750px) {
-    #columns {
-        column-gap: 0px;
-    }
+@media screen and (max-width: 520px) {
     #columns figure {
         width: 100%;
     }
+
+    #columns  {
+        max-width: 95%;
+        padding: 1em;
+    }
 }
+

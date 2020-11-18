@@ -42,6 +42,7 @@ function App() {
                 
             </Switch>
             </main>
+            {/* <footer>Copyright Plantera 2020</footer> */}
         </Router>
         )
 }
