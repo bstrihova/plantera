@@ -7,6 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import MuiSelect from "@material-ui/core/Select";
 import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link } from "react-router-dom";
 
 function PostCreate() {
@@ -20,10 +21,6 @@ function PostCreate() {
             <Box className="main__container__shadow">
                 <div className="main__container">
                     <figure className="myPictures">
-                        <img
-                            src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
-                            alt=""
-                        />
                         <img
                             src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
                             alt=""
@@ -52,8 +49,8 @@ function PostCreate() {
                     </div>
                     <div className="input__group--post">
                         <Box>
-                            <FormControl>
-                                <InputLabel id="status">Selling?</InputLabel>
+                            <FormControl style={{ width: "200%" }}>
+                                <InputLabel id="status"> Selling? </InputLabel>
                                 <MuiSelect labelId="status" variant="filled">
                                     <MuiMenuItem value="1">Donate</MuiMenuItem>
                                     <MuiMenuItem value="2">Sell</MuiMenuItem>
@@ -67,33 +64,43 @@ function PostCreate() {
                             label="Price"
                             placeholder="Add your price"
                             variant="filled"
+                            style={{ width: "30%" }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        Kč
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </div>
                     <div className="texField--postDescription">
                         <Box>
                             <TextField
-                                // inputProps={{ style: { width: 600 } }}
                                 id="filled-multiline-static"
                                 label="Description"
                                 multiline
                                 rows={6}
                                 placeholder="Add your description"
                                 variant="filled"
+                                style={{ width: "100%" }}
                             />
                         </Box>
                     </div>
                     {/* <Link to="/messages/create">  */}
-
-                    <Button
-                        className="button--post"
-                        color="primary"
-                        variant="contained"
-                        size="medium"
-                        disableRipple
-                        style={{ textTransform: "none" }}
-                    >
-                        Post new plant
-                    </Button>
+                    <Box mb={2}>
+                        <Button
+                            className="button--post"
+                            color="primary"
+                            variant="contained"
+                            size="medium"
+                            disableRipple
+                            style={{ textTransform: "none" }}
+                            style={{ width: "100%" }}
+                        >
+                            Post new plant
+                        </Button>
+                    </Box>
 
                     {/* </Link> */}
                 </div>

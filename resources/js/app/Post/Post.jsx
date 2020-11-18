@@ -1,7 +1,7 @@
 import React from "react";
 import PostGrid from "../common/PostGrid/PostGrid";
-
 import PostDescription from "../common/PostDescription/PostDescription";
+import { Box } from "@material-ui/core";
 
 function Post() {
     return (

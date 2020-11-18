@@ -76,7 +76,7 @@
     max-width: 50%;
 }
 
-// post/create
+// post/create and edit
 .myPictures {
     display: flex;
     justify-content: center;
@@ -85,19 +85,20 @@
 .myPictures img {
     justify-self: center;
     border-radius: 32px;
-    width: 20%;
+    width: 40%;
     height: 80%;
     margin: 1%;
 }
 
 .input__group--post {
-    margin-top: 2%;
+    margin-top: 1%;
     width: 60%;
     display: flex;
     justify-content: space-between;
 }
 
 .texField--postName {
+    margin-bottom: 1%;
     margin-top: 2%;
     width: 60%;
     display: flex;
@@ -106,11 +107,65 @@
 }
 
 .texField--postDescription {
+    padding-bottom: 1%;
+    margin-bottom: 2%;
     margin-top: 2%;
     width: 60%;
     display: flex;
-    justify-content: center;
-    margin-bottom: 2%;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 // post/delete
+
+.main__container__shadow--delete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
+    border-radius: 32px;
+    padding: 1.5em;
+    // border-radius: 15px;
+    // height: 600px;
+    // width: 70vw;
+    max-width: 1100px;
+}
+
+.main__container__shadow--delete img {
+    border-radius: 32px;
+    width: 100%;
+    height: 100%;
+}
+
+.button--deleteGroup {
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1%;
+}
+
+.imageDelete__container {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    border-radius: 32px;
+}
+
+.imageDelete__text {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    color: #246b43;
+    background: linear-gradient(
+        to top,
+        rgba(194, 194, 194, 1),
+        rgba(255, 255, 255, 0)
+    );
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+}

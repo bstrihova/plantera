@@ -7,6 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import MuiSelect from "@material-ui/core/Select";
 import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link } from "react-router-dom";
 
 function PostEdit() {
@@ -20,14 +21,6 @@ function PostEdit() {
             <Box className="main__container__shadow">
                 <div className="main__container">
                     <figure className="myPictures">
-                        <img
-                            src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
-                            alt=""
-                        />
-                        <img
-                            src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
-                            alt=""
-                        />
                         <img
                             src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
                             alt=""
@@ -49,7 +42,9 @@ function PostEdit() {
                             placeholder="Add the name of your plant"
                             variant="filled"
                         />
-                        <FormControl>
+                    </div>
+                    <div className="texField--postName">
+                        <FormControl variant="filled" style={{ width: "30%" }}>
                             <InputLabel id="status">Status</InputLabel>
                             <MuiSelect labelId="status">
                                 <MuiMenuItem value="1">Available</MuiMenuItem>
@@ -59,7 +54,7 @@ function PostEdit() {
                     </div>
                     <div className="input__group--post">
                         <Box>
-                            <FormControl>
+                            <FormControl style={{ width: "200%" }}>
                                 <InputLabel id="status">Selling?</InputLabel>
                                 <MuiSelect labelId="status" variant="filled">
                                     <MuiMenuItem value="1">Donate</MuiMenuItem>
@@ -74,6 +69,14 @@ function PostEdit() {
                             label="Price"
                             placeholder="Add your price"
                             variant="filled"
+                            style={{ width: "30%" }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        Kč
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </div>
 
@@ -87,20 +90,24 @@ function PostEdit() {
                                 columns={50}
                                 placeholder="Add your description"
                                 variant="filled"
+                                style={{ width: "100%" }}
                             />
                         </Box>
                     </div>
-                    {/* <Link to="/messages/create">  */}
-                    <Button
-                        className="button--post"
-                        color="primary"
-                        variant="contained"
-                        size="small"
-                        disableRipple
-                        style={{ textTransform: "none" }}
-                    >
-                        Confirm changes
-                    </Button>
+                    <Box mb={2}>
+                        {/* <Link to="/messages/create">  */}
+                        <Button
+                            className="button--post"
+                            color="primary"
+                            variant="contained"
+                            size="small"
+                            disableRipple
+                            style={{ textTransform: "none" }}
+                            style={{ width: "100%" }}
+                        >
+                            Confirm changes
+                        </Button>
+                    </Box>
                     {/* </Link> */}
                 </div>
             </Box>
