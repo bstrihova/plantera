@@ -155,12 +155,11 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: flex-start;
     bottom: 0px;
     right: 0px;
     width: 100%;
-    color: #246b43;
+    height: 35%;
     background: linear-gradient(
         to top,
         rgba(194, 194, 194, 1),
@@ -168,4 +167,17 @@
     );
     border-bottom-left-radius: 32px;
     border-bottom-right-radius: 32px;
+}
+
+.imageDelete__text h1 {
+    font-size: 200%;
+    color: #246b43;
+    padding-left: 3%;
+}
+
+.imageDelete__text h4 {
+    font-size: 200%;
+    color: #246b43;
+    padding-left: 3%;
+    margin-top: -10px; // not sure how to delete the margin from h4
 }

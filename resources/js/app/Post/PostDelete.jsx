@@ -24,7 +24,10 @@ function PostDelete() {
                         src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
                     />
 
-                    <div className="imageDelete__text">150 Kč Snake Plant</div>
+                    <div className="imageDelete__text">
+                        <h1>150 Kč</h1>
+                        <h4>Snake Plant baby</h4>
+                    </div>
                 </div>
                 <div className="button--deleteGroup">
                     <Button
