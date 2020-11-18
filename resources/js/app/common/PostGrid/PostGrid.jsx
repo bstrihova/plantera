@@ -23,7 +23,11 @@ function PostGrid() {
     let gridContent = "";
 
     if (loading) {
-        gridContent = "loading....";
+        gridContent = (
+            <div className="logo--pulsating">
+                <img src="/heart_plantera_inversed.png"/>
+            </div>
+        );
       } else {
         if (posts.length) {
             gridContent = (
@@ -40,13 +44,13 @@ function PostGrid() {
 
 
     return (
-        <section>
-            <div id="columns">
-
-               {gridContent}
-
-        </div>
-    </section>
+            <section>
+                <div id="columns">
+                    {gridContent}
+                    {gridContent}
+                    {gridContent}
+                </div>
+            </section>
     )
 }
 
