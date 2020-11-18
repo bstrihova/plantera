@@ -32,6 +32,9 @@ use Illuminate\Support\Facades\Route;
 //     Route::put('/{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
 // });;
 
+Route::get("/api/posts", "Api\PostController@index");
+Route::get("/api/posts/{id}", "Api\PostController@show");
+
 Route::get('/user/profile', 'IndexController@index');
 Route::get('/user/settings', 'IndexController@index');
 

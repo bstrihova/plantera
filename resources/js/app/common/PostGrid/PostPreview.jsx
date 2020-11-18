@@ -4,15 +4,15 @@ import Avatar from "@material-ui/core/Avatar"
 import Box from "@material-ui/core/Box"
 import { Link } from 'react-router-dom'
 
-function PostPreview({postImg}) {
+function PostPreview({post}) {
     return (
         <Link to="/posts">
             <figure className="postgrid__figure">
-                <img src={postImg} className="postgrid__img"/>
+                <img src={post.photo} className="postgrid__img"/>
                 <figcaption>
                     <Box px={3} mt={0.2}>
                         <Typography variant="h6" >
-                            Snake plant little baby
+                            {post.name}
                         </Typography>
                         <Box display="flex" alignItems="center" justifyContent="space-between" mt={-1}>
                                 <Box display="flex" alignItems="center">
