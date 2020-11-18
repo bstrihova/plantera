@@ -1,70 +1,62 @@
 * {
-    box-sizing: border-box;
-  }
-  
-  html {
-    font-family: "Roboto", sans-serif;
-    font-size: 15px;
-  }
-  
-  body {
-    background: #ffffff;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+}
+
+body {
+  background: #ffffff;
+}
+
+.boxshadow {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
+  border-radius: 32px;}
+
+.imageMessage {
+  border-top-right-radius: 32px;
+  border-top-left-radius: 32px;
+  width: 100%;
+}  
+
+.chat {
+  width: 50%;
+  background: white;
+  margin: 4rem auto;
+  border-radius: 4px;
+  min-height: 4rem;
+  padding: 1rem;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.message--remote {
+  flex-direction: row;
   }
 
-  .boxshadow {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
-    border-radius: 32px;
-     }
+.message--local {
+  flex-direction: row-reverse;
+   }
 
-    .box {
-    border-radius: 32px;
-    max-width: 50%;
-    padding: 10px;
-      }  
+.message__text {
+  flex: 0 0 auto;
+  max-width: 80%;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 0 0.5rem 0.5rem 0.5rem;
+}
 
-  .imageMessage {
-    border-top-left-radius: 32px;
-    border-bottom-left-radius: 32px;
-    width: 100%;
-  }
+.message--local .message__text {
+  background-color:#246b43;
+  color: white;
+}
 
-  .chat {
-    width: 100%;
-    margin: auto;
-    min-height: 50px;
-    padding: 5px;
-  }
-  
-
-  
-  .message {
-    display: flex;
-    margin-bottom: 0.5rem;
-  }
-  
-  .remote {
-    flex-direction: row;
-    background-color: #cccccc;
-    color: black;
-    }
-  
-  .local {
-    flex-direction: row-reverse;
-    background-color:#246b43;
-    color: white;
-     }
-  
-       
-/*   .btn-like {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1.5rem;
-    border: none;
-    outline: none;
-    background-color: orange;
-    color: white;
-  }
-  
-  .btn-like--liked {
-    background-color: red;
-  } */
+.message--remote .message__text {
+  background-color: #cccccc;
+  color: black;
+}
