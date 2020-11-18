@@ -23,10 +23,8 @@ function PostDelete() {
                         alt="Snake plant"
                         src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
                     />
-                    {/* Does not work properly with Box */}
-                    <div class="imageDelete__text">
-                        <h2> 150 Kč</h2> <h4>Snake plant</h4>
-                    </div>
+
+                    <div className="imageDelete__text">150 Kč Snake Plant</div>
                 </div>
                 <div className="button--deleteGroup">
                     <Button
