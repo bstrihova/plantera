@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import PostPreview from './PostPreview'
 import Search from "../Search/Search"
+import Box from '@material-ui/core/Box';
 
 
-function PostGrid({searchValue, setSearchValue}) {
+function PostGrid({searchValue, setSearchValue, currentPostId}) {
 
     const [posts, setPosts] = useState("");
     const [loading, setLoading] = React.useState(true);
@@ -47,12 +48,14 @@ function PostGrid({searchValue, setSearchValue}) {
 
 
     return (
-            <section className="main__container">
+        <Box mt={4}>
+            <section className="main__container--postGrid">
                 <Search searchValue={searchValue} setSearchValue={setSearchValue}/>
                 <div id="columns">
                     {gridContent}
                 </div>
             </section>
+        </Box>
     )
 }
 

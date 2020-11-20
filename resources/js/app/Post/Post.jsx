@@ -52,7 +52,7 @@ function Post({searchValue, setSearchValue}) {
             <section className="main__container__shadow main__container__shadow--post">
                 {postContent}
             </section>
-            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue}/>
+            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue} currentPostId={id}/>
         </div>
     );
 }

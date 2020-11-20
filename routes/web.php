@@ -41,4 +41,4 @@ Route::get("/api/posts/{id}", "Api\PostController@show");
 Route::get('/user/profile', 'IndexController@index');
 Route::get('/user/settings', 'IndexController@index');
 
-// Route::get('/{path?}', "IndexController@index")->where('path', '.*');
+Route::get('/{path?}', "IndexController@index")->where('path', '.*');

@@ -124,7 +124,6 @@ export default function GoogleMaps() {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        // <TextField {...params} label="Location" variant="outlined" fullWidth />
         <TextField
                 {...params}
                 label="Location"
