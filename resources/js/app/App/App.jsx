@@ -17,23 +17,20 @@ function App() {
             <Header />
             <main>
                 <Switch>
-                    {/* // BARA ONLY */}
                     <Route exact path="/" children={<Home />} />
 
                     <Route path="/posts/create" children={<PostCreate />} />
 
-                    <Route path="/posts/edit/:id" children={<PostEdit />} />
+                    <Route path="/posts/:id/edit" children={<PostEdit />} />
 
-                    <Route path="/posts/delete/:id" children={<PostDelete />} />
+                    <Route path="/posts/:id/delete" children={<PostDelete />} />
 
-                    {/* // STEFANO ONLY */}
                     <Route path="/posts/:id" children={<Post />} />
 
                     <Route path="/user/profile" children={<UserProfile />} />
 
                     <Route path="/user/settings" children={<UserSettings />} />
 
-                    {/* EVA ONLY */}
 
                     <Route
                         path="/messages/create"

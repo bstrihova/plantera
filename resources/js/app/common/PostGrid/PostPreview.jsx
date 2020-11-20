@@ -5,8 +5,9 @@ import Box from "@material-ui/core/Box"
 import { Link } from 'react-router-dom'
 
 function PostPreview({post}) {
+    const url = `/posts/${post.id}`
     return (
-        <Link to="/posts">
+        <Link to={url}>
             <figure className="postgrid__figure">
                 <img src={post.photo} className="postgrid__img"/>
                 <figcaption>

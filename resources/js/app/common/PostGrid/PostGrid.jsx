@@ -5,6 +5,7 @@ import PostPreview from './PostPreview'
 function PostGrid() {
 
     const [posts, setPosts] = useState("");
+    const [searchValue, setSearchValue] = useState("")
     const [loading, setLoading] = React.useState(true);
 
 
@@ -18,7 +19,7 @@ function PostGrid() {
 
     useEffect(() => {
         loadPosts();
-    }, [])
+    }, [setSearchValue])
 
     let gridContent = "";
 
@@ -31,9 +32,13 @@ function PostGrid() {
       } else {
         if (posts.length) {
             gridContent = (
-                posts.map((post, index) => (
+                <>
+                {posts.map((post, index) => (
                     <PostPreview key={index} post={post}/>
-                ))
+                ))}
+
+                {console.log(posts.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase()))))}
+                </>
           );
         } else {
             
@@ -45,10 +50,11 @@ function PostGrid() {
 
     return (
             <section>
+                {/* <input type="search" value={searchValue} onChange={(e)=>(setSearchValue(e.target.value))}/> */}
                 <div id="columns">
                     {gridContent}
-                    {gridContent}
-                    {gridContent}
+                    {/* {gridContent}
+                    {gridContent} */}
                 </div>
             </section>
     )
