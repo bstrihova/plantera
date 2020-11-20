@@ -16,10 +16,20 @@ body {
   border-radius: 32px;}
 
 .imageMessage {
-  border-top-right-radius: 32px;
   border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
   width: 100%;
 }  
+
+/* @media only screen and (max-width: 600px) {
+  .imageMessage {
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
+    width: 100%;
+  }
+
+  body {
+} */
 
 .chat {
   width: 50%;

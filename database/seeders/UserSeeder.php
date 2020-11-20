@@ -20,5 +20,11 @@ class UserSeeder extends Seeder
             'email' => 'test@plantera.cz',
             'password' => Hash::make('plantera'),
         ]);
+
+        User::create([
+            'name' => 'test2',
+            'email' => 'test2@plantera.cz',
+            'password' => Hash::make('plantera'),
+        ]);
     }
 }

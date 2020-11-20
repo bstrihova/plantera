@@ -18,6 +18,7 @@ class Thread extends Eloquent
 
     public function post()
     {
+        // return $this->belongsTo(Models::classname(Post::class), 'post_id', 'id');
         return $this->belongsTo(Post::class);
     }
 
