@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class IndexController extends Controller
 {
@@ -15,6 +16,4 @@ class IndexController extends Controller
     {
         return view("index/index");
     }
-
-    
 }

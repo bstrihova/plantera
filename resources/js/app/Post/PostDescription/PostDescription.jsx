@@ -3,28 +3,38 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { Link } from "react-router-dom";
 
-function PostDescription() {
-    const [posts, setPosts] = useState("");
-    const [loading, setLoading] = React.useState(true);
-
-    const loadPosts = async () => {
-        setLoading(true);
-        const response = await fetch("/api/posts/2");
-        const data = await response.json();
-        data && setPosts(data);
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        loadPosts();
-    }, []);
+function PostDescription({ post }) {
     return (
         <section className="containerRight">
+            <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                variant="h2"
+                fontWeight={900}
+                color="primary.main"
+            >
+                <Box>
+                    <Link to="/posts/edit">
+                        <EditIcon fontSize="large" color="primary" />
+                    </Link>
+                    <Link to="/posts/delete">
+                        <DeleteIcon fontSize="large" color="primary" />{" "}
+                    </Link>
+                </Box>
+                <Typography variant="h3">
+                    <h1>{post.name}</h1>
+                </Typography>
+            </Box>
+
             <div className="containerRight__upperPart">
                 <Box variant="h3" fontWeight={900} color="primary.main">
-                    <Typography variant="h3">{posts.price} Kč</Typography>
+                    <Typography variant="h3">{post.price} Kč</Typography>
                 </Box>
                 <Box display="flex" flexDirection="column" alignItems="center">
                     <Box mr={0.6}>
@@ -48,7 +58,7 @@ function PostDescription() {
                     color="primary"
                     className="description__text"
                 >
-                    {posts.description}
+                    {post.description}
                 </Typography>
 
                 <Box>
@@ -63,20 +73,20 @@ function PostDescription() {
                         Prague, CZ
                     </Typography>
                 </Box>
-
+            </div>
+            <Box className="button--post">
                 <Link to="/messages/create">
                     <Button
-                        className="button--post"
                         color="primary"
                         variant="contained"
-                        size="medium"
+                        size="large"
                         disableRipple
                         style={{ textTransform: "none" }}
                     >
                         Contact seller
                     </Button>
                 </Link>
-            </div>
+            </Box>
         </section>
     );
 }

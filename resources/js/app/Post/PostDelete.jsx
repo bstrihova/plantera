@@ -11,7 +11,7 @@ function PostDelete() {
                     Delete your post
                 </Typography>
             </Box>
-            <section className="main__container__shadow--delete">
+            <section className="main__container__shadow--delete main__container__shadow">
                 <Box mt={4}>
                     <Typography variant="h4" gutterBottom>
                         Are you sure you want to delete this post?

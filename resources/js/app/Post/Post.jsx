@@ -1,44 +1,56 @@
 import React, { useState, useEffect } from "react";
 import PostGrid from "../common/PostGrid/PostGrid";
-import PostDescription from "../common/PostDescription/PostDescription";
-import { Box } from "@material-ui/core";
+import PostDescription from "./PostDescription/PostDescription";
+
+import { Link } from "react-router-dom";
+import { Route, Switch, useParams } from "react-router-dom";
 
 function Post() {
-    const [posts, setPosts] = useState("");
+    let { id } = useParams();
+    const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);
 
-    const loadPosts = async () => {
+    const loadPost = async () => {
         setLoading(true);
-        const response = await fetch("/api/posts/3");
+        const response = await fetch(`/api/posts/${id}`);
         const data = await response.json();
-        data && setPosts(data);
+        data && setPost(data);
         setLoading(false);
     };
 
     useEffect(() => {
-        loadPosts();
+        loadPost();
     }, []);
 
-    console.log(posts);
+    let postContent = "";
 
-    // let gridContent = "";
+    if (loading) {
+        postContent = (
+            <div className="logo--pulsating">
+                <img src="/heart_plantera_inversed.png" />
+            </div>
+        );
+    } else {
+        if (post) {
+            postContent = (
+                <>
+                    <>
+                        <img
+                            className="imagePost"
+                            alt={post.name}
+                            src={post.photo}
+                        />
+                    </>
 
-    // if (loading) {
-    //     gridContent = "loading....";
-    // } else {
-    //     if (posts.length) {
-    //         gridContent = posts.map((post, index) => (
-    //             <PostPreview key={index} post={post} />
-    //         ));
-    //     } else {
-    //         gridContent = "No posts found.";
-    //     }
-    // }
+                    <PostDescription post={post} />
+                </>
+            );
+        }
+    }
     return (
         <div className="main__container">
-            <section className="main__container__shadow">
-                <img className="imagePost" alt={posts.name} src={posts.photo} />
-                <PostDescription />
+            <section className="main__container__shadow main__container__shadow--post">
+                {postContent}
             </section>
             <PostGrid />
         </div>

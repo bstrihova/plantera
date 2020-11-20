@@ -17,7 +17,11 @@
     // border-radius: 15px;
     // height: 600px;
     // width: 70vw;
-    max-width: 1100px;
+    // max-width: 1100px;
+}
+
+.main__container__shadow--post {
+    width: 70%;
 }
 
 .containerRight {
@@ -64,16 +68,16 @@
 }
 
 .button--post {
-    align-self: center;
-    width: 50%;
+    display: flex;
+    justify-content: center;
 }
 
 .imagePost {
-    height: 100%;
-    width: 100%;
+    width: 50%;
+    height: 110%;
     border-top-left-radius: 32px;
     border-bottom-left-radius: 32px;
-    max-width: 50%;
+    // max-width: 600px;
 }
 
 // post/create and edit
@@ -119,11 +123,7 @@
 // post/delete
 
 .main__container__shadow--delete {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
-    border-radius: 32px;
     padding: 1.5em;
     // border-radius: 15px;
     // height: 600px;
