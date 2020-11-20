@@ -27,9 +27,9 @@ function App() {
 
                     <Route path="/posts/:id/delete" children={<PostDelete />} />
 
-                    <Route path="/posts/:id" children={<Post searchValue={searchValue}/>} />
+                    <Route path="/posts/:id" children={<Post searchValue={searchValue} setSearchValue={setSearchValue}/>} />
 
-                    <Route path="/user/profile" children={<UserProfile />} />
+                    <Route path="/user/profile" children={<UserProfile searchValue={searchValue} setSearchValue={setSearchValue} />} />
 
                     <Route path="/user/settings" children={<UserSettings />} />
 
