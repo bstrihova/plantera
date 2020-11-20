@@ -16,10 +16,11 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::query()
+            ->with("user")
             ->orderBy("created_at")
             ->get();
-
-        return $posts;    
+        
+        return $posts;   
     }
 
     /**
@@ -30,8 +31,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-        return $post;
+        $post = Post::with("user")->findOrFail($id);
+
+        return $post; 
     }
 
     /**

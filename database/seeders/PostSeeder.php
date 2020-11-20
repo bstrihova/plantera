@@ -22,7 +22,9 @@ class PostSeeder extends Seeder
         $p->transaction = "sell";
         $p->available = true;
         $p->photo = "https://images.unsplash.com/photo-1517848568502-d03fa74e1964?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+       
         // $p->user_id = 1;
+       $p->user_id = 1;
         $p->save();
 
         $p = new Post;
@@ -32,7 +34,9 @@ class PostSeeder extends Seeder
         $p->currency = "€";
         $p->transaction = "sell";
         $p->available = true;
-        $p->photo = "https://images.unsplash.com/photo-1591958911259-bee2173bdccc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80";
+        $p->photo = "https://images.unsplash.com/photo-1591958911259-bee2173bdccc?ixlib=rb-1.2.1&
+        ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80";
+        $p->user_id = 2;
         $p->save();
 
         $p = new Post;
@@ -40,7 +44,9 @@ class PostSeeder extends Seeder
         $p->description = "VERTICAL Very beautiful monstera ready to make your living room warm <3<3<3. Available for handover in Prague 4. I do not send flowers by post.";
         $p->transaction = "swap";
         $p->available = false;
-        $p->photo = "https://images.unsplash.com/photo-1602491674275-316d95560fb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
+        $p->photo = "https://images.unsplash.com/photo-1602491674275-316d95560fb1?ixlib=rb-1.2.1&
+        ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
+        $p->user_id = 3;
         $p->save();
 
         $p = new Post;
@@ -50,7 +56,9 @@ class PostSeeder extends Seeder
         $p->currency = "Kč";
         $p->transaction = "sell";
         $p->available = false;
-        $p->photo = "https://images.unsplash.com/photo-1517848568502-d03fa74e1964?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+        $p->photo = "https://images.unsplash.com/photo-1517848568502-d03fa74e1964?ixlib=rb-1.2.1&
+        ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+        $p->user_id = 4;
         $p->save();
 
         $p = new Post;
@@ -58,7 +66,9 @@ class PostSeeder extends Seeder
         $p->description = "SQUARE Very beautiful monstera ready to make your living room warm <3<3<3. Available for handover in Prague 4. I do not send flowers by post.";
         $p->transaction = "donate";
         $p->available = true;
-        $p->photo = "https://images.unsplash.com/photo-1591958911259-bee2173bdccc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80";
+        $p->photo = "https://images.unsplash.com/photo-1591958911259-bee2173bdccc?ixlib=rb-1.2.1&
+        ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80";
+        $p->user_id = 5;
         $p->save();
 
         $p = new Post;
@@ -68,7 +78,9 @@ class PostSeeder extends Seeder
         $p->currency = "Kč";
         $p->transaction = "sell";
         $p->available = true;
-        $p->photo = "https://images.unsplash.com/photo-1602491674275-316d95560fb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
+        $p->photo = "https://images.unsplash.com/photo-1602491674275-316d95560fb1?ixlib=rb-1.2.1&
+        ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
+        $p->user_id = 4;
         $p->save();
     }
 }
