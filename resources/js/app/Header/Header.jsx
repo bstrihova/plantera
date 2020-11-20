@@ -14,7 +14,6 @@ import LoginIcon from '@material-ui/icons/Lock';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from 'react-router-dom';
-import Search from "./Search"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+export default function Header({searchValue, setSearchValue}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -126,12 +125,7 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
 
- 
-
-    <Search/>
       {/* messages icon inside hamburger mobile menu */}
-
-      
       <Link to="/messages">
         <MenuItem>
           <IconButton aria-label="show 4 new mails" color="primary">
@@ -211,9 +205,6 @@ export default function Header() {
     
         {/* desktop menu - right side */}
         <div className={classes.sectionDesktop}>
-
-        {/* SEARCH */}
-        <Search/>
      
           {/* icon for messages on desktop */}
         <Link to="/messages">

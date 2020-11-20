@@ -5,7 +5,7 @@ import PostDescription from "./PostDescription/PostDescription";
 import { Link } from "react-router-dom";
 import { Route, Switch, useParams } from "react-router-dom";
 
-function Post() {
+function Post({searchValue, setSearchValue}) {
     let { id } = useParams();
     const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);
@@ -52,7 +52,7 @@ function Post() {
             <section className="main__container__shadow main__container__shadow--post">
                 {postContent}
             </section>
-            <PostGrid />
+            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue}/>
         </div>
     );
 }

@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import PostPreview from './PostPreview'
+import Search from "../Search/Search"
 
 
-function PostGrid() {
+function PostGrid({searchValue, setSearchValue}) {
 
     const [posts, setPosts] = useState("");
-    const [searchValue, setSearchValue] = useState("")
     const [loading, setLoading] = React.useState(true);
 
 
@@ -19,7 +19,7 @@ function PostGrid() {
 
     useEffect(() => {
         loadPosts();
-    }, [setSearchValue])
+    }, [])
 
     let gridContent = "";
 
@@ -33,11 +33,9 @@ function PostGrid() {
         if (posts.length) {
             gridContent = (
                 <>
-                {posts.map((post, index) => (
+                {posts.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase()))).map((post, index) => (
                     <PostPreview key={index} post={post}/>
                 ))}
-
-                {console.log(posts.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase()))))}
                 </>
           );
         } else {
@@ -49,12 +47,10 @@ function PostGrid() {
 
 
     return (
-            <section>
-                {/* <input type="search" value={searchValue} onChange={(e)=>(setSearchValue(e.target.value))}/> */}
+            <section className="main__container">
+                <Search searchValue={searchValue} setSearchValue={setSearchValue}/>
                 <div id="columns">
                     {gridContent}
-                    {/* {gridContent}
-                    {gridContent} */}
                 </div>
             </section>
     )

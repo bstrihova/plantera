@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../Home/Home";
 import Post from "../Post/Post";
@@ -12,12 +12,14 @@ import MessageCreate from "../Messages/MessageCreate";
 import Header from "../Header/Header";
 
 function App() {
+    const [searchValue, setSearchValue] = useState("");
+
     return (
         <Router>
-            <Header />
+            <Header/>
             <main>
                 <Switch>
-                    <Route exact path="/" children={<Home />} />
+                    <Route exact path="/" children={<Home  searchValue={searchValue} setSearchValue={setSearchValue}/>} />
 
                     <Route path="/posts/create" children={<PostCreate />} />
 
@@ -25,7 +27,7 @@ function App() {
 
                     <Route path="/posts/:id/delete" children={<PostDelete />} />
 
-                    <Route path="/posts/:id" children={<Post />} />
+                    <Route path="/posts/:id" children={<Post searchValue={searchValue}/>} />
 
                     <Route path="/user/profile" children={<UserProfile />} />
 
