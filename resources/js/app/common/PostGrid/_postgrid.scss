@@ -1,3 +1,10 @@
+
+.main__container--postGrid {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 #columns {
     column-width: 230px;
     column-gap: 15px;
@@ -5,6 +12,7 @@
     margin: 2em auto;
     padding: 0 3em;
 }
+
 
 div#columns figure {
     margin: 0 2px 15px;

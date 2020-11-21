@@ -24,13 +24,16 @@ use Illuminate\Support\Facades\Route;
 // })->name('dashboard');
 
 
-// Route::group(['prefix' => 'messages', "middleware" => "auth"], function () {
-//     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
-//     Route::get('/create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
-//     Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
-//     Route::get('/{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
-//     Route::put('/{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
-// });;
+ Route::group(['prefix' => 'messages', "middleware" => "auth"], function () {
+    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+    Route::get('/create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    Route::get('/{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+    Route::put('/{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+});; 
+
+Route::get("/api/threads", "Api\MessagesController@index");
+Route::get("/api/threads/{id}", "Api\MessagesController@show");
 
 Route::get("/api/posts", "Api\PostController@index");
 Route::get("/api/posts/{id}", "Api\PostController@show");

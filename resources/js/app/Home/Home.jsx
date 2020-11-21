@@ -6,7 +6,7 @@ import 'fontsource-roboto';
 import PostGrid from '../common/PostGrid/PostGrid';
 import { Link } from 'react-router-dom';
 
-function Home() {
+function Home({searchValue, setSearchValue}) {
     return (
         <>
             <section className="banner">
@@ -15,7 +15,7 @@ function Home() {
                     Sell, buy, swap, donate
                 </Typography>
                 <Typography variant="h5" color="primary">
-                Give your plants a second life
+                    Give your plants a second life
                 </Typography>
                 <Box mt={5}>
                     <Link to="/posts/create"> 
@@ -25,7 +25,11 @@ function Home() {
             </Box>
             </section>
 
-                <PostGrid/>
+            <section className="main__container">
+                <PostGrid searchValue={searchValue} setSearchValue={setSearchValue}/>
+            </section>
+
+                
         </>
     )
 }

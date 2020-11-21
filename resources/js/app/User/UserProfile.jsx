@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function UserProfile() {
+function UserProfile({searchValue, setSearchValue}) {
 
     const classes = useStyles();
     return (
@@ -47,7 +47,7 @@ function UserProfile() {
                 </Box>
             </Container>
 
-                    <PostGrid/>
+            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue}/>
 
         </div>
     )
