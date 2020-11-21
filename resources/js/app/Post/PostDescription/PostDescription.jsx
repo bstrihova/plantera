@@ -5,9 +5,19 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 import { Link } from "react-router-dom";
 
 function PostDescription({ post }) {
+    let postTransaction = "";
+
+    if (post.transaction === "sell") {
+        postTransaction = post.price;
+    } else if (post.transaction === "swap") {
+        postTransaction = <SwapHorizIcon fontSize="large" />;
+    } else if (post.transaction === "donate") {
+        postTransaction = 0;
+    }
 
     return (
         <section className="containerRight">
@@ -20,7 +30,7 @@ function PostDescription({ post }) {
                 fontWeight={900}
                 color="primary.main"
             >
-                <Box mt={2} mb={2}>
+                <Box>
                     <Link to="/posts/edit">
                         <EditIcon fontSize="large" color="primary" />
                     </Link>
@@ -28,32 +38,12 @@ function PostDescription({ post }) {
                         <DeleteIcon fontSize="large" color="primary" />{" "}
                     </Link>
                 </Box>
-                <Typography variant="h3">{post.name}</Typography>
+                <Typography variant="h2">{post.name}</Typography>
             </Box>
-
+            ​
             <div className="containerRight__upperPart">
-                <Box mb={2} variant="h3" fontWeight={900} color="primary.main">
-{console.log(post.transaction === "sell" ? post.price : post.transaction === "swap" : "ICON")}
-
-
-                            {/* {if(transaction === "sell") {
-                             return <Typography variant="h3">{post.price}{post.currency}</Typography>
-                            }if else(transaction === "swap") {}
-                             return "free"{
-                                 else{
-                                     return 
-                                 }
-                             }
-                        } */}
-                        {/* {() => {
-                            switch (post.tranasaction) {
-                                case "sell":   return "{post.price}{post.currency}";
-                                case "donate": return "#Donate";
-                                case "swap":  return "#Swap";
-                            }
-                        } } */}
-                         
-                    {/* </Typography> "transaction": "sell",                   */}
+                <Box variant="h3" fontWeight={900} color="primary.main">
+                    <Typography variant="h3">{postTransaction}</Typography>
                 </Box>
                 <Box display="flex" flexDirection="column" alignItems="center">
                     <Box mr={0.6}>
@@ -70,7 +60,7 @@ function PostDescription({ post }) {
                 <Typography variant="h4" component="h2">
                     Description:
                 </Typography>
-
+                ​
                 <Typography
                     variant="subtitle1"
                     component="h2"
@@ -79,7 +69,7 @@ function PostDescription({ post }) {
                 >
                     {post.description}
                 </Typography>
-
+                ​
                 <Box>
                     <Typography variant="h5" component="h2">
                         Location:{" "}
@@ -109,5 +99,4 @@ function PostDescription({ post }) {
         </section>
     );
 }
-
 export default PostDescription;

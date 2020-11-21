@@ -28,31 +28,6 @@ function PostEdit() {
         loadPost();
     }, []);
 
-    // const transactionType = (props) => {
-    //     const { handleTransaction, transactionType } = props;
-
-    // const [transactionType, setTransactionType] = useState("")
-
-    //   const handleTransaction = (e) => {
-    //     setTransactionType(e.target.value);
-    //     setSearchResults([]);
-    //   };
-
-    //   function changeTransaction(value) {
-    //     if (value === 'swap') {
-    //     //   setTransactionType((prevState) => prevState + 1);
-    //     // }
-    //     else if (value === 'donate') {
-    //       setMyState((prevState) => prevState - 1);
-    //     }
-    //     else if (value === 'sell') {
-    //         return //price
-    //     }
-    //   }
-
-    //   const []
-
-    // {
     return (
         <div className="main__container">
             <Box mt={4}>
