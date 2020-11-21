@@ -10,10 +10,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
+import Moment from 'react-moment';
 
-function MessagePreviewItem() {
+function MessagePreviewItem({thread}) {
 
-  const loadDivider = true;
+    const loadDivider = true;
 
     return (
           <div>
@@ -24,18 +25,33 @@ function MessagePreviewItem() {
                  </ListItemAvatar>
                 
                 <ListItemText
-                primary="Brunch this weekend?"
+                primary=
+                {<Typography
+                    component="span"
+                    variant="body2"
+                    color="textPrimary"
+                    align="center">
+                    
+                    {thread.post.name}
+                    
+                    </Typography>
+                    }
+
+                // {Object.keys(thread).map(function(post) {
+                //     return <div>Key: {name}, Value: {post[name]}</div>;
+                //   })}
+
                 secondary={
-                    <React.Fragment>
+                <React.Fragment>
                     <Typography
                         component="span"
                         variant="body2"
                         color="primary"
                     >
-                        Ali Connors
+                        {thread.messages[0].user.name}
                     </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                    </React.Fragment>
+                    {" — "} {thread.messages[thread.messages.length-1].body}
+                     </React.Fragment>
                 }
                 />
                 <Box p={2}>
@@ -46,7 +62,8 @@ function MessagePreviewItem() {
                 color="textPrimary"
                 align="center">
                 
-                    11:15
+                <Moment fromNow>{thread.created_at}</Moment>
+                
                 </Typography>
                 }
                 />

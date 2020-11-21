@@ -24,7 +24,7 @@ class MessagesController extends Controller
     public function index()
     {
         // All threads, ignore deleted/archived participants
-        $threads = Thread::with('messages','post')->get(); ;
+        $threads = Thread::with('messages','messages.user','post')->orderBy("created_at", 'DESC')->get(); ;
 
         // // All threads that user is participating in
         // $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
@@ -44,24 +44,45 @@ class MessagesController extends Controller
      */
     public function show($id)
     {
-        try {
-            $thread = Thread::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+        // try {
+        //     $thread = Thread::findOrFail($id);
+        // } catch (ModelNotFoundException $e) {
+        //     Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
 
-            return redirect()->route('messages');
-        }
+        //     return redirect()->route('messages');
+        // }
 
-        // show current user in list if not a current participant
-        // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
+        // // show current user in list if not a current participant
+        // // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
 
-        // don't show the current user in list
-        $userId = Auth::id();
-        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
+        // // don't show the current user in list
+        // $userId = Auth::id();
+        // $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
 
-        $thread->markAsRead($userId);
+        // $thread->markAsRead($userId);
 
-        return compact('thread', 'users');
+        // return compact('thread', 'users');
+
+        $thread = Thread::findOrFail($id);
+
+
+        $messages = $thread->messages;
+        $post = $thread->post;
+
+
+
+        // return [
+        //     'movie' => $movie,
+        //     'genres' => $genres,
+        //     'people' => $people
+        // ];
+
+        // same as above:
+        return compact('thread');
+
+    
+        return $thread;
+
     }
 
     /**
@@ -69,13 +90,15 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    //public function create($id)
-    public function create()
+    public function create($id)
+    // public function create()
     {
-        $users = User::where('id', '!=', Auth::id())->get();
-        // $users = User::where('id', '!=', Auth::id())->where("id", "=", $id)->get();
+        // $users = User::where('id', '!=', Auth::id())->get();
+        $users = User::where('id', '!=', Auth::id())->where("id", "=", $id)->get();
 
-        return view('messenger.create', compact('users'));
+        return compact('users');
+
+       /*  return view('messenger.create', compact('users')); */
     }
 
     /**
@@ -88,14 +111,15 @@ class MessagesController extends Controller
         $input = Request::all();
 
         $thread = Thread::create([
-            'subject' => $input['subject'],
+            // 'post_id' => $['post_id'],
+             'subject' => $input['subject'],
         ]);
 
         // Message
         Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
-            'body' => $input['message'],
+            'body' => "Hi there!",
         ]);
 
         // Sender

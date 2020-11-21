@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -7,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
 import MessagePreviewItem from './MessagePreviewItem';
+import React, { useState, useEffect } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,16 +23,49 @@ const useStyles = makeStyles((theme) => ({
  
 }));
 
-/* createBreakpoints
-xs, extra-small: 0px
-sm, small: 600px
-md, medium: 960px
-lg, large: 1280px
-xl, extra-large: 1920px */
-
 
 export default function Messages() {
   const classes = useStyles();
+
+  const [threads, setThreads] = useState([]);
+  const [loading, setLoading] = React.useState(true);
+  
+  const loadThreads = async () => {
+      setLoading(true);
+      const response = await fetch("/api/threads/");
+      const data = await response.json();
+      data && setThreads(data);
+      setLoading(false);
+  }
+  
+  useEffect(() => {
+      loadThreads();
+  }, [])
+  
+  let threadContent = "";
+  
+  if (loading) {
+      threadContent = (
+          <div className="logo--pulsating">
+              <img src="/heart_plantera_inversed.png"/>
+          </div>
+      );
+  } else {
+      if (threads.length) {
+          threadContent = (
+              <>
+              {threads.map((thread, index) => (
+                <div key={index}>
+                  <MessagePreviewItem thread={thread} />
+                </div>
+              ))}
+              </>
+        );
+      } else {
+          
+          threadContent = "No threads found.";
+      }
+    }
 
   return (
     <div>
@@ -57,14 +90,8 @@ export default function Messages() {
         <Grid item xs={12} lg={6}> 
           <Box className="boxshadow">                             
              <List>
-               
-                <MessagePreviewItem />
 
-                 
-                <MessagePreviewItem />
-
-                 
-                <MessagePreviewItem />
+               { threadContent }
 
               </List>
               </Box> 
@@ -74,4 +101,5 @@ export default function Messages() {
          </Grid>
     </Container>
   </div>
-  )}
+  )
+}
