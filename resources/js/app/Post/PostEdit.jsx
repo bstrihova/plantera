@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -9,8 +9,25 @@ import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function PostEdit() {
+    let { id } = useParams();
+    const [post, setPost] = useState("");
+    const [loading, setLoading] = React.useState(true);
+
+    const loadPost = async () => {
+        setLoading(true);
+        const response = await fetch(`/api/posts/${id}`);
+        const data = await response.json();
+        data && setPost(data);
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        loadPost();
+    }, []);
+
     return (
         <div className="main__container">
             <Box mt={4}>
@@ -21,10 +38,7 @@ function PostEdit() {
             <Box className="main__container__shadow">
                 <div className="main__container">
                     <figure className="myPictures">
-                        <img
-                            src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
-                            alt=""
-                        />
+                        <img src={post.photo} alt={post.name} />
                     </figure>
                     <Button
                         className="button"
@@ -47,8 +61,10 @@ function PostEdit() {
                         <FormControl variant="filled" style={{ width: "30%" }}>
                             <InputLabel id="status">Status</InputLabel>
                             <MuiSelect labelId="status">
-                                <MuiMenuItem value="1">Available</MuiMenuItem>
-                                <MuiMenuItem value="2">Sold</MuiMenuItem>
+                                <MuiMenuItem value="available">
+                                    Available
+                                </MuiMenuItem>
+                                <MuiMenuItem value="sold">Sold</MuiMenuItem>
                             </MuiSelect>
                         </FormControl>
                     </div>
@@ -56,10 +72,17 @@ function PostEdit() {
                         <Box>
                             <FormControl style={{ width: "200%" }}>
                                 <InputLabel id="status">Selling?</InputLabel>
-                                <MuiSelect labelId="status" variant="filled">
-                                    <MuiMenuItem value="1">Donate</MuiMenuItem>
-                                    <MuiMenuItem value="2">Sell</MuiMenuItem>
-                                    <MuiMenuItem value="2">Swap</MuiMenuItem>
+                                <MuiSelect
+                                    labelId="status"
+                                    variant="filled"
+                                    // onChange={handleTransaction}
+                                    // value={transactionType}
+                                >
+                                    <MuiMenuItem value="donate">
+                                        Donate
+                                    </MuiMenuItem>
+                                    <MuiMenuItem value="sell">Sell</MuiMenuItem>
+                                    <MuiMenuItem value="swap">Swap</MuiMenuItem>
                                 </MuiSelect>
                             </FormControl>
                         </Box>

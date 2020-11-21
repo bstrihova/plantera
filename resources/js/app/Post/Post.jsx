@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PostGrid from "../common/PostGrid/PostGrid";
 import PostDescription from "./PostDescription/PostDescription";
-
 import { Link } from "react-router-dom";
-import { Route, Switch, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-function Post({searchValue, setSearchValue}) {
+function Post({ searchValue, setSearchValue }) {
     let { id } = useParams();
     const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);
@@ -34,14 +33,11 @@ function Post({searchValue, setSearchValue}) {
         if (post) {
             postContent = (
                 <>
-                    <>
-                        <img
-                            className="imagePost"
-                            alt={post.name}
-                            src={post.photo}
-                        />
-                    </>
-
+                    <img
+                        className="imagePost"
+                        alt={post.name}
+                        src={post.photo}
+                    />
                     <PostDescription post={post} />
                 </>
             );
@@ -52,7 +48,11 @@ function Post({searchValue, setSearchValue}) {
             <section className="main__container__shadow main__container__shadow--post">
                 {postContent}
             </section>
-            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue} currentPostId={id}/>
+            <PostGrid
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                specificPost={post.id}
+            />
         </div>
     );
 }
