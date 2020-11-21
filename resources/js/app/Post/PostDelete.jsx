@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { useParams } from "react-router-dom";
 
 function PostDelete() {
+    let { id } = useParams();
+    const [post, setPost] = useState("");
+    const [loading, setLoading] = React.useState(true);
+
+    const loadPost = async () => {
+        setLoading(true);
+        const response = await fetch(`/api/posts/${id}`);
+        const data = await response.json();
+        data && setPost(data);
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        loadPost();
+    }, []);
     return (
         <div className="main__container">
             <Box mt={4}>
@@ -19,14 +35,14 @@ function PostDelete() {
                 </Box>
                 <Box mt={2}>
                     <Typography fontWeight={900} variant="h3" color="primary">
-                        Plant name Plant price
+                        {post.name} - {post.price} {post.currency}
                     </Typography>
                 </Box>
                 <div className="imageDelete__container">
                     <img
                         className="imageDelete"
-                        alt="Snake plant"
-                        src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
+                        src={post.photo}
+                        alt={post.name}
                     />
                 </div>
                 <div className="button--deleteGroup">

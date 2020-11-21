@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -9,33 +9,50 @@ import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-function PostEdit()  
-const transactionType = (props) => {
-    const { handleTransaction, transactionType } = props;
+function PostEdit() {
+    let { id } = useParams();
+    const [post, setPost] = useState("");
+    const [loading, setLoading] = React.useState(true);
 
-const [transactionType, setTransactionType] = useState("")
+    const loadPost = async () => {
+        setLoading(true);
+        const response = await fetch(`/api/posts/${id}`);
+        const data = await response.json();
+        data && setPost(data);
+        setLoading(false);
+    };
 
-  const handleTransaction = (e) => {
-    setTransactionType(e.target.value);
-    setSearchResults([]);
-  };
+    useEffect(() => {
+        loadPost();
+    }, []);
 
-  function changeTransaction(value) {
-    if (value === 'swap') {
-    //   setTransactionType((prevState) => prevState + 1);
-    // }
-    else if (value === 'donate') {
-      setMyState((prevState) => prevState - 1);
-    }
-    else if (value === 'sell') {
-        return //price
-    }
-  }
+    // const transactionType = (props) => {
+    //     const { handleTransaction, transactionType } = props;
 
-  const []
+    // const [transactionType, setTransactionType] = useState("")
 
-{
+    //   const handleTransaction = (e) => {
+    //     setTransactionType(e.target.value);
+    //     setSearchResults([]);
+    //   };
+
+    //   function changeTransaction(value) {
+    //     if (value === 'swap') {
+    //     //   setTransactionType((prevState) => prevState + 1);
+    //     // }
+    //     else if (value === 'donate') {
+    //       setMyState((prevState) => prevState - 1);
+    //     }
+    //     else if (value === 'sell') {
+    //         return //price
+    //     }
+    //   }
+
+    //   const []
+
+    // {
     return (
         <div className="main__container">
             <Box mt={4}>
@@ -46,10 +63,7 @@ const [transactionType, setTransactionType] = useState("")
             <Box className="main__container__shadow">
                 <div className="main__container">
                     <figure className="myPictures">
-                        <img
-                            src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
-                            alt=""
-                        />
+                        <img src={post.photo} alt={post.name} />
                     </figure>
                     <Button
                         className="button"
@@ -86,8 +100,8 @@ const [transactionType, setTransactionType] = useState("")
                                 <MuiSelect
                                     labelId="status"
                                     variant="filled"
-                                    onChange={handleTransaction}
-                                    value={transactionType}
+                                    // onChange={handleTransaction}
+                                    // value={transactionType}
                                 >
                                     <MuiMenuItem value="donate">
                                         Donate
@@ -147,8 +161,6 @@ const [transactionType, setTransactionType] = useState("")
             </Box>
         </div>
     );
-}
-
 }
 
 export default PostEdit;

@@ -8,6 +8,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { Link } from "react-router-dom";
 
 function PostDescription({ post }) {
+
     return (
         <section className="containerRight">
             <Box
@@ -32,7 +33,27 @@ function PostDescription({ post }) {
 
             <div className="containerRight__upperPart">
                 <Box mb={2} variant="h3" fontWeight={900} color="primary.main">
-                    <Typography variant="h3">{post.price} Kč</Typography>
+{console.log(post.transaction === "sell" ? post.price : post.transaction === "swap" : "ICON")}
+
+
+                            {/* {if(transaction === "sell") {
+                             return <Typography variant="h3">{post.price}{post.currency}</Typography>
+                            }if else(transaction === "swap") {}
+                             return "free"{
+                                 else{
+                                     return 
+                                 }
+                             }
+                        } */}
+                        {/* {() => {
+                            switch (post.tranasaction) {
+                                case "sell":   return "{post.price}{post.currency}";
+                                case "donate": return "#Donate";
+                                case "swap":  return "#Swap";
+                            }
+                        } } */}
+                         
+                    {/* </Typography> "transaction": "sell",                   */}
                 </Box>
                 <Box display="flex" flexDirection="column" alignItems="center">
                     <Box mr={0.6}>
