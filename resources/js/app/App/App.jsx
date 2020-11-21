@@ -19,7 +19,7 @@ function App() {
             <Header/>
             <main>
                 <Switch>
-                    <Route exact path="/" children={<Home  searchValue={searchValue} setSearchValue={setSearchValue}/>} />
+                    <Route exact path="/" children={<Home searchValue={searchValue} setSearchValue={setSearchValue}/>} />
 
                     <Route path="/posts/create" children={<PostCreate />} />
 
@@ -29,7 +29,7 @@ function App() {
 
                     <Route path="/posts/:id" children={<Post searchValue={searchValue} setSearchValue={setSearchValue}/>} />
 
-                    <Route path="/user/profile" children={<UserProfile searchValue={searchValue} setSearchValue={setSearchValue} />} />
+                    <Route path="/user/profile/:id" children={<UserProfile searchValue={searchValue} setSearchValue={setSearchValue} />} />
 
                     <Route path="/user/settings" children={<UserSettings />} />
 

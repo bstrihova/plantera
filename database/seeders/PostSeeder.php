@@ -43,7 +43,7 @@ class PostSeeder extends Seeder
         $p->name = "Monstera orbifolia";
         $p->description = "VERTICAL Very beautiful monstera ready to make your living room warm <3<3<3. Available for handover in Prague 4. I do not send flowers by post.";
         $p->transaction = "swap";
-        $p->available = false;
+        $p->available = true;
         $p->photo = "https://images.unsplash.com/photo-1602491674275-316d95560fb1?ixlib=rb-1.2.1&
         ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
         $p->user_id = 3;
@@ -55,7 +55,7 @@ class PostSeeder extends Seeder
         $p->price = 250;
         $p->currency = "Kč";
         $p->transaction = "sell";
-        $p->available = false;
+        $p->available = true;
         $p->photo = "https://images.unsplash.com/photo-1517848568502-d03fa74e1964?ixlib=rb-1.2.1&
         ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
         $p->user_id = 4;
@@ -78,6 +78,18 @@ class PostSeeder extends Seeder
         $p->currency = "Kč";
         $p->transaction = "sell";
         $p->available = true;
+        $p->photo = "https://images.unsplash.com/photo-1602491674275-316d95560fb1?ixlib=rb-1.2.1&
+        ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
+        $p->user_id = 4;
+        $p->save();
+
+        $p = new Post;
+        $p->name = "Monstera unavailable";
+        $p->description = "VERTICAL Very beautiful monstera ready to make your living room warm <3<3<3. Available for handover in Prague 4. I do not send flowers by post.";
+        $p->price = 2500;
+        $p->currency = "Kč";
+        $p->transaction = "sell";
+        $p->available = false;
         $p->photo = "https://images.unsplash.com/photo-1602491674275-316d95560fb1?ixlib=rb-1.2.1&
         ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
         $p->user_id = 4;

@@ -35,6 +35,8 @@ use Illuminate\Support\Facades\Route;
 Route::get("/api/threads", "Api\MessagesController@index");
 Route::get("/api/threads/{id}", "Api\MessagesController@show");
 
+Route::get("/api/users/{id}", "Api\UserController@show");
+
 Route::get("/api/posts", "Api\PostController@index");
 Route::get("/api/posts/{id}", "Api\PostController@show");
 
