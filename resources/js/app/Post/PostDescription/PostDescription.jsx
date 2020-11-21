@@ -19,7 +19,7 @@ function PostDescription({ post }) {
                 fontWeight={900}
                 color="primary.main"
             >
-                <Box>
+                <Box mt={2} mb={2}>
                     <Link to="/posts/edit">
                         <EditIcon fontSize="large" color="primary" />
                     </Link>
@@ -27,13 +27,11 @@ function PostDescription({ post }) {
                         <DeleteIcon fontSize="large" color="primary" />{" "}
                     </Link>
                 </Box>
-                <Typography variant="h3">
-                    <h1>{post.name}</h1>
-                </Typography>
+                <Typography variant="h3">{post.name}</Typography>
             </Box>
 
             <div className="containerRight__upperPart">
-                <Box variant="h3" fontWeight={900} color="primary.main">
+                <Box mb={2} variant="h3" fontWeight={900} color="primary.main">
                     <Typography variant="h3">{post.price} Kč</Typography>
                 </Box>
                 <Box display="flex" flexDirection="column" alignItems="center">

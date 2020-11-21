@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PostGrid from "../common/PostGrid/PostGrid";
 import PostDescription from "./PostDescription/PostDescription";
-
 import { Link } from "react-router-dom";
 import { Route, Switch, useParams } from "react-router-dom";
 
@@ -34,14 +33,11 @@ function Post() {
         if (post) {
             postContent = (
                 <>
-                    <>
-                        <img
-                            className="imagePost"
-                            alt={post.name}
-                            src={post.photo}
-                        />
-                    </>
-
+                    <img
+                        className="imagePost"
+                        alt={post.name}
+                        src={post.photo}
+                    />
                     <PostDescription post={post} />
                 </>
             );

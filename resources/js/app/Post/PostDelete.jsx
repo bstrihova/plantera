@@ -17,17 +17,17 @@ function PostDelete() {
                         Are you sure you want to delete this post?
                     </Typography>
                 </Box>
+                <Box mt={2}>
+                    <Typography fontWeight={900} variant="h3" color="primary">
+                        Plant name Plant price
+                    </Typography>
+                </Box>
                 <div className="imageDelete__container">
                     <img
                         className="imageDelete"
                         alt="Snake plant"
                         src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
                     />
-
-                    <div className="imageDelete__text">
-                        <h1>150 Kč</h1>
-                        <h4>Snake Plant baby</h4>
-                    </div>
                 </div>
                 <div className="button--deleteGroup">
                     <Button

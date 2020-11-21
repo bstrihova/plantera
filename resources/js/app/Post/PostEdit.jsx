@@ -10,7 +10,32 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link } from "react-router-dom";
 
-function PostEdit() {
+function PostEdit()  
+const transactionType = (props) => {
+    const { handleTransaction, transactionType } = props;
+
+const [transactionType, setTransactionType] = useState("")
+
+  const handleTransaction = (e) => {
+    setTransactionType(e.target.value);
+    setSearchResults([]);
+  };
+
+  function changeTransaction(value) {
+    if (value === 'swap') {
+    //   setTransactionType((prevState) => prevState + 1);
+    // }
+    else if (value === 'donate') {
+      setMyState((prevState) => prevState - 1);
+    }
+    else if (value === 'sell') {
+        return //price
+    }
+  }
+
+  const []
+
+{
     return (
         <div className="main__container">
             <Box mt={4}>
@@ -47,8 +72,10 @@ function PostEdit() {
                         <FormControl variant="filled" style={{ width: "30%" }}>
                             <InputLabel id="status">Status</InputLabel>
                             <MuiSelect labelId="status">
-                                <MuiMenuItem value="1">Available</MuiMenuItem>
-                                <MuiMenuItem value="2">Sold</MuiMenuItem>
+                                <MuiMenuItem value="available">
+                                    Available
+                                </MuiMenuItem>
+                                <MuiMenuItem value="sold">Sold</MuiMenuItem>
                             </MuiSelect>
                         </FormControl>
                     </div>
@@ -56,10 +83,17 @@ function PostEdit() {
                         <Box>
                             <FormControl style={{ width: "200%" }}>
                                 <InputLabel id="status">Selling?</InputLabel>
-                                <MuiSelect labelId="status" variant="filled">
-                                    <MuiMenuItem value="1">Donate</MuiMenuItem>
-                                    <MuiMenuItem value="2">Sell</MuiMenuItem>
-                                    <MuiMenuItem value="2">Swap</MuiMenuItem>
+                                <MuiSelect
+                                    labelId="status"
+                                    variant="filled"
+                                    onChange={handleTransaction}
+                                    value={transactionType}
+                                >
+                                    <MuiMenuItem value="donate">
+                                        Donate
+                                    </MuiMenuItem>
+                                    <MuiMenuItem value="sell">Sell</MuiMenuItem>
+                                    <MuiMenuItem value="swap">Swap</MuiMenuItem>
                                 </MuiSelect>
                             </FormControl>
                         </Box>
@@ -113,6 +147,8 @@ function PostEdit() {
             </Box>
         </div>
     );
+}
+
 }
 
 export default PostEdit;
