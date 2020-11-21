@@ -9,11 +9,10 @@ import GoogleLocation from "../GoogleLocation/GoogleLocation"
 
 
 
-function PostGrid({searchValue, setSearchValue}) {
+function PostGrid({searchValue, setSearchValue, specificUser, specificPost}) {
 
     const [posts, setPosts] = useState("");
     const [loading, setLoading] = React.useState(true);
-    // const [currentPostId, setCurrentPostId] = useState("");
 
     const loadPosts = async () => {
         setLoading(true);
@@ -21,6 +20,17 @@ function PostGrid({searchValue, setSearchValue}) {
         const data = await response.json();
         data && setPosts(data);
         setLoading(false);
+    }
+
+    // this function takes an array as argument and returns all available Posts and passes it down as prop to PostPreview (and if there something in the search input, it returns just the ones with searched name)
+    const filterForSpecificArray = (array) => {
+        array.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase())))
+                        .filter((post)=>post.available)
+                        .map((post, index) => (
+                        <div key={index}>
+                            <PostPreview post={post}/>
+                        </div>
+                    ))
     }
 
     useEffect(() => {
@@ -37,22 +47,50 @@ function PostGrid({searchValue, setSearchValue}) {
         );
     } else {
         if (posts.length) {
-            gridContent = (
-                <>
-                {posts.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase()))).map((post, index) => (
-                    <div key={index}>
-                    {console.log(index)}
-                    <PostPreview post={post}/>
-                    {/* {setCurrentPostId(post.id)} */}
-                    </div>
-                ))}
-                </>
-          );
+            let postsOfSpecificUser = posts.filter((post) => post.user_id === specificUser);
+            let specificPostNotUsed = posts.filter((post) => post.id !== specificPost);
+            if (specificUser) {
+                gridContent = (
+                    <>
+                    {postsOfSpecificUser.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase())))
+                        .filter((post)=>post.available)
+                        .map((post, index) => (
+                        <div key={index}>
+                            <PostPreview post={post}/>
+                        </div>
+                    ))}
+                    </>
+                )
+            } else if (specificPost) {
+                gridContent = (
+                    <>
+                    {specificPostNotUsed.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase())))
+                        .filter((post)=>post.available)
+                        .map((post, index) => (
+                        <div key={index}>
+                            <PostPreview post={post}/>
+                        </div>
+                    ))}
+                    </>
+                )
+            } else {
+                gridContent = (
+                    <>
+                    {posts.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase())))
+                            .filter((post)=>post.available)
+                            .map((post, index) => (
+                            <div key={index}>
+                                <PostPreview post={post}/>
+                            </div>
+                    ))}
+                    </>
+                );
+            }
         } else {
             
-            gridContent = "No posts found.";
+            gridContent = "No posts.";
         }
-      }
+    }
 
     return (
         <Box mt={4}>

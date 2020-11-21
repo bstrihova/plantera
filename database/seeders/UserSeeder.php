@@ -19,12 +19,14 @@ class UserSeeder extends Seeder
             'name' => 'test',
             'email' => 'test@plantera.cz',
             'password' => Hash::make('plantera'),
+            "location" => "Prague, Czech Republic"
         ]);
 
         User::create([
             'name' => 'test2',
             'email' => 'test2@plantera.cz',
             'password' => Hash::make('plantera'),
+            "location" => "Trinec, Czech Republic"
         ]);
     }
 }

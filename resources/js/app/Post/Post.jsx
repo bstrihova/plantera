@@ -51,7 +51,7 @@ function Post({ searchValue, setSearchValue }) {
             <PostGrid
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
-                currentPostId={id}
+                specificPost={post.id}
             />
         </div>
     );

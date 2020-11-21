@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -7,6 +7,7 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import PostGrid from "../common/PostGrid/PostGrid"
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -18,8 +19,34 @@ const useStyles = makeStyles((theme) => ({
 function UserProfile({searchValue, setSearchValue}) {
 
     const classes = useStyles();
-    return (
-        <div>
+
+    let { id } = useParams();
+    const [user, setUser] = useState("");
+    const [loading, setLoading] = React.useState(true);
+
+    const loadUser = async () => {
+        setLoading(true);
+        const response = await fetch(`/api/users/${id}`);
+        const data = await response.json();
+        data && setUser(data);
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        loadUser();
+    }, []);
+
+    let userContent = "";
+
+    if (loading) {
+        userContent = (
+            <div className="logo--pulsating">
+                <img src="/heart_plantera_inversed.png" />
+            </div>
+        );
+    } else {
+        if (user) {
+            userContent = (
             <Container maxWidth={false}>
                 <Box mt={4}>
                     <Grid
@@ -30,14 +57,14 @@ function UserProfile({searchValue, setSearchValue}) {
                     spacing={2}
                     >
                         <Grid item>
-                            <Avatar alt="username" src="/storage/profile-photos/08d0IhlaomLIg3XBk0XDZ7ahfMgmTB5zEs82m6Un.jpeg" variant="circle" className={classes.large}/>
+                            <Avatar alt={user.name} src={user.profile_photo_url} variant="circle" className={classes.large}/>
                         </Grid>
                         <Grid item>
                             <Typography variant="h3" color="primary" gutterBottom>
-                                Bramborienka
+                                {user.name}
                             </Typography>
                             <Typography variant="body1"  gutterBottom>
-                                Prague, Czech Republic
+                                {user.location}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -46,8 +73,17 @@ function UserProfile({searchValue, setSearchValue}) {
                     </Grid>
                 </Box>
             </Container>
+               
+            );
+        }
+    }
 
-            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue}/>
+
+    return (
+        <div>
+            {userContent}
+
+            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue} specificUser={user.id}/>
 
         </div>
     )
