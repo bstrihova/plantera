@@ -19,14 +19,11 @@ function Post({ searchValue, setSearchValue }) {
         console.log("update set to false", update)
     };
 
-    const updatePost = (bool) => {
-        setUpdate(bool);
-        console.log("updateSetToBool", update);
-    }
+
 
     useEffect(() => {
         loadPost();
-    }, [update]);
+    }, []);
 
     let postContent = "";
 
@@ -59,8 +56,6 @@ function Post({ searchValue, setSearchValue }) {
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
                 specificPost={post.id}
-                updatePost={updatePost}
-                update={update}
             />
         </div>
     );
