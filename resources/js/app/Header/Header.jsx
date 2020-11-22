@@ -97,7 +97,7 @@ export default function Header({searchValue, setSearchValue}) {
       </Link>  
 
       {/* popup menu account settings menu item */}
-      <Link to="/user/settings">   
+      <Link to="/user/settings/1">   
         <MenuItem>
           <IconButton
             aria-label="account settings"
@@ -139,7 +139,7 @@ export default function Header({searchValue, setSearchValue}) {
 
 
       {/* profile mobile menu */}
-      <Link to="/user/profile">
+      <Link to="/user/profile/1">
         <MenuItem>
           <IconButton
             aria-label="account of current user"
@@ -154,7 +154,7 @@ export default function Header({searchValue, setSearchValue}) {
       </Link>  
 
        {/* account settings mobile menu */}
-      <Link to="/user/settings">   
+      <Link to="/user/settings/1">   
         <MenuItem>
           <IconButton
             aria-label="account settings"
@@ -238,7 +238,7 @@ export default function Header({searchValue, setSearchValue}) {
 
         
           <Button color="secondary" variant="contained">
-          <Link to="/posts/create">Get Started</Link> 
+            <Link to="/register">Get Started</Link> 
           </Button>  
         
    
