@@ -5,20 +5,23 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 
 function PostPreview({ post }) {
-    const url = `/posts/${post.id}`;
+    const postUrl = `/posts/${post.id}`;
+    const profileUrl = `/user/profile/${post.user.id}`;
     return (
-        <Link to={url}>
-            <figure className="postgrid__figure">
+        <figure className="postgrid__figure">
+            <Link to={postUrl}>
                 <img src={post.photo} className="postgrid__img" />
-                <figcaption>
-                    <Box px={3} mt={0.2}>
-                        <Typography variant="h6">{post.name}</Typography>
-                        <Box
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="space-between"
-                            mt={-1}
-                        >
+            </Link>
+            <figcaption>
+                <Box px={3} mt={0.2}>
+                    <Typography variant="h6">{post.name}</Typography>
+                    <Box
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="space-between"
+                        mt={-1}
+                    >
+                        <Link to={profileUrl}>
                             <Box display="flex" alignItems="center">
                                 <Box mr={0.6}>
                                     <Avatar
@@ -31,18 +34,18 @@ function PostPreview({ post }) {
                                     {post.user.name}
                                 </Typography>
                             </Box>
-                            <Box
-                                component="h1"
-                                fontWeight={900}
-                                whiteSpace="nowrap"
-                            >
-                                {post.price} {post.currency}
-                            </Box>
+                        </Link>
+                        <Box
+                            component="h1"
+                            fontWeight={900}
+                            whiteSpace="nowrap"
+                        >
+                            {post.price} {post.currency}
                         </Box>
                     </Box>
-                </figcaption>
-            </figure>
-        </Link>
+                </Box>
+            </figcaption>
+        </figure>
     );
 }
 
