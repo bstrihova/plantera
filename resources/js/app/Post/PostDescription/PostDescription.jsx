@@ -12,11 +12,11 @@ function PostDescription({ post }) {
     let postTransaction = "";
 
     if (post.transaction === "sell") {
-        postTransaction = post.price;
+        postTransaction = `${post.price} ${post.currency}`;
     } else if (post.transaction === "swap") {
         postTransaction = <SwapHorizIcon fontSize="large" />;
     } else if (post.transaction === "donate") {
-        postTransaction = 0;
+        postTransaction = "FREE";
     }
 
     return (
