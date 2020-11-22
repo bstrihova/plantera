@@ -5,7 +5,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
+import LoopIcon from "@material-ui/icons/Loop";
 import { Link } from "react-router-dom";
 
 function PostDescription({ post }) {
@@ -14,10 +14,20 @@ function PostDescription({ post }) {
     if (post.transaction === "sell") {
         postTransaction = `${post.price} ${post.currency}`;
     } else if (post.transaction === "swap") {
-        postTransaction = <SwapHorizIcon fontSize="large" />;
+        postTransaction = (
+            <Box display="flex" alignItems="center" justifyContent="flex-start">
+                <LoopIcon style={{ fontSize: "150%" }} />
+                <Typography variant="h5" color="primary" gutterBottom>
+                    Swap
+                </Typography>
+            </Box>
+        );
     } else if (post.transaction === "donate") {
         postTransaction = "FREE";
     }
+
+    const urlDelete = `/posts/${post.id}/delete`;
+    const urlEdit = `/posts/${post.id}/edit`;
 
     return (
         <section className="containerRight">
@@ -30,11 +40,11 @@ function PostDescription({ post }) {
                 fontWeight={900}
                 color="primary.main"
             >
-                <Box>
-                    <Link to="/posts/edit">
+                <Box display="flex" alignSelf="flex-end">
+                    <Link to={urlEdit}>
                         <EditIcon fontSize="large" color="primary" />
                     </Link>
-                    <Link to="/posts/delete">
+                    <Link to={urlDelete}>
                         <DeleteIcon fontSize="large" color="primary" />{" "}
                     </Link>
                 </Box>
@@ -42,18 +52,30 @@ function PostDescription({ post }) {
             </Box>
             ​
             <div className="containerRight__upperPart">
-                <Box variant="h3" fontWeight={900} color="primary.main">
-                    <Typography variant="h3">{postTransaction}</Typography>
-                </Box>
-                <Box display="flex" flexDirection="column" alignItems="center">
-                    <Box mr={0.6}>
+                <Box
+                    my={0.6}
+                    mb={1}
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <Box variant="h3" fontWeight={900} color="primary.main">
+                        <Typography variant="h3">{postTransaction}</Typography>
+                    </Box>
+                    <Box
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                    >
                         <Avatar
-                            alt="username"
-                            src="/storage/profile-photos/08d0IhlaomLIg3XBk0XDZ7ahfMgmTB5zEs82m6Un.jpeg"
+                            alt={post.user.name}
+                            src={post.user.profile_photo_url}
                             variant="circle"
                         />
+                        <Typography variant="body1">
+                            {post.user.name}
+                        </Typography>
                     </Box>
-                    <Typography variant="body2">bramborienka</Typography>
                 </Box>
             </div>
             <div className="description">
@@ -79,7 +101,7 @@ function PostDescription({ post }) {
                         component="h2"
                         color="primary"
                     >
-                        Prague, CZ
+                        {post.user.location}
                     </Typography>
                 </Box>
             </div>

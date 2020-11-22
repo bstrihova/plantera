@@ -35,16 +35,10 @@ function PostDelete() {
                 </Box>
                 <Box mt={2}>
                     <Typography fontWeight={900} variant="h3" color="primary">
-                        {post.name} - {post.price} {post.currency}
+                        {post.name}
                     </Typography>
                 </Box>
-                <div className="imageDelete__container">
-                    <img
-                        className="imageDelete"
-                        src={post.photo}
-                        alt={post.name}
-                    />
-                </div>
+                <img src={post.photo} alt={post.name} />
                 <div className="button--deleteGroup">
                     <Button
                         className="button"
