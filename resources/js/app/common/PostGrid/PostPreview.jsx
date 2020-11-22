@@ -4,13 +4,13 @@ import Avatar from "@material-ui/core/Avatar"
 import Box from "@material-ui/core/Box"
 import { Link } from 'react-router-dom'
 
-function PostPreview({post}) {
+function PostPreview({post, updatePost, update}) {
     const postUrl = `/posts/${post.id}`
     const profileUrl = `/user/profile/${post.user.id}`
     return (
         
             <figure className="postgrid__figure">
-                <Link to={postUrl}>
+                <Link to={postUrl} onClick={()=>updatePost(true)}>
                     <img src={post.photo} className="postgrid__img"/>
                 </Link>
                 <figcaption>

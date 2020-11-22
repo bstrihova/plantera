@@ -9,7 +9,7 @@ import GoogleLocation from "../GoogleLocation/GoogleLocation"
 
 
 
-function PostGrid({searchValue, setSearchValue, specificUser, specificPost}) {
+function PostGrid({searchValue, setSearchValue, specificUser, specificPost, updatePost, update}) {
 
     const [posts, setPosts] = useState("");
     const [loading, setLoading] = React.useState(true);
@@ -80,7 +80,7 @@ function PostGrid({searchValue, setSearchValue, specificUser, specificPost}) {
                             .filter((post)=>post.available)
                             .map((post, index) => (
                             <div key={index}>
-                                <PostPreview post={post}/>
+                                <PostPreview post={post} updatePost={updatePost} update={update}/>
                             </div>
                     ))}
                     </>

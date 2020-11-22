@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PostGrid from "../common/PostGrid/PostGrid";
 import PostDescription from "./PostDescription/PostDescription";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 function Post({ searchValue, setSearchValue }) {
     let { id } = useParams();
     const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);
+    const [update, setUpdate] = useState(false);
 
     const loadPost = async () => {
         setLoading(true);
@@ -15,11 +15,18 @@ function Post({ searchValue, setSearchValue }) {
         const data = await response.json();
         data && setPost(data);
         setLoading(false);
+        setUpdate(false);
+        console.log("update set to false", update)
     };
+
+    const updatePost = (bool) => {
+        setUpdate(bool);
+        console.log("updateSetToBool", update);
+    }
 
     useEffect(() => {
         loadPost();
-    }, []);
+    }, [update]);
 
     let postContent = "";
 
@@ -52,6 +59,8 @@ function Post({ searchValue, setSearchValue }) {
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
                 specificPost={post.id}
+                updatePost={updatePost}
+                update={update}
             />
         </div>
     );
