@@ -13,7 +13,7 @@ function Login() {
                     Login
                 </Typography>
             </Box>
-            <div className="container--auth">
+            <div className="main__container__shadow main__container__shadow--auth">
                 <Grid
                     container
                     spacing={3}
@@ -31,13 +31,6 @@ function Login() {
                     <Grid item>
                         <TextField
                             label="Password"
-                            type="password"
-                            variant="filled"
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            label="Confirm password"
                             type="password"
                             variant="filled"
                         />

@@ -46,18 +46,35 @@ function Register() {
                         />
                     </Grid>
                     <Grid item>
+                        <TextField
+                            label="Confirm password"
+                            type="password"
+                            variant="filled"
+                        />
+                    </Grid>
+                    <Grid item>
                         <GoogleLocation />
                     </Grid>
-
-                    <Grid item>
-                        <Button
-                            className="button"
-                            color="primary"
-                            variant="contained"
-                            size="large"
-                        >
-                            Register
-                        </Button>
+                    <Grid
+                        container
+                        spacing={2}
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                    >
+                        <Grid item>
+                            <Button
+                                className="button"
+                                color="primary"
+                                variant="contained"
+                                size="large"
+                            >
+                                Register
+                            </Button>
+                            <Grid item>
+                                <a href="#">Already registered?</a>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </div>
