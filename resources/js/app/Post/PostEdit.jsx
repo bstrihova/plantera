@@ -53,18 +53,20 @@ function PostEdit() {
                         <TextField
                             color="primary"
                             label="Name of the plant"
-                            placeholder="Add the name of your plant"
                             variant="filled"
+                            value={post.name || ""}
                         />
                     </div>
                     <div className="texField--postName">
                         <FormControl variant="filled" style={{ width: "30%" }}>
                             <InputLabel id="status">Status</InputLabel>
                             <MuiSelect labelId="status">
-                                <MuiMenuItem value="available">
+                                <MuiMenuItem value={post.available || ""}>
                                     Available
                                 </MuiMenuItem>
-                                <MuiMenuItem value="sold">Sold</MuiMenuItem>
+                                <MuiMenuItem value={post.available || ""}>
+                                    Sold
+                                </MuiMenuItem>
                             </MuiSelect>
                         </FormControl>
                     </div>
@@ -76,13 +78,17 @@ function PostEdit() {
                                     labelId="status"
                                     variant="filled"
                                     // onChange={handleTransaction}
-                                    // value={transactionType}
+                                    value={post.transaction || ""}
                                 >
-                                    <MuiMenuItem value="donate">
+                                    <MuiMenuItem value={post.transaction || ""}>
                                         Donate
                                     </MuiMenuItem>
-                                    <MuiMenuItem value="sell">Sell</MuiMenuItem>
-                                    <MuiMenuItem value="swap">Swap</MuiMenuItem>
+                                    <MuiMenuItem value={post.transaction || ""}>
+                                        Sell
+                                    </MuiMenuItem>
+                                    <MuiMenuItem value={post.transaction || ""}>
+                                        Swap
+                                    </MuiMenuItem>
                                 </MuiSelect>
                             </FormControl>
                         </Box>
@@ -93,6 +99,7 @@ function PostEdit() {
                             placeholder="Add your price"
                             variant="filled"
                             style={{ width: "30%" }}
+                            value={post.price || ""}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -111,7 +118,7 @@ function PostEdit() {
                                 multiline
                                 rows={4}
                                 columns={50}
-                                placeholder="Add your description"
+                                value={post.description || ""}
                                 variant="filled"
                                 style={{ width: "100%" }}
                             />
@@ -120,10 +127,9 @@ function PostEdit() {
                     <Box mb={2}>
                         {/* <Link to="/messages/create">  */}
                         <Button
-                            className="button--post"
                             color="primary"
                             variant="contained"
-                            size="small"
+                            size="large"
                             disableRipple
                             style={{ textTransform: "none" }}
                             style={{ width: "100%" }}

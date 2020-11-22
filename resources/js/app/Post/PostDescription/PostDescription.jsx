@@ -48,7 +48,9 @@ function PostDescription({ post }) {
                         <DeleteIcon fontSize="large" color="primary" />{" "}
                     </Link>
                 </Box>
-                <Typography variant="h2">{post.name}</Typography>
+                <Typography variant="h3">
+                    <Box fontWeight="fontWeightMedium">{post.name}</Box>
+                </Typography>
             </Box>
             ​
             <div className="containerRight__upperPart">
@@ -59,9 +61,15 @@ function PostDescription({ post }) {
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Box variant="h3" fontWeight={900} color="primary.main">
-                        <Typography variant="h3">{postTransaction}</Typography>
-                    </Box>
+                    <Typography>
+                        <Box
+                            fontSize="h2.fontSize"
+                            fontWeight="fontWeightMedium"
+                            color="secondary"
+                        >
+                            {postTransaction}
+                        </Box>
+                    </Typography>
                     <Box
                         display="flex"
                         flexDirection="column"
