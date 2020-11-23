@@ -19,15 +19,22 @@ function PostCreate() {
                 </Typography>
             </Box>
             <Box className="main__container__shadow main__container__shadow--auth">
-                <Button
-                    className="button"
-                    alignSelf="center"
-                    color="primary"
-                    variant="contained"
-                    size="medium"
-                >
-                    + Add plant picture
-                </Button>
+                <label htmlFor="upload-photo">
+                    <input
+                        style={{ display: "none" }}
+                        id="upload-photo"
+                        name="upload-photo"
+                        type="file"
+                    />
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        component="span"
+                    >
+                        + Add new picture
+                    </Button>{" "}
+                </label>
+
                 <div className="texField--postName">
                     <TextField
                         color="primary"
@@ -41,9 +48,9 @@ function PostCreate() {
                         <FormControl style={{ width: "200%" }}>
                             <InputLabel id="status"> Selling? </InputLabel>
                             <MuiSelect labelId="status" variant="filled">
-                                <MuiMenuItem value="1">Donate</MuiMenuItem>
-                                <MuiMenuItem value="2">Sell</MuiMenuItem>
-                                <MuiMenuItem value="2">Swap</MuiMenuItem>
+                                <MuiMenuItem value="Donate">Donate</MuiMenuItem>
+                                <MuiMenuItem value="Sell">Sell</MuiMenuItem>
+                                <MuiMenuItem value="Swap">Swap</MuiMenuItem>
                             </MuiSelect>
                         </FormControl>
                     </Box>
@@ -53,6 +60,7 @@ function PostCreate() {
                         label="Price"
                         variant="filled"
                         style={{ width: "30%" }}
+                        type="number"
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
