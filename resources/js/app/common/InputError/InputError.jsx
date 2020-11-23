@@ -1,6 +1,6 @@
 import React from 'react'
 
-function AuthError({errors}) {
+function InputError({errors}) {
 
     
     return (
@@ -13,4 +13,4 @@ function AuthError({errors}) {
     )
 }
 
-export default AuthError
+export default InputError

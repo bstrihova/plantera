@@ -5,9 +5,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import GoogleLocation from "../common/GoogleLocation/GoogleLocation";
 import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
 import { Link } from 'react-router-dom'
-import AuthError from "./AuthError";
+import InputError from "../common/InputError/InputError";
 
 function Register() {
 
@@ -86,7 +85,7 @@ function Register() {
                             value={ values.email } 
                             onChange={ handleChange }
                             error={errors.email ? true : false}
-                            helperText={<AuthError errors={errors.email}/>}
+                            helperText={<InputError errors={errors.email}/>}
                             autoComplete="email"
                         />
                     </Grid>
@@ -99,7 +98,7 @@ function Register() {
                             value={ values.name } 
                             onChange={ handleChange }
                             error={errors.name ? true : false}
-                            helperText={<AuthError errors={errors.name}/>}
+                            helperText={<InputError errors={errors.name}/>}
                             autoComplete="username"
 
                         />
@@ -113,7 +112,7 @@ function Register() {
                             value={ values.password } 
                             onChange={ handleChange }
                             error={errors.password ? true : false}
-                            helperText={<AuthError errors={errors.password}/>}
+                            helperText={<InputError errors={errors.password}/>}
                             autoComplete="new-password"
                         />
                     </Grid>
@@ -126,7 +125,7 @@ function Register() {
                             value={ values.password_confirmation } 
                             onChange={ handleChange }
                             error={errors.password_confirmation ? true : false}
-                            helperText={<AuthError errors={errors.password_confirmation}/>}
+                            helperText={<InputError errors={errors.password_confirmation}/>}
                             autoComplete="new-password"
                         />
                     </Grid>
