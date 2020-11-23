@@ -20,7 +20,7 @@ function Post({ searchValue, setSearchValue }) {
 
     useEffect(() => {
         loadPost();
-    }, [id]);
+    }, [ id ]);
 
     let postContent = "";
 
