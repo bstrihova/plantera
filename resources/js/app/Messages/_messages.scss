@@ -13,7 +13,8 @@ body {
 
 .boxshadow {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
-  border-radius: 32px;}
+  border-radius: 32px;
+  }
 
 .imageMessage {
   border-top-left-radius: 32px;
@@ -27,29 +28,18 @@ body {
     border-top-left-radius: 32px;
     width: 100%;
   }
-
-  body {
-} */
-
-.chat {
-  width: 50%;
-  background: white;
-  margin: 4rem auto;
-  border-radius: 4px;
-  min-height: 4rem;
-  padding: 1rem;
-}
+*/
 
 .message {
   display: flex;
   margin-bottom: 0.5rem;
 }
 
-.message--remote {
+.message--seller {
   flex-direction: row;
   }
 
-.message--local {
+.message--buyer {
   flex-direction: row-reverse;
    }
 
@@ -57,16 +47,16 @@ body {
   flex: 0 0 auto;
   max-width: 80%;
   padding: 1rem;
-  border-radius: 4px;
+  border-radius: 10px;
   margin: 0 0.5rem 0.5rem 0.5rem;
 }
 
-.message--local .message__text {
+.message--buyer .message__text {
   background-color:#246b43;
   color: white;
 }
 
-.message--remote .message__text {
+.message--seller .message__text {
   background-color: #cccccc;
   color: black;
 }

@@ -36,7 +36,7 @@ class PostSeeder extends Seeder
         $p->available = true;
         $p->photo = "https://images.unsplash.com/photo-1591958911259-bee2173bdccc?ixlib=rb-1.2.1&
         ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80";
-        $p->user_id = 2;
+        $p->user_id = 1;
         $p->save();
 
         $p = new Post;
@@ -46,7 +46,7 @@ class PostSeeder extends Seeder
         $p->available = true;
         $p->photo = "https://images.unsplash.com/photo-1602491674275-316d95560fb1?ixlib=rb-1.2.1&
         ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
-        $p->user_id = 3;
+        $p->user_id = 2;
         $p->save();
 
         $p = new Post;

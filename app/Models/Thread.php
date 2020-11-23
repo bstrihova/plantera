@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use App\Models\Post;
+use App\Models\User;
 use Cmgmyr\Messenger\Models\Models;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
@@ -20,6 +21,16 @@ class Thread extends Eloquent
     {
         // return $this->belongsTo(Models::classname(Post::class), 'post_id', 'id');
         return $this->belongsTo(Post::class);
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(Models::user(), 'seller_id');
+    }
+
+    public function buyer()
+    {
+        return $this->belongsTo(Models::user(), 'buyer_id');
     }
 
     /**

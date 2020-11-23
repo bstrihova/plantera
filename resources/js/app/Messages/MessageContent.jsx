@@ -4,16 +4,25 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
 
-function MessageContent({role}) {
+function MessageContent({message, seller}) {
+      let role = "";
 
-    const specificRole = `message--${role}`
+      if (seller === message.user.id) {
+        role = "message--seller"
+      } else {
+        role = "message--buyer"
+      }
+      
 
-    return (
-/* <div>
-       /* <ListItem className="message--remote" alignItems="flex-start">
+      return (
+ <div>
+     <ListItem 
+        className={role}
+        alignItems="flex-start">
             <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar alt={message.user.name} src={message.user.profile_photo_url} />
             </ListItemAvatar>
             <ListItemText className="message--remote message__text"
                 primary={
@@ -22,15 +31,14 @@ function MessageContent({role}) {
                     <Typography
                         component="span"
                         variant="body2">
-              {"I am a sender / I want your plant"} 
+              {message.body} 
               </Typography>
               </React.Fragment>}>
           
                 </ListItemText>
-
       </ListItem>
-
-      <ListItem className="message--local" alignItems="flex-start">
+     
+      {/* <ListItem className="message--local" alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
@@ -47,10 +55,10 @@ function MessageContent({role}) {
             </React.Fragment>
           }
           />
-      </ListItem>    
- */
+      </ListItem>   */}  
+ </div>
 
-       <ListItem className={specificRole} alignItems="flex-start">
+   /*     <ListItem className={specificRole} alignItems="flex-start">
             <ListItemAvatar>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
             </ListItemAvatar>
@@ -66,7 +74,7 @@ function MessageContent({role}) {
             </ListItemText>
 
 
-        </ListItem> 
+        </ListItem>  */
 
     
 )

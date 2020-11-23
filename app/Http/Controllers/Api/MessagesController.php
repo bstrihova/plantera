@@ -24,7 +24,7 @@ class MessagesController extends Controller
     public function index()
     {
         // All threads, ignore deleted/archived participants
-        $threads = Thread::with('messages','messages.user','post')->orderBy("created_at", 'DESC')->get(); ;
+        $threads = Thread::with('buyer','seller', 'messages','messages.user','post')->orderBy("created_at", 'DESC')->get();
 
         // // All threads that user is participating in
         // $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
@@ -63,11 +63,13 @@ class MessagesController extends Controller
 
         // return compact('thread', 'users');
 
-        $thread = Thread::findOrFail($id);
+        $thread = Thread::with('buyer','seller', 'messages','messages.user','post')->findOrFail($id);
+
+        // Thread::with('buyer','seller', 'messages','messages.user','post')->orderBy("created_at", 'DESC')->get()
 
 
-        $messages = $thread->messages;
-        $post = $thread->post;
+        // $messages = $thread->messages;
+        // $post = $thread->post;
 
 
 
@@ -81,7 +83,7 @@ class MessagesController extends Controller
         return compact('thread');
 
     
-        return $thread;
+        // return $thread;
 
     }
 

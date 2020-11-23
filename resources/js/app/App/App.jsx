@@ -10,6 +10,7 @@ import UserSettings from "../User/UserSettings";
 import Messages from "../Messages/Messages";
 import MessageCreate from "../Messages/MessageCreate";
 import Header from "../Header/Header";
+import ThreadShow from "../Messages/ThreadShow"
 
 function App() {
     const [searchValue, setSearchValue] = useState("");
@@ -32,13 +33,20 @@ function App() {
                     <Route path="/user/profile/:id" children={<UserProfile searchValue={searchValue} setSearchValue={setSearchValue} />} />
 
                     <Route path="/user/settings" children={<UserSettings />} />
-
-
+{/* 
                     <Route
-                        path="/messages/create"
+                        path="/messages/:id"
                         children={<MessageCreate />}
+                    /> */}
+
+                    
+<Route
+                        path="/messages/:id"
+                        children={<ThreadShow searchValue={searchValue} setSearchValue={setSearchValue}/>}
                     />
-                    <Route path="/messages" children={<Messages />} />
+
+                    <Route path="/messages" children={<Messages />} />  
+                    
                 </Switch>
             </main>
             {/* <footer>Copyright Plantera 2020</footer> */}

@@ -1,5 +1,9 @@
 <?php $class = $thread->isUnread(Auth::id()) ? 'alert-info' : ''; ?>
 
+<div class="MessagePreviewItem"></div>
+
+<script src="resources\js\app\Messages\MessagePreviewItem.jsx"></script>
+
 <div class="media alert {{ $class }}">
     <h4 class="media-heading">
         <a href="{{ route('messages.show', $thread->id) }}">{{ $thread->subject }}</a>

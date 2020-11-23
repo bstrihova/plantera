@@ -21,7 +21,7 @@ function MessagePreviewItem({thread}) {
             <Grid item xs={12}>
               <ListItem secondaryaction="true" >          
                   <ListItemAvatar p={2}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    <Avatar alt={thread.messages[0].user.name} src={thread.messages[0].user.profile_photo_url} />
                  </ListItemAvatar>
                 
                 <ListItemText
@@ -48,9 +48,13 @@ function MessagePreviewItem({thread}) {
                         variant="body2"
                         color="primary"
                     >
+                    {/* {Object.keys(thread.messages).map(function(user) {
+                    return {user}, Value: {user[name]};
+                  })} */}
+
                         {thread.messages[0].user.name}
                     </Typography>
-                    {" — "} {thread.messages[thread.messages.length-1].body}
+                    {/* {" — "} */} {thread.messages[thread.messages.length-1].body}
                      </React.Fragment>
                 }
                 />
@@ -88,3 +92,7 @@ function MessagePreviewItem({thread}) {
       }
 
 export default MessagePreviewItem
+
+/* if (document.getElementById('MessagePreviewItem')) {
+    ReactDOM.render(<MessagePreviewItem />, document.getElementById('MessagePreviewItem'));
+} */

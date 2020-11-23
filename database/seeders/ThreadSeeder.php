@@ -16,19 +16,22 @@ class ThreadSeeder extends Seeder
     {       
         $p = new Thread;
                
-        $p->subject= "Thread 1 o Post 1";
+        $p->seller_id = 1;
+        $p->buyer_id = 2 ;
         $p->post_id = 1;
         $p->save();
 
         $p = new Thread;
                
-        $p->subject= "Thread 2 o Post 2";
+        $p->seller_id = 1;
+        $p->buyer_id = 2;
         $p->post_id = 2;
         $p->save();
 
         $p = new Thread;
                
-        $p->subject= "Thread 3 o Post 3";
+        $p->seller_id = 2;
+        $p->buyer_id = 1 ;
         $p->post_id = 3;
         $p->save();
 
