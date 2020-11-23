@@ -19,16 +19,6 @@ function PostCreate() {
                 </Typography>
             </Box>
             <Box className="main__container__shadow main__container__shadow--auth">
-                <figure className="myPictures">
-                    {/* <img
-                            src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
-                            alt=""
-                        />
-                        <img
-                            src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
-                            alt=""
-                        /> */}
-                </figure>
                 <Button
                     className="button"
                     alignSelf="center"

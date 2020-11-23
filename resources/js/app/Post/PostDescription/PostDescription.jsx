@@ -5,26 +5,26 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import LoopIcon from "@material-ui/icons/Loop";
+import PostPrice from "../../common/PostPrice/PostPrice";
 import { Link } from "react-router-dom";
 
 function PostDescription({ post }) {
-    let postTransaction = "";
+    // let postTransaction = "";
 
-    if (post.transaction === "sell") {
-        postTransaction = `${post.price} ${post.currency}`;
-    } else if (post.transaction === "swap") {
-        postTransaction = (
-            <Box display="flex" alignItems="center" justifyContent="flex-start">
-                <LoopIcon style={{ fontSize: "150%" }} />
-                <Typography variant="h5" color="primary" gutterBottom>
-                    Swap
-                </Typography>
-            </Box>
-        );
-    } else if (post.transaction === "donate") {
-        postTransaction = "FREE";
-    }
+    // if (post.transaction === "sell") {
+    //     postTransaction = `${post.price} ${post.currency}`;
+    // } else if (post.transaction === "swap") {
+    //     postTransaction = (
+    //         <Box display="flex" alignItems="center" justifyContent="flex-start">
+    //             <LoopIcon style={{ fontSize: "150%" }} />
+    //             <Typography variant="h5" color="primary" gutterBottom>
+    //                 Swap
+    //             </Typography>
+    //         </Box>
+    //     );
+    // } else if (post.transaction === "donate") {
+    //     postTransaction = "FREE";
+    // }
 
     const urlDelete = `/posts/${post.id}/delete`;
     const urlEdit = `/posts/${post.id}/edit`;
@@ -67,7 +67,7 @@ function PostDescription({ post }) {
                             fontWeight="fontWeightMedium"
                             color="secondary"
                         >
-                            {postTransaction}
+                            <PostPrice post={post} />
                         </Box>
                     </Typography>
                     <Box
