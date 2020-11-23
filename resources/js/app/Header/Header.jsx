@@ -82,7 +82,7 @@ export default function Header({searchValue, setSearchValue}) {
     >
 
       {/* popup menu profile menu item */}
-     <Link to="/user/profile">
+     <Link to="/user/profile/1">
         <MenuItem>
           <IconButton
             aria-label="account of current user"
@@ -97,7 +97,7 @@ export default function Header({searchValue, setSearchValue}) {
       </Link>  
 
       {/* popup menu account settings menu item */}
-      <Link to="/user/settings">   
+      <Link to="/user/settings/1">   
         <MenuItem>
           <IconButton
             aria-label="account settings"
@@ -139,7 +139,7 @@ export default function Header({searchValue, setSearchValue}) {
 
 
       {/* profile mobile menu */}
-      <Link to="/user/profile">
+      <Link to="/user/profile/1">
         <MenuItem>
           <IconButton
             aria-label="account of current user"
@@ -154,7 +154,7 @@ export default function Header({searchValue, setSearchValue}) {
       </Link>  
 
        {/* account settings mobile menu */}
-      <Link to="/user/settings">   
+      <Link to="/user/settings/1">   
         <MenuItem>
           <IconButton
             aria-label="account settings"
@@ -168,17 +168,19 @@ export default function Header({searchValue, setSearchValue}) {
       </Link> 
 
       {/* LOGIN/LOGOUT */}
+      <Link to="/login">
       <MenuItem>
-        <IconButton>
-            <LogoutIcon color="primary"/>
-        </IconButton>
-        <p>Logout</p>
-      </MenuItem>
+          <IconButton>
+              <LoginIcon color="primary"/>
+          </IconButton>
+          <p>Login</p>
+        </MenuItem>
+      </Link> 
 
       <MenuItem>
       
         <Button color="primary" variant="contained" size="large">
-          <Link to="/posts/create">Get Started</Link> 
+          <Link to="/register">Get Started</Link> 
         </Button> 
       
       </MenuItem>
@@ -228,13 +230,15 @@ export default function Header({searchValue, setSearchValue}) {
             </IconButton>
 
         {/* LOGIN/LOGOUT */}
-        <IconButton aria-label="login" color="secondary">
-          <LogoutIcon/>
-        </IconButton>  
+        <Link to="/login">
+          <IconButton aria-label="login" color="secondary">
+            <LoginIcon/>
+          </IconButton>  
+        </Link> 
 
         
           <Button color="secondary" variant="contained">
-          <Link to="/posts/create">Get Started</Link> 
+            <Link to="/register">Get Started</Link> 
           </Button>  
         
    

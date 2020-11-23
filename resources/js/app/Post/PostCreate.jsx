@@ -18,92 +18,89 @@ function PostCreate() {
                     Post new plant
                 </Typography>
             </Box>
-            <Box className="main__container__shadow">
-                <div className="main__container">
-                    <figure className="myPictures">
-                        <img
+            <Box className="main__container__shadow main__container__shadow--auth">
+                <figure className="myPictures">
+                    {/* <img
                             src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
                             alt=""
                         />
                         <img
                             src="https://cdn.shopify.com/s/files/1/0260/3037/4957/products/medium-plant-snake-white-pot_720x.jpg?v=1597702214"
                             alt=""
+                        /> */}
+                </figure>
+                <Button
+                    className="button"
+                    alignSelf="center"
+                    color="primary"
+                    variant="contained"
+                    size="medium"
+                >
+                    + Add plant picture
+                </Button>
+                <div className="texField--postName">
+                    <TextField
+                        color="primary"
+                        label="Name of the plant"
+                        placeholder="Add the name of your plant"
+                        variant="filled"
+                    />
+                </div>
+                <div className="input__group--post">
+                    <Box>
+                        <FormControl style={{ width: "200%" }}>
+                            <InputLabel id="status"> Selling? </InputLabel>
+                            <MuiSelect labelId="status" variant="filled">
+                                <MuiMenuItem value="1">Donate</MuiMenuItem>
+                                <MuiMenuItem value="2">Sell</MuiMenuItem>
+                                <MuiMenuItem value="2">Swap</MuiMenuItem>
+                            </MuiSelect>
+                        </FormControl>
+                    </Box>
+
+                    <TextField
+                        color="primary"
+                        label="Price"
+                        variant="filled"
+                        style={{ width: "30%" }}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    Kč
+                                </InputAdornment>
+                            )
+                        }}
+                    />
+                </div>
+                <div className="texField--postDescription">
+                    <Box>
+                        <TextField
+                            id="filled-multiline-static"
+                            label="Description"
+                            multiline
+                            rows={6}
+                            placeholder="Add your description"
+                            variant="filled"
+                            style={{ width: "100%" }}
                         />
-                    </figure>
+                    </Box>
+                </div>
+                {/* <Link to="/messages/create">  */}
+                <Box mb={2}>
                     <Button
-                        className="button"
-                        alignSelf="center"
+                        // className="button--post"
                         color="primary"
                         variant="contained"
                         size="large"
+                        disableRipple
+                        style={{ textTransform: "none" }}
+                        style={{ width: "100%" }}
                     >
-                        + Add plant picture
+                        Post new plant
                     </Button>
-                    <div className="texField--postName">
-                        <TextField
-                            color="primary"
-                            label="Name of the plant"
-                            placeholder="Add the name of your plant"
-                            variant="filled"
-                        />
-                    </div>
-                    <div className="input__group--post">
-                        <Box>
-                            <FormControl style={{ width: "200%" }}>
-                                <InputLabel id="status"> Selling? </InputLabel>
-                                <MuiSelect labelId="status" variant="filled">
-                                    <MuiMenuItem value="1">Donate</MuiMenuItem>
-                                    <MuiMenuItem value="2">Sell</MuiMenuItem>
-                                    <MuiMenuItem value="2">Swap</MuiMenuItem>
-                                </MuiSelect>
-                            </FormControl>
-                        </Box>
+                </Box>
 
-                        <TextField
-                            color="primary"
-                            label="Price"
-                            placeholder="Add your price"
-                            variant="filled"
-                            style={{ width: "30%" }}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        Kč
-                                    </InputAdornment>
-                                )
-                            }}
-                        />
-                    </div>
-                    <div className="texField--postDescription">
-                        <Box>
-                            <TextField
-                                id="filled-multiline-static"
-                                label="Description"
-                                multiline
-                                rows={6}
-                                placeholder="Add your description"
-                                variant="filled"
-                                style={{ width: "100%" }}
-                            />
-                        </Box>
-                    </div>
-                    {/* <Link to="/messages/create">  */}
-                    <Box mb={2}>
-                        <Button
-                            className="button--post"
-                            color="primary"
-                            variant="contained"
-                            size="medium"
-                            disableRipple
-                            style={{ textTransform: "none" }}
-                            style={{ width: "100%" }}
-                        >
-                            Post new plant
-                        </Button>
-                    </Box>
-
-                    {/* </Link> */}
-                </div>
+                {/* </Link> */}
             </Box>
         </div>
     );

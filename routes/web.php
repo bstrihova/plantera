@@ -40,6 +40,8 @@ Route::get("/api/users/{id}", "Api\UserController@show");
 Route::get("/api/posts", "Api\PostController@index");
 Route::get("/api/posts/{id}", "Api\PostController@show");
 
+Route::get('/login', 'IndexController@index');
+Route::get('/register', 'IndexController@index');
 Route::get('/user/profile', 'IndexController@index');
 Route::get('/user/settings', 'IndexController@index');
 

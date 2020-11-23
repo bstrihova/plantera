@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../Home/Home";
 import Post from "../Post/Post";
@@ -8,19 +8,34 @@ import PostDelete from "../Post/PostDelete";
 import UserProfile from "../User/UserProfile";
 import UserSettings from "../User/UserSettings";
 import Messages from "../Messages/Messages";
-import MessageCreate from "../Messages/MessageCreate";
+// import MessageCreate from "../Messages/MessageCreate";
 import Header from "../Header/Header";
 import ThreadShow from "../Messages/ThreadShow"
+import Login from "../Auth/Login";
+import Register from "../Auth/Register";
 
 function App() {
     const [searchValue, setSearchValue] = useState("");
 
     return (
         <Router>
-            <Header/>
+            <Header />
             <main>
                 <Switch>
-                    <Route exact path="/" children={<Home searchValue={searchValue} setSearchValue={setSearchValue}/>} />
+                    <Route
+                        exact
+                        path="/"
+                        children={
+                            <Home
+                                searchValue={searchValue}
+                                setSearchValue={setSearchValue}
+                            />
+                        }
+                    />
+
+                    <Route path="/login" children={<Login />} />
+
+                    <Route path="/register" children={<Register />} />
 
                     <Route path="/posts/create" children={<PostCreate />} />
 
@@ -28,16 +43,27 @@ function App() {
 
                     <Route path="/posts/:id/delete" children={<PostDelete />} />
 
-                    <Route path="/posts/:id" children={<Post searchValue={searchValue} setSearchValue={setSearchValue}/>} />
-
-                    <Route path="/user/profile/:id" children={<UserProfile searchValue={searchValue} setSearchValue={setSearchValue} />} />
-
-                    <Route path="/user/settings" children={<UserSettings />} />
-{/* 
                     <Route
-                        path="/messages/:id"
-                        children={<MessageCreate />}
-                    /> */}
+                        path="/posts/:id"
+                        children={
+                            <Post
+                                searchValue={searchValue}
+                                setSearchValue={setSearchValue}
+                            />
+                        }
+                    />
+
+                    <Route
+                        path="/user/profile/:id"
+                        children={
+                            <UserProfile
+                                searchValue={searchValue}
+                                setSearchValue={setSearchValue}
+                            />
+                        }
+                    />
+
+                    <Route path="/user/settings/:id" children={<UserSettings />} />
 
                     
 <Route
