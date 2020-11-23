@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
 import MessagePreviewItem from './MessagePreviewItem';
 import React, { useState, useEffect } from 'react';
+import {useHistory} from "react-router-dom"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,14 +27,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Messages() {
   const classes = useStyles();
+  const history = useHistory();
 
   const [threads, setThreads] = useState([]);
   const [loading, setLoading] = React.useState(true);
   
   const loadThreads = async () => {
       setLoading(true);
-      const response = await fetch("/api/threads/");
+      const response = await fetch("/api/threads/", {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
       const data = await response.json();
+      if(data.message) {
+        history.push("/login")
+      }
       data && setThreads(data);
       setLoading(false);
   }
@@ -43,6 +53,8 @@ export default function Messages() {
   }, [])
   
   let threadContent = "";
+
+ 
   
   if (loading) {
       threadContent = (

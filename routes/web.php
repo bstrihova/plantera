@@ -32,15 +32,16 @@ use Illuminate\Support\Facades\Route;
     Route::put('/{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
 });;  */
 
-Route::get("/api/threads", "Api\MessagesController@index");
-Route::get("/api/threads/{id}", "Api\MessagesController@show");
+Route::get("/api/threads", "Api\MessagesController@index")->middleware('auth');
+Route::get("/api/threads/{id}", "Api\MessagesController@show")->middleware('auth');
 
-Route::get("/api/users/{id}", "Api\UserController@show");
+Route::get("/api/users/{id}", "Api\UserController@show")->middleware('auth');
+Route::get("/api/authuser", "Api\UserController@authUser")->middleware('auth');
 
 Route::get("/api/posts", "Api\PostController@index");
 Route::get("/api/posts/{id}", "Api\PostController@show");
 
-Route::get('/login', 'IndexController@index');
+Route::get('/login', 'IndexController@index')->name("login");
 Route::get('/register', 'IndexController@index');
 Route::get('/user/profile', 'IndexController@index');
 Route::get('/user/settings', 'IndexController@index');

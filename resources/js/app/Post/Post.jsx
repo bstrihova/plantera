@@ -7,7 +7,6 @@ function Post({ searchValue, setSearchValue }) {
     let { id } = useParams();
     const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);
-    const [update, setUpdate] = useState(false);
 
     const loadPost = async () => {
         setLoading(true);
@@ -15,15 +14,13 @@ function Post({ searchValue, setSearchValue }) {
         const data = await response.json();
         data && setPost(data);
         setLoading(false);
-        setUpdate(false);
-        console.log("update set to false", update)
     };
 
-
+    //fetch user here and compare if post.user_id = authUser
 
     useEffect(() => {
         loadPost();
-    }, []);
+    }, [id]);
 
     let postContent = "";
 

@@ -11,9 +11,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuIcon from '@material-ui/icons/Menu';
 import MailIcon from '@material-ui/icons/Mail';
 import LoginIcon from '@material-ui/icons/Lock';
-import LogoutIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from 'react-router-dom';
+import Logout from "../Auth/Logout"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -169,13 +169,15 @@ export default function Header({searchValue, setSearchValue}) {
 
       {/* LOGIN/LOGOUT */}
       <Link to="/login">
-      <MenuItem>
-          <IconButton>
-              <LoginIcon color="primary"/>
-          </IconButton>
-          <p>Login</p>
+        <MenuItem>
+            <IconButton>
+                <LoginIcon color="primary"/>
+            </IconButton>
+            <p>Login</p>
         </MenuItem>
       </Link> 
+
+      <Logout version="mobile"/>
 
       <MenuItem>
       
@@ -218,28 +220,30 @@ export default function Header({searchValue, setSearchValue}) {
         </Link>
           
           {/* profile icon on desktop */}
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="secondary"
-            >
-              <AccountCircle />
-            </IconButton>
+          <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="secondary"
+          >
+            <AccountCircle />
+          </IconButton>
 
-        {/* LOGIN/LOGOUT */}
+        {/* LOGIN/LOGOUT desktop */}
         <Link to="/login">
           <IconButton aria-label="login" color="secondary">
             <LoginIcon/>
           </IconButton>  
         </Link> 
 
+        <Logout version="desktop"/>
+
         
-          <Button color="secondary" variant="contained">
-            <Link to="/register">Get Started</Link> 
-          </Button>  
+        <Button color="secondary" variant="contained">
+          <Link to="/register">Get Started</Link> 
+        </Button>  
         
    
 

@@ -5,10 +5,13 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import GoogleLocation from "../common/GoogleLocation/GoogleLocation";
 import Grid from "@material-ui/core/Grid";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import InputError from "../common/InputError/InputError";
+import { useHistory } from "react-router-dom";
 
 function Register() {
+
+    const history = useHistory();
 
     const [values, setValues] = useState({
         name: '',
@@ -50,6 +53,10 @@ function Register() {
         })
 
         const response_data = await response.json();
+        if (response.status === 201) {
+            //The user is authenticated, redirect to /
+            history.push("/");
+        }
 
         if (response_data.errors) {
             setErrors(response_data.errors);
@@ -82,11 +89,11 @@ function Register() {
                             type="email"
                             variant="filled"
                             name="email"
+                            autoComplete="email"
                             value={ values.email } 
                             onChange={ handleChange }
                             error={errors.email ? true : false}
                             helperText={<InputError errors={errors.email}/>}
-                            autoComplete="email"
                         />
                     </Grid>
                     <Grid item>
@@ -95,11 +102,11 @@ function Register() {
                             label="Username"
                             variant="filled"
                             name="name" 
+                            autoComplete="username"
                             value={ values.name } 
                             onChange={ handleChange }
                             error={errors.name ? true : false}
                             helperText={<InputError errors={errors.name}/>}
-                            autoComplete="username"
 
                         />
                     </Grid>
@@ -109,11 +116,11 @@ function Register() {
                             type="password"
                             variant="filled"
                             name="password" 
+                            autoComplete="new-password"
                             value={ values.password } 
                             onChange={ handleChange }
                             error={errors.password ? true : false}
                             helperText={<InputError errors={errors.password}/>}
-                            autoComplete="new-password"
                         />
                     </Grid>
                     <Grid item>
@@ -122,11 +129,11 @@ function Register() {
                             type="password"
                             variant="filled"
                             name="password_confirmation" 
+                            autoComplete="new-password"
                             value={ values.password_confirmation } 
                             onChange={ handleChange }
                             error={errors.password_confirmation ? true : false}
                             helperText={<InputError errors={errors.password_confirmation}/>}
-                            autoComplete="new-password"
                         />
                     </Grid>
                     <Grid item>
