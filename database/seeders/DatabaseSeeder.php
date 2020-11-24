@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         $this->call(PostSeeder::class);
         $this->call(ThreadSeeder::class);
-        $this->call(ParticipantSeeder::class);
         $this->call(MessageSeeder::class);
     }
 }

@@ -4,15 +4,19 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
+import { useGlobalContext } from "../context";
+
 
 function MessageContent({message, seller}) {
+
+      
+      const { user } = useGlobalContext();
       let role = "";
 
-      if (seller === message.user.id) {
-        role = "message--seller"
+      if (message.user.id != user.id) {
+        role = "message--sender"
       } else {
-        role = "message--buyer"
+        role = "message--reciever"
       }
       
 
@@ -24,7 +28,7 @@ function MessageContent({message, seller}) {
             <ListItemAvatar>
                 <Avatar alt={message.user.name} src={message.user.profile_photo_url} />
             </ListItemAvatar>
-            <ListItemText className="message--remote message__text"
+            <ListItemText className="message--sender message__text"
                 primary={
                 <React.Fragment>
                     
