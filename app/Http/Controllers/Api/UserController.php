@@ -46,9 +46,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
-        //
+    
     }
 
     
@@ -73,7 +73,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $input = $request->all();
+        $user->fill($input)->save();
+
+        return [
+            'status' => 'success'
+        ];
     }
 
     /**
