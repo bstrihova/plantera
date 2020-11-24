@@ -10,9 +10,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import InputError from "../common/InputError/InputError";
-
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import PriceOption from "../common/PriceOption/PriceOption";
 
 function PostEdit() {
     let { id } = useParams();
@@ -22,7 +22,7 @@ function PostEdit() {
     const [values, setValues] = useState({
         name: "",
         status: "",
-        price: post.price,
+        price: "",
         transaction: "",
         description: ""
     });
@@ -48,11 +48,6 @@ function PostEdit() {
 
         //The user is authenticated,
         if (response.status === 201) {
-            // fetch authenticated user data
-            // const response_user = await fetch(`/api/authuser`);
-            // const data = await response_user.json();
-            // // setUser to authenticated user
-            // fetchUser(data);
             history.push("/");
         }
 
@@ -93,30 +88,6 @@ function PostEdit() {
     useEffect(() => {
         loadPost();
     }, []);
-
-    let priceContainer = "";
-    if (post.transaction === "sell") {
-        priceContainer = (
-            <TextField
-                color="primary"
-                label="Price"
-                variant="filled"
-                style={{ width: "30%" }}
-                value={post.price || ""}
-                name="price"
-                value={values.price || ""}
-                onChange={handleChange}
-                error={errors.price ? true : false}
-                helperText={<InputError errors={errors.price} />}
-                type="number"
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">Kč</InputAdornment>
-                    )
-                }}
-            />
-        );
-    }
 
     let content = "";
 
@@ -186,7 +157,7 @@ function PostEdit() {
                                     <MuiSelect
                                         variant="filled"
                                         name="transaction"
-                                        value={post.transaction || ""}
+                                        value={values.transaction || ""}
                                         onChange={handleChange}
                                     >
                                         <MuiMenuItem value="swap">
@@ -200,8 +171,13 @@ function PostEdit() {
                                         </MuiMenuItem>
                                     </MuiSelect>
                                 </FormControl>
-
-                                {priceContainer}
+                                <PriceOption
+                                    transaction={values.transaction}
+                                    price={values.price}
+                                    errors={errors.price}
+                                />
+                                {/* Add new component PriceOption here */}
+                                {/* {priceContainer} */}
                             </div>
                             <div className="texField--postDescription">
                                 <Box>
