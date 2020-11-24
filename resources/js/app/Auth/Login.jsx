@@ -7,12 +7,14 @@ import Grid from "@material-ui/core/Grid";
 import { Link } from 'react-router-dom';
 import InputError from "../common/InputError/InputError";
 import { useHistory } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
 function Login() {
     const [{email, password}, setValues] = useState({
         email: '',
         password: ''
     })
+    const { fetchUser} = useGlobalContext();
 
     const history = useHistory();
 
@@ -32,8 +34,15 @@ function Login() {
             }
         });
         const response_data = await response.json();
+
+        // user is authenticated
         if (response.status === 200) {
-            //The user is authenticated, redirect to /
+            // fetch authenticated user data
+            const response_user = await fetch(`/api/authuser`);
+            const data = await response_user.json();
+            // setUser to authenticated user
+            fetchUser(data);
+            //  redirect to home
             history.push("/");
         }
 
@@ -41,6 +50,9 @@ function Login() {
             setErrors(response_data.errors);
         }
     }
+
+
+
 
     const handleChange = (event) => {
         const allowed_names = ['email', 'password'],
@@ -55,8 +67,6 @@ function Login() {
             });
         }
     }
-
-
 
     return (
         <div className="main__container">
@@ -116,7 +126,7 @@ function Login() {
                         <Link to="/register">Not registered yet?</Link>
                     </Grid>
                 </Grid>
-            </form>    
+            </form>   
             </div>
         </div>
     );

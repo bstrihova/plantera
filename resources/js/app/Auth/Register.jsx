@@ -8,8 +8,11 @@ import Grid from "@material-ui/core/Grid";
 import { Link } from 'react-router-dom';
 import InputError from "../common/InputError/InputError";
 import { useHistory } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
 function Register() {
+
+    const { fetchUser } = useGlobalContext();
 
     const history = useHistory();
 
@@ -21,6 +24,37 @@ function Register() {
     });
 
     const [errors, setErrors] = useState({});
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const response = await fetch('/register', {
+            method: 'post',
+            body: JSON.stringify(values),
+            headers: {
+                'Accept' : 'application/json', // tell Laravel (backend) what we want in response
+                'Content-type' : 'application/json', // tell backend what we are sending
+                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+            }
+        })
+
+        const response_data = await response.json();
+
+        //The user is authenticated, 
+        if (response.status === 201) {
+            // fetch authenticated user data
+            const response_user = await fetch(`/api/authuser`);
+            const data = await response_user.json();
+            // setUser to authenticated user
+            fetchUser(data);
+            history.push("/");
+        }
+
+        if (response_data.errors) {
+            setErrors(response_data.errors);
+        }
+
+    }
 
     const handleChange = (event) => {
         const allowed_names = ['name', 'email', 'password', 'password_confirmation'],
@@ -37,31 +71,6 @@ function Register() {
                 );
             });
         }
-    }
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        const response = await fetch('/register', {
-            method: 'post',
-            body: JSON.stringify(values),
-            headers: {
-                'Accept' : 'application/json', // tell Laravel (backend) what we want in response
-                'Content-type' : 'application/json', // tell backend what we are sending
-                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
-            }
-        })
-
-        const response_data = await response.json();
-        if (response.status === 201) {
-            //The user is authenticated, redirect to /
-            history.push("/");
-        }
-
-        if (response_data.errors) {
-            setErrors(response_data.errors);
-        }
-
     }
 
 

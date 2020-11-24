@@ -14,6 +14,7 @@ import LoginIcon from '@material-ui/icons/Lock';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from 'react-router-dom';
 import Logout from "../Auth/Logout"
+import { useGlobalContext } from "../context";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,10 +44,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({searchValue, setSearchValue}) {
+export default function Header() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const { user } = useGlobalContext();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -68,21 +71,63 @@ export default function Header({searchValue, setSearchValue}) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = 'primary-search-account-menu';
+  const urlUserProfile = `/user/profile/${user.id}`
+  const urlUserSettings = `/user/settings/${user.id}`
+  
+  let authContentMobile = "";
+  let authContentDesktop= "";
+
+  if (user.id) {
+    authContentMobile = (
+     <Logout version="mobile"/>
+    )
+  } else {
+    authContentMobile = (
+    <Link to="/login">
+      <MenuItem>
+          <IconButton>
+              <LoginIcon color="primary"/>
+          </IconButton>
+          Login
+      </MenuItem>
+    </Link> 
+    )
+  }
+
+
+
+  if (user.id) {
+    authContentDesktop = (
+      <Logout version="desktop"/>
+    )
+  } else {
+    authContentDesktop = (
+    <Link to="/login">
+      <IconButton
+      edge="end"
+      aria-label="login icon"
+      color="secondary"
+    >
+      <LoginIcon />
+    </IconButton>
+  </Link> 
+    )
+  }
+
   const renderMenu = (
     //profile menu on desktop
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
 
+
       {/* popup menu profile menu item */}
-     <Link to="/user/profile/1">
+    <Link to={urlUserProfile}>
         <MenuItem>
           <IconButton
             aria-label="account of current user"
@@ -92,12 +137,12 @@ export default function Header({searchValue, setSearchValue}) {
           >
             <AccountCircle />
           </IconButton>
-          <p>Profile</p>
+          Profile
         </MenuItem>
       </Link>  
 
       {/* popup menu account settings menu item */}
-      <Link to="/user/settings/1">   
+      <Link to={urlUserSettings}>   
         <MenuItem>
           <IconButton
             aria-label="account settings"
@@ -106,19 +151,17 @@ export default function Header({searchValue, setSearchValue}) {
           >
             <SettingsIcon />
           </IconButton>
-          <p>Account Settings</p>
+          Account Settings
         </MenuItem> 
       </Link> 
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     // whole hamburger mobile menu
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
@@ -133,13 +176,15 @@ export default function Header({searchValue, setSearchValue}) {
               <MailIcon />
             </Badge>
           </IconButton>
-          <p>Messages</p>
+          Messages
         </MenuItem>
       </Link>
 
+      {authContentMobile}
+
 
       {/* profile mobile menu */}
-      <Link to="/user/profile/1">
+      <Link to={urlUserProfile}>
         <MenuItem>
           <IconButton
             aria-label="account of current user"
@@ -149,12 +194,12 @@ export default function Header({searchValue, setSearchValue}) {
           >
             <AccountCircle />
           </IconButton>
-          <p>Profile</p>
+          Profile
         </MenuItem>
       </Link>  
 
        {/* account settings mobile menu */}
-      <Link to="/user/settings/1">   
+      <Link to={urlUserSettings}>   
         <MenuItem>
           <IconButton
             aria-label="account settings"
@@ -163,21 +208,9 @@ export default function Header({searchValue, setSearchValue}) {
           >
             <SettingsIcon />
           </IconButton>
-          <p>Account Settings</p>
+          Account Settings
         </MenuItem> 
       </Link> 
-
-      {/* LOGIN/LOGOUT */}
-      <Link to="/login">
-        <MenuItem>
-            <IconButton>
-                <LoginIcon color="primary"/>
-            </IconButton>
-            <p>Login</p>
-        </MenuItem>
-      </Link> 
-
-      <Logout version="mobile"/>
 
       <MenuItem>
       
@@ -203,7 +236,7 @@ export default function Header({searchValue, setSearchValue}) {
         <img src="/logo_plantera.png" alt="logo" width="100px"/>
         </Link>
 
-        
+        ahoj {user.id ? `loaded ${user.id}` : "nothing"} {user.name}
 
         <div className={classes.grow} />
     
@@ -223,7 +256,6 @@ export default function Header({searchValue, setSearchValue}) {
           <IconButton
             edge="end"
             aria-label="account of current user"
-            aria-controls={menuId}
             aria-haspopup="true"
             onClick={handleProfileMenuOpen}
             color="secondary"
@@ -231,15 +263,8 @@ export default function Header({searchValue, setSearchValue}) {
             <AccountCircle />
           </IconButton>
 
-        {/* LOGIN/LOGOUT desktop */}
-        <Link to="/login">
-          <IconButton aria-label="login" color="secondary">
-            <LoginIcon/>
-          </IconButton>  
-        </Link> 
 
-        <Logout version="desktop"/>
-
+        {authContentDesktop}
         
         <Button color="secondary" variant="contained">
           <Link to="/register">Get Started</Link> 
@@ -258,7 +283,6 @@ export default function Header({searchValue, setSearchValue}) {
           {/* hamburger button */}
           <IconButton
             aria-label="open mobile menu"
-            aria-controls={mobileMenuId}
             aria-haspopup="true"
             onClick={handleMobileMenuOpen}
             color="inherit"

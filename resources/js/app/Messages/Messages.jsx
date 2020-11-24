@@ -64,11 +64,12 @@ export default function Messages() {
       );
   } else {
       if (threads.length) {
+        
           threadContent = (
               <>
               {threads.map((thread, index) => (
                 <div key={index}>
-                  <MessagePreviewItem thread={thread} />
+                    <MessagePreviewItem thread={thread} />
                 </div>
               ))}
               </>

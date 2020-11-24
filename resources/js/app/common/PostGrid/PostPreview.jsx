@@ -2,6 +2,7 @@ import React from 'react'
 import Typography from "@material-ui/core/Typography"
 import Avatar from "@material-ui/core/Avatar"
 import Box from "@material-ui/core/Box"
+import PostPrice from "../PostPrice/PostPrice"
 import { Link } from 'react-router-dom'
 
 function PostPreview({post}) {
@@ -30,7 +31,7 @@ function PostPreview({post}) {
                                     </Box>
                                 </Link>
                             <Box component="h1" fontWeight={900} whiteSpace="nowrap">
-                            {post.price} {post.currency}
+                            <PostPrice post={post}/>
                             </Box>
                         </Box>
                     </Box>

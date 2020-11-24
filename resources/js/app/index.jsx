@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from "react-dom"
 import App from "./App/App"
 import {ThemeProvider, createMuiTheme, responsiveFontSizes} from "@material-ui/core/styles"
+import { AppProvider } from './context';
 
 let theme = createMuiTheme({
     palette: {
@@ -33,8 +34,12 @@ theme = responsiveFontSizes(theme);
 
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-        <App />
-    </ThemeProvider>
+    <React.StrictMode>
+        <AppProvider>
+            <ThemeProvider theme={theme}>
+                <App />
+            </ThemeProvider>
+        </AppProvider>
+    </React.StrictMode>
     , document.getElementById('app')
 );

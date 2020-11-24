@@ -15,6 +15,7 @@ function Logout({version}) {
         event.preventDefault();
         await axios.post("/logout");
         history.push("/");
+        window.location.reload()
     };
 
     let content = "";
