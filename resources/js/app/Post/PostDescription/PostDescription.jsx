@@ -9,23 +9,6 @@ import PostPrice from "../../common/PostPrice/PostPrice";
 import { Link } from "react-router-dom";
 
 function PostDescription({ post }) {
-    // let postTransaction = "";
-
-    // if (post.transaction === "sell") {
-    //     postTransaction = `${post.price} ${post.currency}`;
-    // } else if (post.transaction === "swap") {
-    //     postTransaction = (
-    //         <Box display="flex" alignItems="center" justifyContent="flex-start">
-    //             <LoopIcon style={{ fontSize: "150%" }} />
-    //             <Typography variant="h5" color="primary" gutterBottom>
-    //                 Swap
-    //             </Typography>
-    //         </Box>
-    //     );
-    // } else if (post.transaction === "donate") {
-    //     postTransaction = "FREE";
-    // }
-
     const urlDelete = `/posts/${post.id}/delete`;
     const urlEdit = `/posts/${post.id}/edit`;
 
@@ -65,9 +48,8 @@ function PostDescription({ post }) {
                         <Box
                             fontSize="h2.fontSize"
                             fontWeight="fontWeightMedium"
-                            color="secondary"
                         >
-                            <PostPrice post={post} />
+                            <PostPrice isPostDescription={true} post={post} />
                         </Box>
                     </Typography>
                     <Box
