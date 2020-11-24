@@ -14,6 +14,9 @@ import MessageContent from './MessageContent';
 import { useParams } from "react-router-dom";
 import List from '@material-ui/core/List';
 import Container from '@material-ui/core/Container';
+import Previews from '../common/FileUpload/Previews';
+import { ImageUpload } from "../common/FileUpload/ImageUpload";
+
 
 function ThreadShow() {
     let { id } = useParams();
@@ -63,6 +66,13 @@ function ThreadShow() {
 
             threadContent = (
                 <> 
+                <Box className="boxshadow">   
+
+                <Grid  container 
+                    direction="row"
+                    justify='center'
+                    alignItems='center'
+    >                     
                 
                 <Grid item xs={12} lg={5}>    
                 {/* conditional rendering on image class for desktop */}
@@ -70,7 +80,11 @@ function ThreadShow() {
                     <img className="imageMessage" src={thread.post.photo} alt={thread.post.name}/>
 
                 </Grid>   
-                   <Grid item xs={12} lg={5}>       
+                   <Grid item xs={12} lg={7}>  
+                   <Grid container 
+                         direction="column"
+                         alignItems="center">
+
                         <Typography variant="h6"  align="center">
                                 {/* Snake plant little baby */}
                                 {thread.post.name}
@@ -82,18 +96,19 @@ function ThreadShow() {
                                   
                                 {thread.post.price} {thread.post.currency}
                         </Typography>
-                        
-                    <Box>   
-                        <FormControl fullWidth >
+                       
+                        <FormControl style={{width:"70%"}}> 
                         <InputLabel id="status">Status</InputLabel>
                             <MuiSelect labelId="status">
                             <MuiMenuItem /* value={`Available`} */>Available</MuiMenuItem>
                             <MuiMenuItem /* value={'Sold'} */>Sold</MuiMenuItem>
                         </MuiSelect>
                         </FormControl> 
-                    </Box>   
+                        
+                    </Grid> 
                 </Grid>
-
+                </Grid>
+                </Box>
                
                 </>
 
@@ -119,25 +134,37 @@ function ThreadShow() {
                    alignItems="center"
                     > 
 
-               <Grid item xs={12} lg={5}>               
+               <Grid item xs={10} lg={6}>               
                         {username}
                     </Grid>
+
+                    <Grid item xs={10} lg={6}>    
                     
-                    <Box p={4}>
-                    <Box className="boxshadow">   
+                    {/* <Box className="boxshadow">    */}
                       {threadContent}
-                    </Box>
-                    </Box>
-                    <Grid item>              
+                    {/* </Box> */}
+                   
+                    </Grid>   
+
+
+                    <Grid container
+                      justify="center">
+                <Grid item xs={10} lg={6}> 
                         <List>
                             {messageContent}
                         </List> 
                     </Grid> 
-            
-            <Box>
-                <FormControl fullWidth hiddenLabel variant="filled">
+                    </Grid>
+              
+             
+                <Grid container
+                      justify="center"
+                      p={5}>
+                <Grid item xs={10} lg={6}>
+                    
+                <FormControl fullWidth margin="dense" hiddenLabel variant="filled">
 
-                <FilledInput 
+                <FilledInput fullWidth
                 id="create-message"
                 type= "text"
                 placeholder="Write a message"
@@ -157,11 +184,34 @@ function ThreadShow() {
                     }
                 />
                 </FormControl>
-                </Box>
-             
+             </Grid>
                 
-        </Grid>
+             </Grid>   
+
+
+             {/* implementing image upload  */}
+
+
+             <Grid container
+                      justify="center">
+                <Grid item xs={10} lg={6}>       
+
+                <Box mt={4}>
+               
+                <Box className="boxshadow">
+
+                <ImageUpload/>
+
+                </Box>
+            </Box>
+
+               </Grid>
+                
+             </Grid>    
+
+             {/* implementing image upload  */}           
         
+             </Grid> 
     </div>    
     );
 }
