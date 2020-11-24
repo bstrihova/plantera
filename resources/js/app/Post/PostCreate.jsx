@@ -54,7 +54,7 @@ function PostCreate() {
                             </MuiSelect>
                         </FormControl>
                     </Box>
-
+                    {/* Set the conditional rendering for the price TextField to do not show here if donate or swap */}
                     <TextField
                         color="primary"
                         label="Price"

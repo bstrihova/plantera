@@ -29,13 +29,24 @@ function PostEdit() {
         loadPost();
     }, []);
 
-    // let availability = "";
-
-    // if (post.available == 1) {
-    //     availability = "Available";
-    // } else {
-    //     availability = "Sold";
-    // }
+    let priceContainer = "";
+    if (post.transaction === "sell") {
+        priceContainer = (
+            <TextField
+                color="primary"
+                label="Price"
+                variant="filled"
+                style={{ width: "30%" }}
+                value={post.price || ""}
+                type="number"
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">Kč</InputAdornment>
+                    )
+                }}
+            />
+        );
+    }
 
     let content = "";
 
@@ -105,21 +116,8 @@ function PostEdit() {
                                 </FormControl>
                             </Box>
 
-                            <TextField
-                                color="primary"
-                                label="Price"
-                                variant="filled"
-                                style={{ width: "30%" }}
-                                value={post.price || ""}
-                                type="number"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            Kč
-                                        </InputAdornment>
-                                    )
-                                }}
-                            />
+                            {/* TextField with Price */}
+                            {priceContainer}
                         </div>
                         <div className="texField--postDescription">
                             <Box>
