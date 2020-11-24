@@ -13,8 +13,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MessageContent from './MessageContent';
 import { useParams } from "react-router-dom";
 import List from '@material-ui/core/List';
-import Container from '@material-ui/core/Container';
-import Previews from '../common/FileUpload/Previews';
 import { ImageUpload } from "../common/FileUpload/ImageUpload";
 
 
@@ -187,29 +185,6 @@ function ThreadShow() {
              </Grid>
                 
              </Grid>   
-
-
-             {/* implementing image upload  */}
-
-
-             <Grid container
-                      justify="center">
-                <Grid item xs={10} lg={6}>       
-
-                <Box mt={4}>
-               
-                <Box className="boxshadow">
-
-                <ImageUpload/>
-
-                </Box>
-            </Box>
-
-               </Grid>
-                
-             </Grid>    
-
-             {/* implementing image upload  */}           
         
              </Grid> 
     </div>    

@@ -1,9 +1,11 @@
 import React from "react";
 import ImageUploading from "react-images-uploading";
+import Button from "@material-ui/core/button"
+import Grid from "@material-ui/core/Grid"
 
 export function ImageUpload() {
   const [images, setImages] = React.useState([]);
-  const maxNumber = 69;
+  const maxNumber = 1;
 
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
@@ -23,33 +25,48 @@ export function ImageUpload() {
         {({
           imageList,
           onImageUpload,
-          onImageRemoveAll,
           onImageUpdate,
           onImageRemove,
           isDragging,
           dragProps
         }) => (
-          // write your building UI
-          <div className="upload__image-wrapper">
-            <button
-              style={isDragging ? { color: "red" } : undefined}
-              onClick={onImageUpload}
-              {...dragProps}
-            >
-              Click or Drop here
-            </button>
-            &nbsp;
-            <button onClick={onImageRemoveAll}>Remove all images</button>
-            {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image["data_url"]} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <>
+          <Grid container direction="column" spacing={2} alignItems="center">
+            <Grid item>
+              <Button 
+                color={isDragging? "secondary" : "primary"}
+                variant="contained"
+                onClick={onImageUpload}
+                  {...dragProps}
+              >
+                Click or Drop here
+              </Button>
+            </Grid>
+            <Grid item>
+              {imageList.map((image, index) => (
+                <Grid container justify="center" key={index}>
+                  <Grid item>
+                  <img src={image["data_url"]} alt="uploaded image" width="100" />
+                  </Grid>
+                  <Grid container justify="center">
+                    <Button 
+                      color="primary"
+                      onClick={() => onImageUpdate(index)}
+                      >
+                        Update
+                    </Button>
+                    <Button 
+                      color="primary"
+                      onClick={() => onImageRemove(index)}
+                      >
+                        Remove
+                    </Button>
+                  </Grid>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+          </>
         )}
       </ImageUploading>
     </div>

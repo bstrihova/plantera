@@ -79,7 +79,50 @@ export default function Header() {
 
   if (user.id) {
     authContentMobile = (
+      <>
+      {/* messages icon inside hamburger mobile menu */}
+      <Link to="/messages">
+        <MenuItem>
+          <IconButton aria-label="show 4 new mails" color="primary">
+            <Badge badgeContent={4} color="primary">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          Messages
+        </MenuItem>
+      </Link>
+
+      {/* profile mobile menu */}
+      <Link to={urlUserProfile}>
+        <MenuItem>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="primary"
+          >
+            <AccountCircle />
+          </IconButton>
+          Profile
+        </MenuItem>
+      </Link>  
+
+       {/* account settings mobile menu */}
+      <Link to={urlUserSettings}>   
+        <MenuItem>
+          <IconButton
+            aria-label="account settings"
+            aria-haspopup="true"
+            color="primary"
+          >
+            <SettingsIcon />
+          </IconButton>
+          Account Settings
+        </MenuItem> 
+      </Link> 
+
      <Logout version="mobile"/>
+     </>
     )
   } else {
     authContentMobile = (
@@ -94,11 +137,30 @@ export default function Header() {
     )
   }
 
-
-
   if (user.id) {
     authContentDesktop = (
+      <>
+        {/* icon for messages on desktop */}
+        <Link to="/messages">
+            <IconButton aria-label="show 4 new mails" color="secondary">
+              <Badge badgeContent={4} color="secondary">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+        </Link>
+          
+          {/* profile icon on desktop */}
+          <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="secondary"
+          >
+            <AccountCircle />
+          </IconButton>
       <Logout version="desktop"/>
+      </>
     )
   } else {
     authContentDesktop = (
@@ -168,49 +230,7 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
 
-      {/* messages icon inside hamburger mobile menu */}
-      <Link to="/messages">
-        <MenuItem>
-          <IconButton aria-label="show 4 new mails" color="primary">
-            <Badge badgeContent={4} color="primary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          Messages
-        </MenuItem>
-      </Link>
-
       {authContentMobile}
-
-
-      {/* profile mobile menu */}
-      <Link to={urlUserProfile}>
-        <MenuItem>
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="primary"
-          >
-            <AccountCircle />
-          </IconButton>
-          Profile
-        </MenuItem>
-      </Link>  
-
-       {/* account settings mobile menu */}
-      <Link to={urlUserSettings}>   
-        <MenuItem>
-          <IconButton
-            aria-label="account settings"
-            aria-haspopup="true"
-            color="primary"
-          >
-            <SettingsIcon />
-          </IconButton>
-          Account Settings
-        </MenuItem> 
-      </Link> 
 
       <MenuItem>
       
@@ -243,26 +263,6 @@ export default function Header() {
         {/* desktop menu - right side */}
         <div className={classes.sectionDesktop}>
      
-          {/* icon for messages on desktop */}
-        <Link to="/messages">
-            <IconButton aria-label="show 4 new mails" color="secondary">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-        </Link>
-          
-          {/* profile icon on desktop */}
-          <IconButton
-            edge="end"
-            aria-label="account of current user"
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
-            color="secondary"
-          >
-            <AccountCircle />
-          </IconButton>
-
 
         {authContentDesktop}
         
