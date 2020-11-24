@@ -104,11 +104,11 @@ class MessagesController extends Controller
     }
 
     /**
-     * Stores a new message thread.
+     * Stores a new message.
      *
      * @return mixed
      */
-    public function store($thread_id, Request $request)
+    public function storeMessage($thread_id, Request $request)
     {           
         // $thread = Thread::findOrFail($thread_id);
 
@@ -162,43 +162,53 @@ class MessagesController extends Controller
     }
 
     /**
+     * Stores a new message.
+     *
+     * @return mixed
+     */
+    public function storeThread(Request $request)
+    {           
+
+    }
+
+    /**
      * Adds a new message to a current thread.
      *
      * @param $id
      * @return mixed
      */
-    public function update($id)
-    {
-        try {
-            $thread = Thread::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+    // public function update($id)
+    // {
+    //     try {
+    //         $thread = Thread::findOrFail($id);
+    //     } catch (ModelNotFoundException $e) {
+    //         Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
 
-            return redirect()->route('messages');
-        }
+    //         return redirect()->route('messages');
+    //     }
 
-        $thread->activateAllParticipants();
+    //     $thread->activateAllParticipants();
 
-        // Message
-        Message::create([
-            'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
-            'body' => Request::input('message'),
-        ]);
+    //     // Message
+    //     Message::create([
+    //         'thread_id' => $thread->id,
+    //         'user_id' => Auth::id(),
+    //         'body' => Request::input('message'),
+    //     ]);
 
-        // Add replier as a participant
-        $participant = Participant::firstOrCreate([
-            'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
-        ]);
-        $participant->last_read = new Carbon;
-        $participant->save();
+    //     // Add replier as a participant
+    //     $participant = Participant::firstOrCreate([
+    //         'thread_id' => $thread->id,
+    //         'user_id' => Auth::id(),
+    //     ]);
+    //     $participant->last_read = new Carbon;
+    //     $participant->save();
 
-        // Recipients
-        if (Request::has('recipients')) {
-            $thread->addParticipant(Request::input('recipients'));
-        }
+    //     // Recipients
+    //     if (Request::has('recipients')) {
+    //         $thread->addParticipant(Request::input('recipients'));
+    //     }
 
-        return redirect()->route('messages.show', $id);
-    }
+    //     return redirect()->route('messages.show', $id);
+    // }
 }

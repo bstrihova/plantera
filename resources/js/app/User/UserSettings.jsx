@@ -34,7 +34,7 @@ function UserSettings() {
     const [loading, setLoading] = React.useState(true);
 
     const [userValues, setUserValues] = useState({
-        name: user.name,
+        name: "",
     });
 
     const [passwordValues, setPasswordValues] = useState({
@@ -212,7 +212,7 @@ function UserSettings() {
                     label="Username"
                     variant="filled"
                     name="name"
-                    value={ userValues.name } 
+                    value={ userValues.name || "" } 
                     onChange={ handleUserChange }
                     error={errors.name ? true : false}
                     helperText={<InputError errors={errors.name}/>}

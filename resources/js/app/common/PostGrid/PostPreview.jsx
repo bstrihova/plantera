@@ -15,7 +15,7 @@ function PostPreview({post}) {
                     <img src={post.photo} className="postgrid__img"/>
                 </Link>
                 <figcaption>
-                    <Box px={3} mt={0.2}>
+                    <Box px={2} mt={0.2}>
                         <Typography variant="h6" >
                             {post.name}
                         </Typography>

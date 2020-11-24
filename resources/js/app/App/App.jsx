@@ -8,7 +8,6 @@ import PostDelete from "../Post/PostDelete";
 import UserProfile from "../User/UserProfile";
 import UserSettings from "../User/UserSettings";
 import Messages from "../Messages/Messages";
-// import MessageCreate from "../Messages/MessageCreate";
 import Header from "../Header/Header";
 import ThreadShow from "../Messages/ThreadShow"
 import Login from "../Auth/Login";

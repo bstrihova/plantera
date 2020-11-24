@@ -81,7 +81,7 @@ export default function Header() {
     authContentMobile = (
       <>
       {/* messages icon inside hamburger mobile menu */}
-      <Link to="/messages">
+      <Link to="/messages" onClick={handleMenuClose}>
         <MenuItem>
           <IconButton aria-label="show 4 new mails" color="primary">
             <Badge badgeContent={4} color="primary">
@@ -93,7 +93,7 @@ export default function Header() {
       </Link>
 
       {/* profile mobile menu */}
-      <Link to={urlUserProfile}>
+      <Link to={urlUserProfile} onClick={handleMenuClose}>
         <MenuItem>
           <IconButton
             aria-label="account of current user"
@@ -108,7 +108,7 @@ export default function Header() {
       </Link>  
 
        {/* account settings mobile menu */}
-      <Link to={urlUserSettings}>   
+      <Link to={urlUserSettings} onClick={handleMenuClose}>   
         <MenuItem>
           <IconButton
             aria-label="account settings"
@@ -126,7 +126,7 @@ export default function Header() {
     )
   } else {
     authContentMobile = (
-    <Link to="/login">
+    <Link to="/login" onClick={handleMenuClose}>
       <MenuItem>
           <IconButton>
               <LoginIcon color="primary"/>
@@ -189,7 +189,7 @@ export default function Header() {
 
 
       {/* popup menu profile menu item */}
-    <Link to={urlUserProfile}>
+    <Link to={urlUserProfile} onClick={handleMenuClose}>
         <MenuItem>
           <IconButton
             aria-label="account of current user"
@@ -204,7 +204,7 @@ export default function Header() {
       </Link>  
 
       {/* popup menu account settings menu item */}
-      <Link to={urlUserSettings}>   
+      <Link to={urlUserSettings} onClick={handleMenuClose}>   
         <MenuItem>
           <IconButton
             aria-label="account settings"
