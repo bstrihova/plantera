@@ -10,6 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import GoogleLocation from "../common/GoogleLocation/GoogleLocation"
 import { useParams } from "react-router-dom";
 import InputError from "../common/InputError/InputError";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UserSettings() {
+    const history = useHistory();
     const classes = useStyles();
 
     const [errors, setErrors] = useState({});
@@ -31,8 +33,14 @@ function UserSettings() {
     const [user, setUser] = useState("");
     const [loading, setLoading] = React.useState(true);
 
-    const [values, setValues] = useState({
+    const [userValues, setUserValues] = useState({
         name: user.name,
+    });
+
+    const [passwordValues, setPasswordValues] = useState({
+        current_password: "",
+        password: "",
+        password_confirmation: ""
     });
 
     const loadUser = async () => {
@@ -66,12 +74,12 @@ function UserSettings() {
         }
     }
 
-    const handleSubmit = async (event) => {
+    const handleUserSubmit = async (event) => {
         event.preventDefault();
 
         const response = await fetch(`/user/settings/${user.id}`, {
             method: 'post',
-            body: JSON.stringify(values),
+            body: JSON.stringify(userValues),
             headers: {
                 'Accept' : 'application/json', // tell Laravel (backend) what we want in response
                 'Content-type' : 'application/json', // tell backend what we are sending
@@ -83,13 +91,8 @@ function UserSettings() {
         console.log(response);
 
         //The user is authenticated, 
-        if (response.status === 201) {
-            // fetch authenticated user data
-            // const response_user = await fetch(`/api/authuser`);
-            // const data = await response_user.json();
-            // setUser to authenticated user
-            // fetchUser(data);
-            history.push(`/user/settings/${user.id}`);
+        if (response.status === 200) {
+            history.push(`/user/profile/${id}`);
         }
 
         if (response_data.errors) {
@@ -98,17 +101,60 @@ function UserSettings() {
 
     }
 
-    const handleChange = (event) => {
+    const handlePasswordSubmit = async (event) => {
+        event.preventDefault();
+
+        const response = await fetch(`/user/settings/${id}/pwdchange`, {
+            method: 'post',
+            body: JSON.stringify(passwordValues),
+            headers: {
+                'Accept' : 'application/json', // tell Laravel (backend) what we want in response
+                'Content-type' : 'application/json', // tell backend what we are sending
+                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+            }
+        })
+
+        const response_data = await response.json();
+        console.log(response);
+
+        if (response.status === 200) {
+            history.push(`/user/profile/${id}`);
+        }
+
+        if (response_data.errors) {
+            setErrors(response_data.errors);
+        }
+
+    }
+
+    const handleUserChange = (event) => {
         const allowed_names = ['name'],
             name  = event.target.name,
-            value = event.target.value
+            userValues = event.target.value
 
         if (-1 !== allowed_names.indexOf(name)) {
-            setValues(prev_values => {
+            setUserValues(prev_values => {
                 return (
                     {
                         ...prev_values,
-                        [name]: value
+                        [name]: userValues
+                    }
+                );
+            });
+        }
+    }
+
+    const handlePasswordChange = (event) => {
+        const allowed_names = ['current_password', "password", "password_confirmation"],
+            name  = event.target.name,
+            userValues = event.target.value
+
+        if (-1 !== allowed_names.indexOf(name)) {
+            setPasswordValues(prev_values => {
+                return (
+                    {
+                        ...prev_values,
+                        [name]: userValues
                     }
                 );
             });
@@ -143,7 +189,7 @@ function UserSettings() {
                 </Box>
             </Grid> 
             <div className="main__container__shadow main__container__shadow--auth">
-            <form method="post" onSubmit={handleSubmit}> 
+            <form onSubmit={handleUserSubmit}> 
                 <Grid
                 container
                 direction="column" 
@@ -166,8 +212,8 @@ function UserSettings() {
                     label="Username"
                     variant="filled"
                     name="name"
-                    value={ values.name } 
-                    onChange={ handleChange }
+                    value={ userValues.name } 
+                    onChange={ handleUserChange }
                     error={errors.name ? true : false}
                     helperText={<InputError errors={errors.name}/>}
                     />
@@ -196,12 +242,22 @@ function UserSettings() {
                 </Typography>
                 </Box>
             </Grid> 
-            <Grid container className="main__container__shadow--userSettings" direction="column" justify="center" alignItems="center" spacing={4}>
+            <div className="main__container__shadow main__container__shadow--auth">
+            <form onSubmit={handlePasswordSubmit}> 
+            <Grid container direction="column" justify="center" alignItems="center" spacing={4}>
                 <Grid item >
                 <TextField
                     color="primary"
                     label="Current password"
                     variant="filled"
+                    type="password"
+                    name="current_password"
+                    autoComplete="current-password"
+                    value={ passwordValues.current_password} 
+                    onChange={ handlePasswordChange }
+                    error={errors.current_password ? true : false}
+                    helperText={<InputError errors={errors.current_password}
+                    />}
                     />
                 </Grid>
                 <Grid item>
@@ -209,6 +265,13 @@ function UserSettings() {
                     color="primary"
                     label="New password"
                     variant="filled"
+                    type="password"
+                    name="password"
+                    autoComplete="new-password"
+                    value={ passwordValues.password } 
+                    onChange={ handlePasswordChange }
+                    error={errors.password ? true : false}
+                    helperText={<InputError errors={errors.password}/>}
                     />
                 </Grid>
                 <Grid item>
@@ -216,6 +279,13 @@ function UserSettings() {
                     color="primary"
                     label="Confirm password"
                     variant="filled"
+                    type="password"
+                    name="password_confirmation"
+                    autoComplete="new-password"
+                    value={ passwordValues.password_confirmation } 
+                    onChange={ handlePasswordChange }
+                    error={errors.password_confirmation ? true : false}
+                    helperText={<InputError errors={errors.password_confirmation}/>}
                     />
                 </Grid>
                 <Grid item>
@@ -223,11 +293,14 @@ function UserSettings() {
                     className="button"
                     color="primary"
                     variant="contained"
+                    type="submit"
                     >
                         Save
                     </Button>
                 </Grid>
             </Grid>
+            </form>
+            </div>
 
             <Grid item>
                 <Box mt={5}>

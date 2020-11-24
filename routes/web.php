@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Actions\Fortify\UpdateUserPassword;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::get("/api/threads/{id}", "Api\MessagesController@show")->middleware('auth
 Route::get("/api/users/{id}", "Api\UserController@show")->middleware('auth');
 Route::get("/api/authuser", "Api\UserController@authUser")->middleware('auth');
 Route::post('/user/settings/{id}', "Api\UserController@update")->middleware("auth");
+Route::post("user/settings/{id}/pwdchange", "UpdateUserPassword@update")->middleware("auth");
 
 Route::get("/api/posts", "Api\PostController@index");
 Route::get("/api/posts/{id}", "Api\PostController@show");
