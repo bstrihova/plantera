@@ -13,11 +13,68 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MessageContent from './MessageContent';
 import { useParams } from "react-router-dom";
 import List from '@material-ui/core/List';
+import InputError from "../common/InputError/InputError";
 
 function ThreadShow() {
     let { id } = useParams();
     const [thread, setThread] = useState("");
     const [loading, setLoading] = React.useState(true);
+
+    const [values, setValues] = useState({
+        message: '',
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const response = await fetch(`/api/threads/${id}`, {
+            method: 'post',
+            body: JSON.stringify(values),
+            headers: {
+                'Accept' : 'application/json', // tell Laravel (backend) what we want in response
+                'Content-type' : 'application/json', // tell backend what we are sending
+                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+            }
+            
+        })
+        
+        const response_data = await response.json();
+      
+        //The user is authenticated, 
+        if (response.status === 201) {
+            // fetch authenticated user data
+            // const response_user = await fetch(`/api/authuser`);
+            // const data = await response_user.json();
+            // // setUser to authenticated user
+            // fetchUser(data);
+            history.push(`/api/threads/${id}`);
+        }
+
+        if (response_data.errors) {
+            setErrors(response_data.errors);
+        }
+
+    }
+
+    const handleChange = (event) => {
+        const allowed_names = ['message'],
+            name  = event.target.name,
+            value = event.target.value
+
+        if (-1 !== allowed_names.indexOf(name)) {
+            setValues(prev_values => {
+                return (
+                    {
+                        ...prev_values,
+                        [name]: value
+                    }
+                );
+            });
+        }
+    }
+
 
     const loadThread = async () => {
         setLoading(true);
@@ -32,6 +89,7 @@ function ThreadShow() {
     
     }, []);
 
+ 
     let threadContent = "";
     let messageContent = "";
     let username = "";
@@ -92,7 +150,6 @@ function ThreadShow() {
                                   
                                 {thread.post.price} {thread.post.currency}
                         </Typography>
-                       
                         <FormControl style={{width:"70%"}}> 
                         <InputLabel id="status">Status</InputLabel>
                             <MuiSelect labelId="status">
@@ -100,7 +157,7 @@ function ThreadShow() {
                             <MuiMenuItem /* value={'Sold'} */>Sold</MuiMenuItem>
                         </MuiSelect>
                         </FormControl> 
-                        
+                       
                     </Grid> 
                 </Grid>
                 </Grid>
@@ -151,28 +208,38 @@ function ThreadShow() {
                         </List> 
                     </Grid> 
                     </Grid>
-              
-             
+                
+                       
                 <Grid container
                       justify="center"
                       p={5}>
                 <Grid item xs={10} lg={6}>
                     
-                <FormControl fullWidth margin="dense" hiddenLabel variant="filled">
+                <form  onSubmit={ handleSubmit }>    
+                <FormControl fullWidth 
+                margin="dense" 
+                hiddenLabel 
+                variant="filled"
+                >
 
                 <FilledInput fullWidth
-                id="create-message"
-                type= "text"
-                placeholder="Write a message"
+                            name="message"
+                            type= "text"
+                            placeholder="Write a message"
+                            // autoComplete="message"
+                            value={ values.message } 
+                            onChange={ handleChange }
+                            error={errors.message ? true : false}
+                            helpertext={<InputError errors={errors.message}/>}
                 
                 // sending icon 
                     endAdornment={
                     <InputAdornment position="end">
                         <IconButton
                         aria-label="action send message"
-                        // onClick={handleSendMessege}
                         edge="end"
                         color="primary"
+                        type="submit"
                         >
                         <SendIcon />
                         </IconButton>
@@ -180,11 +247,13 @@ function ThreadShow() {
                     }
                 />
                 </FormControl>
+                </form>
              </Grid>
                 
              </Grid>   
-        
+             
              </Grid> 
+            
     </div>    
     );
 }

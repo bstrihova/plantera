@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../Home/Home";
 import Post from "../Post/Post";
@@ -13,9 +13,22 @@ import Header from "../Header/Header";
 import ThreadShow from "../Messages/ThreadShow"
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
+import { useGlobalContext } from "../context";
 
 function App() {
     const [searchValue, setSearchValue] = useState("");
+    const { fetchUser } = useGlobalContext();
+
+    const loadUser = async () => {
+        const response_user = await fetch(`/api/authuser`);
+        const data = await response_user.json();
+        // setUser to authenticated user
+        fetchUser(data);
+    }
+
+    useEffect(() => {
+        loadUser();
+    }, [])
 
     return (
         <Router>

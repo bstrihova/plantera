@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import GoogleLocation from "../common/GoogleLocation/GoogleLocation"
 import { useParams } from "react-router-dom";
+import InputError from "../common/InputError/InputError";
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -24,9 +25,15 @@ const useStyles = makeStyles((theme) => ({
 function UserSettings() {
     const classes = useStyles();
 
+    const [errors, setErrors] = useState({});
+
     let { id } = useParams();
     const [user, setUser] = useState("");
     const [loading, setLoading] = React.useState(true);
+
+    const [values, setValues] = useState({
+        name: user.name,
+    });
 
     const loadUser = async () => {
         setLoading(true);
@@ -59,6 +66,55 @@ function UserSettings() {
         }
     }
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const response = await fetch(`/user/settings/${user.id}`, {
+            method: 'post',
+            body: JSON.stringify(values),
+            headers: {
+                'Accept' : 'application/json', // tell Laravel (backend) what we want in response
+                'Content-type' : 'application/json', // tell backend what we are sending
+                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+            }
+        })
+
+        const response_data = await response.json();
+        console.log(response);
+
+        //The user is authenticated, 
+        if (response.status === 201) {
+            // fetch authenticated user data
+            // const response_user = await fetch(`/api/authuser`);
+            // const data = await response_user.json();
+            // setUser to authenticated user
+            // fetchUser(data);
+            history.push(`/user/settings/${user.id}`);
+        }
+
+        if (response_data.errors) {
+            setErrors(response_data.errors);
+        }
+
+    }
+
+    const handleChange = (event) => {
+        const allowed_names = ['name'],
+            name  = event.target.name,
+            value = event.target.value
+
+        if (-1 !== allowed_names.indexOf(name)) {
+            setValues(prev_values => {
+                return (
+                    {
+                        ...prev_values,
+                        [name]: value
+                    }
+                );
+            });
+        }
+    }
+
 
     return (
         <div>
@@ -86,7 +142,15 @@ function UserSettings() {
                     </Typography>
                 </Box>
             </Grid> 
-            <Grid container className="main__container__shadow--userSettings" direction="column" justify="center" alignItems="center" spacing={4}>
+            <div className="main__container__shadow main__container__shadow--auth">
+            <form method="post" onSubmit={handleSubmit}> 
+                <Grid
+                container
+                direction="column" 
+                justify="center" 
+                alignItems="center" 
+                spacing={4}
+                >
                 <Grid item >
                     <Button
                     className="button"
@@ -101,7 +165,11 @@ function UserSettings() {
                     color="primary"
                     label="Username"
                     variant="filled"
-                    value={user.name || ''}
+                    name="name"
+                    value={ values.name } 
+                    onChange={ handleChange }
+                    error={errors.name ? true : false}
+                    helperText={<InputError errors={errors.name}/>}
                     />
                 </Grid>
                 <Grid item>
@@ -112,11 +180,14 @@ function UserSettings() {
                     className="button"
                     color="primary"
                     variant="contained"
+                    type="submit"
                     >
                         Save
                     </Button>
                 </Grid>
             </Grid>
+            </form>
+            </div>
             
             <Grid item>
                 <Box mt={5} mb={2}>

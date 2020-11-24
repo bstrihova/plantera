@@ -34,7 +34,7 @@ function UserProfile({searchValue, setSearchValue}) {
 
     useEffect(() => {
         loadUser();
-    }, []);
+    }, [id]);
 
     let userContent = "";
 

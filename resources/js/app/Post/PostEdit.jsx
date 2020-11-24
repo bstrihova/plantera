@@ -7,8 +7,10 @@ import FormControl from "@material-ui/core/FormControl";
 import MuiSelect from "@material-ui/core/Select";
 import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import InputError from "../common/InputError/InputError";
+import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import InputError from "../common/InputError/InputError";
+
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
@@ -24,6 +26,7 @@ function PostEdit() {
         transaction: "",
         description: ""
     });
+
     const [errors, setErrors] = useState({});
 
     const handleSubmit = async event => {
@@ -98,13 +101,14 @@ function PostEdit() {
                 color="primary"
                 label="Price"
                 variant="filled"
-                type="number"
                 style={{ width: "30%" }}
+                value={post.price || ""}
                 name="price"
                 value={values.price || ""}
                 onChange={handleChange}
                 error={errors.price ? true : false}
                 helperText={<InputError errors={errors.price} />}
+                type="number"
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">Kč</InputAdornment>
@@ -130,12 +134,12 @@ function PostEdit() {
                             <figure className="myPictures">
                                 <img src={post.photo} alt={post.name} />
                             </figure>
-
                             <Button
                                 className="button"
                                 color="primary"
                                 variant="contained"
                                 size="large"
+                                type="submit"
                             >
                                 Modify plant picture
                             </Button>
@@ -156,7 +160,7 @@ function PostEdit() {
                             <div className="texField--postName">
                                 <FormControl
                                     variant="filled"
-                                    style={{ width: "30%" }}
+                                    // style={{ width: "30%" }}
                                 >
                                     <InputLabel>Status</InputLabel>
                                     <MuiSelect
@@ -174,39 +178,34 @@ function PostEdit() {
                                 </FormControl>
                             </div>
                             <div className="input__group--post">
-                                <Box>
-                                    <FormControl style={{ width: "150%" }}>
-                                        <InputLabel>Selling?</InputLabel>
-                                        <MuiSelect
-                                            variant="filled"
-                                            name="transaction"
-                                            value={post.transaction || ""}
-                                            onChange={handleChange}
+                                <FormControl
+                                    variant="filled"
+                                    style={{ width: "30%" }}
+                                >
+                                    <InputLabel>Selling?</InputLabel>
+                                    <MuiSelect
+                                        variant="filled"
+                                        name="transaction"
+                                        value={post.transaction || ""}
+                                        onChange={handleChange}
+                                    >
+                                        <MuiMenuItem value="swap">
+                                            Swap
+                                        </MuiMenuItem>
+                                        <MuiMenuItem value="sell">
+                                            Sell
+                                        </MuiMenuItem>
+                                        <MuiMenuItem value="donate">
+                                            Donate
+                                        </MuiMenuItem>
+                                    </MuiSelect>
+                                </FormControl>
 
-                                            // onChange={handleTransaction}
-                                        >
-                                            <MuiMenuItem value="donate">
-                                                Donate
-                                            </MuiMenuItem>
-                                            <MuiMenuItem value="sell">
-                                                Sell
-                                            </MuiMenuItem>
-                                            <MuiMenuItem value="swap">
-                                                Swap
-                                            </MuiMenuItem>
-                                        </MuiSelect>
-                                    </FormControl>
-                                </Box>
-
-                                {/* TextField with Price */}
                                 {priceContainer}
-                                {post.price}
-                                {values.price}
                             </div>
                             <div className="texField--postDescription">
                                 <Box>
                                     <TextField
-                                        id="filled-multiline-static"
                                         label="Description"
                                         name="description"
                                         onChange={handleChange}
@@ -233,15 +232,14 @@ function PostEdit() {
                                     color="primary"
                                     variant="contained"
                                     size="large"
-                                    type="submit"
                                     disableRipple
+                                    type="submit"
                                     style={{ textTransform: "none" }}
                                     style={{ width: "100%" }}
                                 >
                                     Confirm changes
                                 </Button>
                             </Box>
-
                             {/* </Link> */}
                         </div>
                     </form>
