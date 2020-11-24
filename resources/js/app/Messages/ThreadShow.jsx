@@ -15,14 +15,16 @@ import { useParams } from "react-router-dom";
 import List from '@material-ui/core/List';
 import InputError from "../common/InputError/InputError";
 
+
 function ThreadShow() {
     let { id } = useParams();
     const [thread, setThread] = useState("");
     const [loading, setLoading] = React.useState(true);
 
     const [values, setValues] = useState({
-        message: '',
+        body: '',
     });
+
 
     const [errors, setErrors] = useState({});
 
@@ -42,14 +44,8 @@ function ThreadShow() {
         
         const response_data = await response.json();
       
-        //The user is authenticated, 
-        if (response.status === 201) {
-            // fetch authenticated user data
-            // const response_user = await fetch(`/api/authuser`);
-            // const data = await response_user.json();
-            // // setUser to authenticated user
-            // fetchUser(data);
-            history.push(`/api/threads/${id}`);
+        if (response.status === 200) {
+            window.location.reload();
         }
 
         if (response_data.errors) {
@@ -59,7 +55,7 @@ function ThreadShow() {
     }
 
     const handleChange = (event) => {
-        const allowed_names = ['message'],
+        const allowed_names = ['body'],
             name  = event.target.name,
             value = event.target.value
 
@@ -215,7 +211,7 @@ function ThreadShow() {
                       p={5}>
                 <Grid item xs={10} lg={6}>
                     
-                <form  onSubmit={ handleSubmit }>    
+                <form onSubmit={ handleSubmit }>    
                 <FormControl fullWidth 
                 margin="dense" 
                 hiddenLabel 
@@ -223,14 +219,14 @@ function ThreadShow() {
                 >
 
                 <FilledInput fullWidth
-                            name="message"
+                            name="body"
                             type= "text"
                             placeholder="Write a message"
                             // autoComplete="message"
-                            value={ values.message } 
+                            value={ values.body } 
                             onChange={ handleChange }
-                            error={errors.message ? true : false}
-                            helpertext={<InputError errors={errors.message}/>}
+                            error={errors.body ? true : false}
+                            helpertext={<InputError errors={errors.body}/>}
                 
                 // sending icon 
                     endAdornment={

@@ -35,11 +35,11 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.message--seller {
+.message--sender {
   flex-direction: row;
   }
 
-.message--buyer {
+.message--reciever {
   flex-direction: row-reverse;
    }
 
@@ -51,12 +51,12 @@ body {
   margin: 0 0.5rem 0.5rem 0.5rem;
 }
 
-.message--buyer .message__text {
+.message--reciever .message__text {
   background-color:#246b43;
   color: white;
 }
 
-.message--seller .message__text {
+.message--sender .message__text {
   background-color: #cccccc;
   color: black;
 }

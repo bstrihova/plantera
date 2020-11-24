@@ -16,7 +16,7 @@ import {useHistory} from "react-router-dom"
 
 function MessagePreviewItem({thread}) {
 
-    const loadDivider = true;
+    let loadDivider = true; /* if (threads.length - 1) => load divider */
 
     let history = useHistory();
 
