@@ -7,6 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import MuiSelect from "@material-ui/core/Select";
 import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
+import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -82,7 +83,7 @@ function PostEdit() {
                         <div className="texField--postName">
                             <FormControl
                                 variant="filled"
-                                style={{ width: "30%" }}
+                                // style={{ width: "30%" }}
                             >
                                 <InputLabel>Status</InputLabel>
                                 <MuiSelect value={post.available}>
@@ -94,30 +95,21 @@ function PostEdit() {
                             </FormControl>
                         </div>
                         <div className="input__group--post">
-                            <Box>
-                                <FormControl style={{ width: "150%" }}>
+                                <FormControl
+                                    variant="filled"
+                                    style={{ width: "30%" }}
+                                >
                                     <InputLabel>Selling?</InputLabel>
-                                    <MuiSelect
-                                        variant="filled"
-                                        value={post.transaction || ""}
-
-                                        // onChange={handleTransaction}
-                                    >
-                                        <MuiMenuItem value="donate">
-                                            Donate
-                                        </MuiMenuItem>
-                                        <MuiMenuItem value="sell">
-                                            Sell
-                                        </MuiMenuItem>
+                                    <MuiSelect value={post.transaction || ""}>
                                         <MuiMenuItem value="swap">
                                             Swap
                                         </MuiMenuItem>
+                                        <MuiMenuItem value="sell">Sell</MuiMenuItem>
+                                        <MuiMenuItem value="donate">Donate</MuiMenuItem>
                                     </MuiSelect>
                                 </FormControl>
-                            </Box>
-
-                            {/* TextField with Price */}
-                            {priceContainer}
+                                
+                                {priceContainer}
                         </div>
                         <div className="texField--postDescription">
                             <Box>

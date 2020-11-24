@@ -18,7 +18,6 @@ const AppProvider = ({ children }) => {
     // };
 
     const fetchUser = response => {
-        console.log(response.id);
         setUser({
             // id: response.data.id,
             // name: response.data.name,

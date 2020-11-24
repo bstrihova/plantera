@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -11,6 +11,32 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link } from "react-router-dom";
 
 function PostCreate() {
+
+    const [values, setValues] = useState({
+        transaction: 'sell',
+        price: '',
+    });
+
+
+    let priceContainer = "";
+    if (values.transaction === "sell") {
+        priceContainer = (
+            <TextField
+                color="primary"
+                label="Price"
+                variant="filled"
+                style={{ width: "30%" }}
+                value={values.price || ""}
+                type="number"
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">Kč</InputAdornment>
+                    )
+                }}
+            />
+        );
+    }
+
     return (
         <div className="main__container">
             <Box mt={4}>
@@ -44,32 +70,23 @@ function PostCreate() {
                     />
                 </div>
                 <div className="input__group--post">
-                    <Box>
-                        <FormControl style={{ width: "200%" }}>
-                            <InputLabel id="status"> Selling? </InputLabel>
-                            <MuiSelect labelId="status" variant="filled">
-                                <MuiMenuItem value="Donate">Donate</MuiMenuItem>
-                                <MuiMenuItem value="Sell">Sell</MuiMenuItem>
-                                <MuiMenuItem value="Swap">Swap</MuiMenuItem>
-                            </MuiSelect>
-                        </FormControl>
-                    </Box>
-                    {/* Set the conditional rendering for the price TextField to do not show here if donate or swap */}
-                    <TextField
-                        color="primary"
-                        label="Price"
-                        variant="filled"
-                        style={{ width: "30%" }}
-                        type="number"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    Kč
-                                </InputAdornment>
-                            )
-                        }}
-                    />
-                </div>
+                                <FormControl
+                                    variant="filled"
+                                    style={{ width: "50%" }}
+                                >
+                                    <InputLabel>Selling?</InputLabel>
+                                    <MuiSelect value={values.transaction || ""}>
+                                        <MuiMenuItem value="swap">
+                                            Swap
+                                        </MuiMenuItem>
+                                        <MuiMenuItem value="sell">Sell</MuiMenuItem>
+                                        <MuiMenuItem value="donate">Donate</MuiMenuItem>
+                                    </MuiSelect>
+                                </FormControl>
+                                
+                                {priceContainer}
+                        </div>
+                
                 <div className="texField--postDescription">
                     <Box>
                         <TextField

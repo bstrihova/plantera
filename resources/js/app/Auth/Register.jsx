@@ -56,6 +56,7 @@ function Register() {
 
     }
 
+    // copy this whole function and only modify const allowed_names, nothing else
     const handleChange = (event) => {
         const allowed_names = ['name', 'email', 'password', 'password_confirmation'],
             name  = event.target.name,
@@ -97,13 +98,15 @@ function Register() {
                             label="Email"
                             type="email"
                             variant="filled"
-                            name="email"
                             autoComplete="email"
+                            // here starts the important part for every input to have in order to be sent by POST to db
+                            name="email"
                             value={ values.email } 
                             onChange={ handleChange }
                             error={errors.email ? true : false}
                             helperText={<InputError errors={errors.email}/>}
                         />
+                        {values.email}
                     </Grid>
                     <Grid item>
                         <TextField
