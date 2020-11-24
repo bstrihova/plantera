@@ -13,8 +13,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MessageContent from './MessageContent';
 import { useParams } from "react-router-dom";
 import List from '@material-ui/core/List';
-import { ImageUpload } from "../common/FileUpload/ImageUpload";
-
 
 function ThreadShow() {
     let { id } = useParams();

@@ -10,15 +10,24 @@ import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
 import Moment from 'react-moment';
+import {useHistory} from "react-router-dom"
 
 function MessagePreviewItem({thread}) {
 
     const loadDivider = true;
 
+    let history = useHistory();
+
+    const redirect = () => {
+      history.push(`/messages/${thread.id}`)
+    } 
+
     return (
           <div>
             <Grid item xs={12}>
+            <Link href="#" onClick={redirect}> 
               <ListItem secondaryaction="true" >          
                   <ListItemAvatar p={2}>
                     <Avatar alt={thread.messages[0].user.name} src={thread.messages[0].user.profile_photo_url} />
@@ -85,7 +94,7 @@ function MessagePreviewItem({thread}) {
        { loadDivider ? <Divider variant="middle" /> 
                      : <React.Fragment></React.Fragment>
                      }
-             
+          </Link>   
           </Grid>
           </div>     
     )    

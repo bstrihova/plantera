@@ -31,8 +31,8 @@ export default function Messages() {
 
   const [threads, setThreads] = useState([]);
   const [loading, setLoading] = React.useState(true);
-  
-  const loadThreads = async () => {
+
+ const loadThreads = async () => {
       setLoading(true);
       const response = await fetch("/api/threads/", {
         headers: {
@@ -104,8 +104,10 @@ export default function Messages() {
           <Box className="boxshadow">                             
              <List>
 
+            
                { threadContent }
 
+               
               </List>
               </Box> 
               </Grid>
