@@ -45,7 +45,8 @@ Route::post('/change-password', 'ChangePasswordController@store')->name('change.
 
 Route::get("/api/posts", "Api\PostController@index");
 Route::get("/api/posts/{id}", "Api\PostController@show");
-Route::post("/api/posts", "Api\PostController@store");
+Route::post("/api/posts", "Api\PostController@store")->middleware("auth");
+Route::post("/api/posts/{id}/edit", "Api\PostController@update")->middleware("auth");
 
 Route::get('/login', 'IndexController@index')->name("login");
 Route::get('/register', 'IndexController@index');

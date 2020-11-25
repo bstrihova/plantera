@@ -68,6 +68,8 @@ class PostController extends Controller
         $post->photo = "https://images.unsplash.com/photo-1517848568502-d03fa74e1964?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
 
         $post->save();
+
+        return $post->id;
     }
 
 
@@ -92,7 +94,14 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $input = $request->all();
+        $post->fill($input)->save();
+
+        return [
+            'status' => 'success'
+        ];
     }
 
     /**

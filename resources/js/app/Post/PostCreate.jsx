@@ -19,7 +19,7 @@ function PostCreate() {
         name: "",
         description: "",
         price: "",
-        status: "",
+        status: 1,
         transaction: "sell"
     });
 
@@ -42,10 +42,11 @@ function PostCreate() {
         });
 
         const response_data = await response.json();
+        console.log(response_data);
 
         //The user is authenticated,
-        if (response.status === 201) {
-            history.push("/");
+        if (response.status === 200) {
+            history.push(`/posts/${response_data}`);
         }
 
         if (response_data.errors) {

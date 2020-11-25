@@ -21,9 +21,9 @@ function PostEdit() {
     const [loading, setLoading] = React.useState(true);
     const [values, setValues] = useState({
         name: post.name,
-        status: post.status,
-        price: 300,
-        transaction: "sell",
+        available: post.available,
+        price: post.price,
+        transaction: post.transaction,
         description: post.description
     });
     console.log(post);
@@ -33,7 +33,7 @@ function PostEdit() {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const response = await fetch("/edit", {
+        const response = await fetch(`/api/posts/${id}/edit`, {
             method: "post",
             body: JSON.stringify(values),
             headers: {
@@ -60,19 +60,19 @@ function PostEdit() {
     const handleChange = event => {
         const allowed_names = [
                 "name",
-                "status",
+                "available",
                 "price",
                 "transaction",
                 "description"
             ],
             name = event.target.name,
-            value = event.target.value;
+            values = event.target.value;
 
         if (-1 !== allowed_names.indexOf(name)) {
             setValues(prev_values => {
                 return {
                     ...prev_values,
-                    [name]: value
+                    [name]: values
                 };
             });
         }
@@ -121,7 +121,7 @@ function PostEdit() {
                                     label="Name of the plant"
                                     variant="filled"
                                     name="name"
-                                    value={post.name || ""}
+                                    value={values.name || ""}
                                     onChange={handleChange}
                                     error={errors.name ? true : false}
                                     helperText={
@@ -136,8 +136,8 @@ function PostEdit() {
                                 >
                                     <InputLabel>Status</InputLabel>
                                     <MuiSelect
-                                        name="status"
-                                        value={post.available}
+                                        name="available"
+                                        value={values.available}
                                         onChange={handleChange}
                                     >
                                         <MuiMenuItem value="1">
@@ -186,7 +186,7 @@ function PostEdit() {
                                         label="Description"
                                         name="description"
                                         onChange={handleChange}
-                                        value={post.description || ""}
+                                        value={values.description || ""}
                                         multiline
                                         rows={4}
                                         columns={50}

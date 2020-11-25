@@ -10,12 +10,22 @@ use App\Models\User;
 class Post extends Model
 {
     use HasFactory;
-    
-    public function threads() {
+
+    public function threads()
+    {
         return $this->hasMany(Thread::class);
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
+
+    protected $fillable = [
+        "name",
+        "available",
+        "price",
+        "transaction",
+        "description"
+    ];
 }
