@@ -166,8 +166,25 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function storeThread(Request $request)
-    {           
+    public function storeThread($post_id, $seller_id, Request $request)
+    {  
+          $thread = Thread::create([
+            'post_id' => $post_id,
+            'seller_id' => $seller_id,
+            'buyer_id' => Auth::id()
+
+          ]);   
+          
+          
+          Message::create([
+            'thread_id' =>  $thread->id,
+            'user_id' => Auth::id(),
+            'body' => 'Ahoj'
+        ]);
+
+        return [
+            'status' => 'success'
+        ];
 
     }
 

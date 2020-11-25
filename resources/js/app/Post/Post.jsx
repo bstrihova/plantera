@@ -8,6 +8,7 @@ function Post({ searchValue, setSearchValue }) {
     const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);
 
+
     const loadPost = async () => {
         setLoading(true);
         const response = await fetch(`/api/posts/${id}`);

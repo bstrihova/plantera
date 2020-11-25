@@ -12,6 +12,39 @@ function PostDescription({ post }) {
     const urlDelete = `/posts/${post.id}/delete`;
     const urlEdit = `/posts/${post.id}/edit`;
 
+    const [values, setValues] = useState({
+        body: '',
+    });
+
+
+    const [errors, setErrors] = useState({});
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const response = await fetch(`/api/threads/${post.id}/${post.seller_id}`, {
+            method: 'post',
+            body: JSON.stringify(values),
+            headers: {
+                'Accept' : 'application/json', // tell Laravel (backend) what we want in response
+                'Content-type' : 'application/json', // tell backend what we are sending
+                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+            }
+            
+        })
+        
+        const response_data = await response.json();
+      
+        if (response.status === 200) {
+            window.location.reload();
+        }
+
+        if (response_data.errors) {
+            setErrors(response_data.errors);
+        }
+
+    }
+
     return (
         <section className="containerRight">
             <Box
@@ -96,17 +129,18 @@ function PostDescription({ post }) {
                 </Box>
             </div>
             <Box className="button--post">
-                <Link to="/messages/create">
+                {/* <Link to="/messages/create"> */}
                     <Button
                         color="primary"
                         variant="contained"
                         size="large"
                         disableRipple
                         style={{ textTransform: "none" }}
+                        onCLick={handleSubmit}
                     >
                         Contact seller
                     </Button>
-                </Link>
+                {/* </Link> */}
             </Box>
         </section>
     );

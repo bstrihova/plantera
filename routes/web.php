@@ -36,7 +36,7 @@ use App\Actions\Fortify\UpdateUserPassword;
 Route::get("/api/threads", "Api\MessagesController@index")->middleware('auth');
 Route::get("/api/threads/{id}", "Api\MessagesController@show")->middleware('auth');
 Route::post("/api/threads/{thread_id}", "Api\MessagesController@storeMessage")->middleware('auth');
-Route::post("/api/threads", "Api\MessagesController@storeThread")->middleware('auth');
+Route::post("/api/threads/{post_id}/{seller_id}", "Api\MessagesController@storeThread")->middleware('auth');
 
 Route::get("/api/users/{id}", "Api\UserController@show");
 Route::get("/api/authuser", "Api\UserController@authUser")->middleware('auth');
