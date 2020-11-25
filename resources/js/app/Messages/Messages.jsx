@@ -7,7 +7,8 @@ import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
 import MessagePreviewItem from './MessagePreviewItem';
 import React, { useState, useEffect } from 'react';
-import {useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom";
+import Divider from '@material-ui/core/Divider';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -67,11 +68,21 @@ export default function Messages() {
         
           threadContent = (
               <>
-              {threads.map((thread, index) => (
+              {/* {threads.map((thread, index) => (
                 <div key={index}>
                     <MessagePreviewItem thread={thread} />
                 </div>
-              ))}
+              ))} */}
+              
+
+            {threads.map((thread, index,arr) => 
+            <div 
+            key="index"
+            >
+              <MessagePreviewItem 
+              thread={thread} 
+              /> {index != (arr.length-1) ? <Divider variant='middle'/> : ''}
+            </div>)}
               </>
         );
       } else {

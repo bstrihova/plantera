@@ -7,21 +7,35 @@ import FilledInput from '@material-ui/core/FilledInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import SendIcon from '@material-ui/icons/Send';
-import MuiSelect from "@material-ui/core/Select";
-import MuiMenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
 import MessageContent from './MessageContent';
 import { useParams } from "react-router-dom";
 import List from '@material-ui/core/List';
 import InputError from "../common/InputError/InputError";
 import CookieCsrf from "../csrf";
 import PostPrice from "../common/PostPrice/PostPrice";
+import BlockIcon from '@material-ui/icons/Block';
+import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
+import Chip from '@material-ui/core/Chip';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(() => ({
+    root: {
+        backgroundColor: "#FF0000",
+        color: "white",
+        icon: "white",
+    }
+
+    
+}));
 
 function ThreadShow() {
+
+    const classes = useStyles();
     let { id } = useParams();
     const [thread, setThread] = useState("");
     const [loading, setLoading] = React.useState(true);
+   
+   
 
     const [values, setValues] = useState({
         body: '',
@@ -94,6 +108,16 @@ function ThreadShow() {
     let threadContent = "";
     let messageContent = "";
     let username = "";
+    let status = "";
+
+    if (thread && thread.post.available === 1 ) {
+        status = ( <Chip color="primary" 
+        icon={<LocalFloristIcon />}
+        label= "Available" /> )}
+     else { 
+        status = ( <Chip   className={classes.root} 
+                           icon={<BlockIcon style={{ color: "white"}} />}
+                           label= "Sold"  /> )} ;
     
 
     if (loading) {
@@ -135,7 +159,7 @@ function ThreadShow() {
                     <img className="imageMessage" src={thread.post.photo} alt={thread.post.name}/>
 
                 </Grid>   
-                   <Grid item xs={12} lg={7}>  
+                   <Grid item xs={12} lg={7} >  
                    <Grid container 
                          direction="column"
                          alignItems="center">
@@ -161,14 +185,13 @@ function ThreadShow() {
                                 {thread.post.price} {thread.post.currency}
                         </Typography> */}
 
+                       
 
-                        <FormControl style={{width:"70%"}}> 
-                        <InputLabel id="status">Status</InputLabel>
-                            <MuiSelect labelId="status">
-                            <MuiMenuItem /* value={`Available`} */>Available</MuiMenuItem>
-                            <MuiMenuItem /* value={'Sold'} */>Sold</MuiMenuItem>
-                        </MuiSelect>
-                        </FormControl> 
+                   
+                    {status}
+
+                                                
+                        
                        
                     </Grid> 
                 </Grid>

@@ -8,15 +8,12 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import Moment from 'react-moment';
 import {useHistory} from "react-router-dom"
 
 function MessagePreviewItem({thread}) {
-
-    let loadDivider = true; /* if (threads.length - 1) => load divider */
 
     let history = useHistory();
 
@@ -90,10 +87,7 @@ function MessagePreviewItem({thread}) {
 
             </ListItem>    
 
-      
-       { loadDivider ? <Divider variant="middle" /> 
-                     : <React.Fragment></React.Fragment>
-                     }
+            
           </Link>   
           </Grid>
           </div>     
