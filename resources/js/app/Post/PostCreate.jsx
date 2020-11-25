@@ -146,6 +146,7 @@ function PostCreate() {
                             </Grid>
 
                             <Grid item>
+                                {/* Component to have Price option available */}
                                 <PriceOption
                                     transaction={values.transaction}
                                     price={values.price}
