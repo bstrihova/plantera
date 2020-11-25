@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->string("currency")->nullable();
             $table->string("transaction");
             $table->boolean("available");
-            $table->text("photo");
+            $table->text("photo")->nullable();
             $table->timestamps();
         });
     }
