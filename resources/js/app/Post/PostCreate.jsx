@@ -12,7 +12,7 @@ import InputError from "../common/InputError/InputError";
 import Grid from "@material-ui/core/Grid";
 import PriceOption from "../common/PriceOption/PriceOption";
 import { Link } from "react-router-dom";
-import CookieCsrf from "../csrf"
+import CookieCsrf from "../csrf";
 
 function PostCreate() {
     const [values, setValues] = useState({
@@ -28,7 +28,7 @@ function PostCreate() {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const response = await fetch("/edit", {
+        const response = await fetch("/api/posts", {
             method: "post",
             body: JSON.stringify(values),
             headers: {
@@ -37,7 +37,7 @@ function PostCreate() {
                 // "X-CSRF-TOKEN": document
                 //     .querySelector('meta[name="csrf-token"]')
                 //     .getAttribute("content") // prove to backend that this is authorized
-                'X-XSRF-TOKEN': CookieCsrf()
+                "X-XSRF-TOKEN": CookieCsrf()
             }
         });
 
@@ -153,6 +153,7 @@ function PostCreate() {
                                     transaction={values.transaction}
                                     price={values.price}
                                     errors={errors.price}
+                                    handleChange={handleChange}
                                 />
                             </Grid>
                         </Grid>
@@ -179,6 +180,7 @@ function PostCreate() {
                                 // className="button--post"
                                 color="primary"
                                 variant="contained"
+                                type="submit"
                                 size="large"
                                 disableRipple
                                 style={{ textTransform: "none" }}
