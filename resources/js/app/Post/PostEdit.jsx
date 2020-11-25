@@ -7,12 +7,10 @@ import FormControl from "@material-ui/core/FormControl";
 import MuiSelect from "@material-ui/core/Select";
 import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import Grid from "@material-ui/core/Grid";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import InputError from "../common/InputError/InputError";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import PriceOption from "../common/PriceOption/PriceOption";
+import CookieCsrf from "../csrf"
 
 function PostEdit() {
     let { id } = useParams();
@@ -38,9 +36,10 @@ function PostEdit() {
             headers: {
                 Accept: "application/json", // tell Laravel (backend) what we want in response
                 "Content-type": "application/json", // tell backend what we are sending
-                "X-CSRF-TOKEN": document
-                    .querySelector('meta[name="csrf-token"]')
-                    .getAttribute("content") // prove to backend that this is authorized
+                // "X-CSRF-TOKEN": document
+                //     .querySelector('meta[name="csrf-token"]')
+                //     .getAttribute("content") // prove to backend that this is authorized
+                'X-XSRF-TOKEN': CookieCsrf()
             }
         });
 

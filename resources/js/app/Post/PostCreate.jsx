@@ -12,6 +12,7 @@ import InputError from "../common/InputError/InputError";
 import Grid from "@material-ui/core/Grid";
 import PriceOption from "../common/PriceOption/PriceOption";
 import { Link } from "react-router-dom";
+import CookieCsrf from "../csrf"
 
 function PostCreate() {
     const [values, setValues] = useState({
@@ -33,9 +34,10 @@ function PostCreate() {
             headers: {
                 Accept: "application/json", // tell Laravel (backend) what we want in response
                 "Content-type": "application/json", // tell backend what we are sending
-                "X-CSRF-TOKEN": document
-                    .querySelector('meta[name="csrf-token"]')
-                    .getAttribute("content") // prove to backend that this is authorized
+                // "X-CSRF-TOKEN": document
+                //     .querySelector('meta[name="csrf-token"]')
+                //     .getAttribute("content") // prove to backend that this is authorized
+                'X-XSRF-TOKEN': CookieCsrf()
             }
         });
 

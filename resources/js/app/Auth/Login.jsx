@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import InputError from "../common/InputError/InputError";
 import { useHistory } from "react-router-dom";
 import { useGlobalContext } from "../context";
+import CookieCsrf from "../csrf"
 
 function Login() {
     const [{email, password}, setValues] = useState({
@@ -30,7 +31,8 @@ function Login() {
             headers: {
                 'Accept': 'application/json',
                 'Content-type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                // 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                'X-XSRF-TOKEN': CookieCsrf()
             }
         });
         const response_data = await response.json();

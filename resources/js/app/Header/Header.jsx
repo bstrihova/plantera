@@ -93,7 +93,7 @@ export default function Header() {
       </Link>
 
       {/* profile mobile menu */}
-      <Link to={urlUserProfile} onClick={handleMenuClose}>
+      {/* <Link to={urlUserProfile} onClick={handleMenuClose}>
         <MenuItem>
           <IconButton
             aria-label="account of current user"
@@ -105,10 +105,10 @@ export default function Header() {
           </IconButton>
           Profile
         </MenuItem>
-      </Link>  
+      </Link>   */}
 
        {/* account settings mobile menu */}
-      <Link to={urlUserSettings} onClick={handleMenuClose}>   
+      {/* <Link to={urlUserSettings} onClick={handleMenuClose}>   
         <MenuItem>
           <IconButton
             aria-label="account settings"
@@ -119,10 +119,10 @@ export default function Header() {
           </IconButton>
           Account Settings
         </MenuItem> 
-      </Link> 
+      </Link>  */}
 
-     <Logout version="mobile"/>
-     </>
+    <Logout version="mobile"/>
+    </>
     )
   } else {
     authContentMobile = (
@@ -134,6 +134,7 @@ export default function Header() {
           Login
       </MenuItem>
     </Link> 
+    // "hello"
     )
   }
 

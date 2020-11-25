@@ -14,6 +14,7 @@ import MessageContent from './MessageContent';
 import { useParams } from "react-router-dom";
 import List from '@material-ui/core/List';
 import InputError from "../common/InputError/InputError";
+import CookieCsrf from "../csrf"
 
 
 function ThreadShow() {
@@ -30,6 +31,8 @@ function ThreadShow() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        
+       
 
         const response = await fetch(`/api/threads/${id}`, {
             method: 'post',
@@ -37,7 +40,8 @@ function ThreadShow() {
             headers: {
                 'Accept' : 'application/json', // tell Laravel (backend) what we want in response
                 'Content-type' : 'application/json', // tell backend what we are sending
-                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+                // 'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+                'X-XSRF-TOKEN': CookieCsrf()
             }
             
         })

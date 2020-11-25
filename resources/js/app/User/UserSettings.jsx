@@ -11,6 +11,7 @@ import GoogleLocation from "../common/GoogleLocation/GoogleLocation"
 import { useParams } from "react-router-dom";
 import InputError from "../common/InputError/InputError";
 import { useHistory } from "react-router-dom";
+import CookieCsrf from "../csrf"
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -34,7 +35,7 @@ function UserSettings() {
     const [loading, setLoading] = React.useState(true);
 
     const [userValues, setUserValues] = useState({
-        name: "",
+        name: user.name,
     });
 
     const [passwordValues, setPasswordValues] = useState({
@@ -83,7 +84,8 @@ function UserSettings() {
             headers: {
                 'Accept' : 'application/json', // tell Laravel (backend) what we want in response
                 'Content-type' : 'application/json', // tell backend what we are sending
-                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+                // 'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+                'X-XSRF-TOKEN': CookieCsrf()
             }
         })
 
@@ -101,31 +103,31 @@ function UserSettings() {
 
     }
 
-    const handlePasswordSubmit = async (event) => {
-        event.preventDefault();
+    // const handlePasswordSubmit = async (event) => {
+    //     event.preventDefault();
 
-        const response = await fetch(`/user/settings/${id}/pwdchange`, {
-            method: 'post',
-            body: JSON.stringify(passwordValues),
-            headers: {
-                'Accept' : 'application/json', // tell Laravel (backend) what we want in response
-                'Content-type' : 'application/json', // tell backend what we are sending
-                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
-            }
-        })
+    //     const response = await fetch(`/user/settings/${id}/pwdchange`, {
+    //         method: 'post',
+    //         body: JSON.stringify(passwordValues),
+    //         headers: {
+    //             'Accept' : 'application/json', // tell Laravel (backend) what we want in response
+    //             'Content-type' : 'application/json', // tell backend what we are sending
+    //             'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+    //         }
+    //     })
 
-        const response_data = await response.json();
-        console.log(response);
+    //     const response_data = await response.json();
+    //     console.log(response);
 
-        if (response.status === 200) {
-            history.push(`/user/profile/${id}`);
-        }
+    //     if (response.status === 200) {
+    //         history.push(`/user/profile/${id}`);
+    //     }
 
-        if (response_data.errors) {
-            setErrors(response_data.errors);
-        }
+    //     if (response_data.errors) {
+    //         setErrors(response_data.errors);
+    //     }
 
-    }
+    // }
 
     const handleUserChange = (event) => {
         const allowed_names = ['name'],
@@ -243,7 +245,7 @@ function UserSettings() {
                 </Box>
             </Grid> 
             <div className="main__container__shadow main__container__shadow--auth">
-            <form onSubmit={handlePasswordSubmit}> 
+            <form onSubmit={()=>console.log("change pwd")}> 
             <Grid container direction="column" justify="center" alignItems="center" spacing={4}>
                 <Grid item >
                 <TextField

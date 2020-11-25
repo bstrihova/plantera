@@ -7,6 +7,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import PostPrice from "../../common/PostPrice/PostPrice";
 import { Link } from "react-router-dom";
+import CookieCsrf from "../../csrf"
 
 function PostDescription({ post }) {
     const urlDelete = `/posts/${post.id}/delete`;
@@ -28,7 +29,8 @@ function PostDescription({ post }) {
             headers: {
                 'Accept' : 'application/json', // tell Laravel (backend) what we want in response
                 'Content-type' : 'application/json', // tell backend what we are sending
-                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+                // 'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+                'X-XSRF-TOKEN': CookieCsrf()
             }
             
         })
