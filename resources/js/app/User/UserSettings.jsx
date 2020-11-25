@@ -8,12 +8,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import GoogleLocation from "../common/GoogleLocation/GoogleLocation"
-import { useParams } from "react-router-dom";
 import InputError from "../common/InputError/InputError";
 import { useHistory } from "react-router-dom";
 import CookieCsrf from "../csrf"
 import { useGlobalContext } from "../context";
 import PasswordChange from './PasswordChange';
+import DeleteUser from './DeleteUser';
+
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -187,26 +188,10 @@ function UserSettings() {
                 </Box>
             </Grid> 
           
-            <div className="main__container__shadow--userSettings">
-            <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
-            <form onSubmit={()=>console.log("submitted delete form")}>
-            <Grid item >
-                <Typography variant="body1" color="primary" gutterBottom>
-                    Once your account is deleted, all of its resourced and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.
-                </Typography>
-                </Grid>
-                <Grid item>
-                    <Button
-                    className={classes.root}
-                    color="primary"
-                    variant="contained"
-                    >
-                        Delete
-                    </Button>
-                </Grid>
-        </form>
-            </Grid>
+            <div className="main__container__shadow main__container__shadow--auth ">
+                <DeleteUser/>
             </div>
+
             </Grid>
             </Box>
         </Container>
