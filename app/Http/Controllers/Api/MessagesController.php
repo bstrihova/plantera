@@ -110,31 +110,6 @@ class MessagesController extends Controller
      */
     public function storeMessage($thread_id, Request $request)
     {           
-        // $thread = Thread::findOrFail($thread_id);
-
-        // $user = Thread::findOrFail($current_user);
-
-        // $message = new Message;
-
-        // $message->user_id = $user;
-        // $message->thread_id = 1;
-        // $message->body = $request->input('body');
-
-        // $message->save();
-
-        // return [
-        //     'status' => 'success'
-        // ];
-
-
-        
-      
-
-        // $thread = Thread::create([
-        //     // 'post_id' => $['post_id'],
-        //     // 'subject' => $input['subject'],
-        // ]);
-
         // Message
         Message::create([
             'thread_id' => $thread_id,
@@ -146,19 +121,6 @@ class MessagesController extends Controller
             'status' => 'success'
         ];
 
-        // // Sender
-        // Participant::create([
-        //     'thread_id' => $thread->id,
-        //     'user_id' => Auth::id(),
-        //     'last_read' => new Carbon,
-        // ]);
-
-        // // Recipients
-        // if (Request::has('recipients')) {
-        //     $thread->addParticipant($input['recipients']);
-        // }
-
-        // return redirect()->route('messages');
     }
 
     /**
@@ -166,24 +128,23 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function storeThread($post_id, $seller_id, Request $request)
+    public function storeThread($post_id, $seller_id)
     {  
-          $thread = Thread::create([
-            'post_id' => $post_id,
+        $thread = Thread::create([
+            'post_id' => $post_id, 
             'seller_id' => $seller_id,
-            'buyer_id' => Auth::id()
-
+            'buyer_id' => Auth::id(),  
           ]);   
-          
-          
+
           Message::create([
             'thread_id' =>  $thread->id,
-            'user_id' => Auth::id(),
+            'user_id' => $seller_id, 
             'body' => 'Ahoj'
         ]);
 
         return [
-            'status' => 'success'
+            'status' => 'success',
+            "thread" => $thread->id
         ];
 
     }

@@ -8,24 +8,24 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import PostPrice from "../../common/PostPrice/PostPrice";
 import { Link } from "react-router-dom";
 import CookieCsrf from "../../csrf"
+import { useHistory } from "react-router-dom";
 
 function PostDescription({ post }) {
     const urlDelete = `/posts/${post.id}/delete`;
     const urlEdit = `/posts/${post.id}/edit`;
 
-    const [values, setValues] = useState({
-        body: '',
-    });
+    const history = useHistory();
 
-
-    const [errors, setErrors] = useState({});
+    // const [errors, setErrors] = useState({});
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await fetch(`/api/threads/${post.id}/${post.seller_id}`, {
+        console.log(post.user_id)
+
+        const response = await fetch(`/api/newthread/${post.id}/${post.user_id}`, {
             method: 'post',
-            body: JSON.stringify(values),
+            // body: JSON.stringify(values),
             headers: {
                 'Accept' : 'application/json', // tell Laravel (backend) what we want in response
                 'Content-type' : 'application/json', // tell backend what we are sending
@@ -36,9 +36,11 @@ function PostDescription({ post }) {
         })
         
         const response_data = await response.json();
+        console.log(response);
+        console.log(response_data);
       
         if (response.status === 200) {
-            window.location.reload();
+            history.push(`/messages/${response_data.thread}`);
         }
 
         if (response_data.errors) {
@@ -138,9 +140,9 @@ function PostDescription({ post }) {
                         size="large"
                         disableRipple
                         style={{ textTransform: "none" }}
-                        onCLick={handleSubmit}
+                        onClick={handleSubmit}
                     >
-                        Contact seller
+                        Contact seller hovno
                     </Button>
                 {/* </Link> */}
             </Box>
