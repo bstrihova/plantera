@@ -72,7 +72,7 @@ export default function Header() {
   };
 
   const urlUserProfile = `/user/profile/${user.id}`
-  const urlUserSettings = `/user/settings/${user.id}`
+  const urlUserSettings = `/user/settings`
   
   let authContentMobile = "";
   let authContentDesktop= "";

@@ -8,10 +8,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import GoogleLocation from "../common/GoogleLocation/GoogleLocation"
-import { useParams } from "react-router-dom";
 import InputError from "../common/InputError/InputError";
 import { useHistory } from "react-router-dom";
 import CookieCsrf from "../csrf"
+import { useGlobalContext } from "../context";
+import PasswordChange from './PasswordChange';
+import DeleteUser from './DeleteUser';
+
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -30,50 +33,23 @@ function UserSettings() {
 
     const [errors, setErrors] = useState({});
 
-    let { id } = useParams();
-    const [user, setUser] = useState("");
-    const [loading, setLoading] = React.useState(true);
+    const { user } = useGlobalContext();
 
     const [userValues, setUserValues] = useState({
         name: user.name,
     });
 
-    const [passwordValues, setPasswordValues] = useState({
-        current_password: "",
-        password: "",
-        password_confirmation: ""
-    });
-
-    const loadUser = async () => {
-        setLoading(true);
-        const response = await fetch(`/api/users/${id}`);
-        const data = await response.json();
-        data && setUser(data);
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        loadUser();
-    }, []);
-
     let userContent = "";
 
-    if (loading) {
+    if (user) {
         userContent = (
-            <div className="logo--pulsating">
-                <img src="/heart_plantera_inversed.png" />
-            </div>
+            <Grid item>
+                <Avatar alt={user.name} src={user.profile_photo_url} variant="circle" className={classes.large}/>
+            </Grid>
+            
         );
-    } else {
-        if (user) {
-            userContent = (
-                <Grid item>
-                    <Avatar alt={user.name} src={user.profile_photo_url} variant="circle" className={classes.large}/>
-                </Grid>
-               
-            );
-        }
     }
+    
 
     const handleUserSubmit = async (event) => {
         event.preventDefault();
@@ -94,7 +70,7 @@ function UserSettings() {
 
         //The user is authenticated, 
         if (response.status === 200) {
-            history.push(`/user/profile/${id}`);
+            history.push(`/user/profile/${user.id}`);
         }
 
         if (response_data.errors) {
@@ -102,32 +78,6 @@ function UserSettings() {
         }
 
     }
-
-    // const handlePasswordSubmit = async (event) => {
-    //     event.preventDefault();
-
-    //     const response = await fetch(`/user/settings/${id}/pwdchange`, {
-    //         method: 'post',
-    //         body: JSON.stringify(passwordValues),
-    //         headers: {
-    //             'Accept' : 'application/json', // tell Laravel (backend) what we want in response
-    //             'Content-type' : 'application/json', // tell backend what we are sending
-    //             'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
-    //         }
-    //     })
-
-    //     const response_data = await response.json();
-    //     console.log(response);
-
-    //     if (response.status === 200) {
-    //         history.push(`/user/profile/${id}`);
-    //     }
-
-    //     if (response_data.errors) {
-    //         setErrors(response_data.errors);
-    //     }
-
-    // }
 
     const handleUserChange = (event) => {
         const allowed_names = ['name'],
@@ -145,24 +95,6 @@ function UserSettings() {
             });
         }
     }
-
-    const handlePasswordChange = (event) => {
-        const allowed_names = ['current_password', "password", "password_confirmation"],
-            name  = event.target.name,
-            userValues = event.target.value
-
-        if (-1 !== allowed_names.indexOf(name)) {
-            setPasswordValues(prev_values => {
-                return (
-                    {
-                        ...prev_values,
-                        [name]: userValues
-                    }
-                );
-            });
-        }
-    }
-
 
     return (
         <div>
@@ -245,63 +177,7 @@ function UserSettings() {
                 </Box>
             </Grid> 
             <div className="main__container__shadow main__container__shadow--auth">
-            <form onSubmit={()=>console.log("change pwd")}> 
-            <Grid container direction="column" justify="center" alignItems="center" spacing={4}>
-                <Grid item >
-                <TextField
-                    color="primary"
-                    label="Current password"
-                    variant="filled"
-                    type="password"
-                    name="current_password"
-                    autoComplete="current-password"
-                    value={ passwordValues.current_password} 
-                    onChange={ handlePasswordChange }
-                    error={errors.current_password ? true : false}
-                    helperText={<InputError errors={errors.current_password}
-                    />}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                    color="primary"
-                    label="New password"
-                    variant="filled"
-                    type="password"
-                    name="password"
-                    autoComplete="new-password"
-                    value={ passwordValues.password } 
-                    onChange={ handlePasswordChange }
-                    error={errors.password ? true : false}
-                    helperText={<InputError errors={errors.password}/>}
-                    />
-                </Grid>
-                <Grid item>
-                <TextField
-                    color="primary"
-                    label="Confirm password"
-                    variant="filled"
-                    type="password"
-                    name="password_confirmation"
-                    autoComplete="new-password"
-                    value={ passwordValues.password_confirmation } 
-                    onChange={ handlePasswordChange }
-                    error={errors.password_confirmation ? true : false}
-                    helperText={<InputError errors={errors.password_confirmation}/>}
-                    />
-                </Grid>
-                <Grid item>
-                    <Button
-                    className="button"
-                    color="primary"
-                    variant="contained"
-                    type="submit"
-                    >
-                        Save
-                    </Button>
-                </Grid>
-            </Grid>
-            </form>
+                <PasswordChange/>
             </div>
 
             <Grid item>
@@ -311,27 +187,15 @@ function UserSettings() {
                 </Typography>
                 </Box>
             </Grid> 
-            <Grid container className="main__container__shadow--userSettings" direction="row" justify="center" alignItems="center" spacing={2}>
-                <Grid item >
-                <Typography variant="body1" color="primary" gutterBottom>
-                    Once your account is deleted, all of its resourced and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.
-                </Typography>
-                </Grid>
-                <Grid item>
-                    <Button
-                    className={classes.root}
-                    color="primary"
-                    variant="contained"
-                    >
-                        Delete
-                    </Button>
-                </Grid>
-            </Grid>
+          
+            <div className="main__container__shadow main__container__shadow--auth ">
+                <DeleteUser/>
+            </div>
 
-            
-                </Grid>
-                </Box>
+            </Grid>
+            </Box>
         </Container>
+        
         </div>
     )
 }
