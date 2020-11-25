@@ -12,10 +12,14 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import InputError from "../common/InputError/InputError";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import PriceOption from "../common/PriceOption/PriceOption";
 
 function PostEdit() {
     let { id } = useParams();
+
+    const history = useHistory();
 
     const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);

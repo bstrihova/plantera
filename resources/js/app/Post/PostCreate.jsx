@@ -7,6 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import MuiSelect from "@material-ui/core/Select";
 import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
+import { useHistory } from "react-router-dom";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import InputError from "../common/InputError/InputError";
 import Grid from "@material-ui/core/Grid";
@@ -22,6 +23,8 @@ function PostCreate() {
         status: 1,
         transaction: "sell"
     });
+
+    const history = useHistory();
 
     const [errors, setErrors] = useState({});
 
