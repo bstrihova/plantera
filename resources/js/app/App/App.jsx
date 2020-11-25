@@ -75,7 +75,7 @@ function App() {
                         }
                     />
 
-                    <Route path="/user/settings/:id" children={<UserSettings />} />
+                    <Route path="/user/settings" children={<UserSettings />} />
 
                     
 <Route

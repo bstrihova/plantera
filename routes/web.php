@@ -41,7 +41,7 @@ Route::post("/api/threads/{post_id}", "Api\MessagesController@storeThread")->mid
 Route::get("/api/users/{id}", "Api\UserController@show");
 Route::get("/api/authuser", "Api\UserController@authUser")->middleware('auth');
 Route::post('/user/settings/{id}', "Api\UserController@update")->middleware("auth");
-Route::post("user/settings/{id}/pwdchange", "UpdateUserPassword@update")->middleware("auth");
+Route::post('/change-password', 'ChangePasswordController@store')->name('change.password');
 
 Route::get("/api/posts", "Api\PostController@index");
 Route::get("/api/posts/{id}", "Api\PostController@show");

@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-    const [user, setUser] = useState({ id: "", name: "" });
+    const [user, setUser] = useState({ id: "", name: "", profile_photo_url: "" });
     // const [alert, setAlert] = useState({
     //     isAlert: false,
     //     type: "info",
@@ -22,7 +22,8 @@ const AppProvider = ({ children }) => {
             // id: response.data.id,
             // name: response.data.name,
             id: response.id,
-            name: response.name
+            name: response.name,
+            profile_photo_url : response.profile_photo_url
         });
     };
 
