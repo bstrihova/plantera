@@ -110,31 +110,6 @@ class MessagesController extends Controller
      */
     public function storeMessage($thread_id, Request $request)
     {           
-        // $thread = Thread::findOrFail($thread_id);
-
-        // $user = Thread::findOrFail($current_user);
-
-        // $message = new Message;
-
-        // $message->user_id = $user;
-        // $message->thread_id = 1;
-        // $message->body = $request->input('body');
-
-        // $message->save();
-
-        // return [
-        //     'status' => 'success'
-        // ];
-
-
-        
-      
-
-        // $thread = Thread::create([
-        //     // 'post_id' => $['post_id'],
-        //     // 'subject' => $input['subject'],
-        // ]);
-
         // Message
         Message::create([
             'thread_id' => $thread_id,
@@ -146,19 +121,6 @@ class MessagesController extends Controller
             'status' => 'success'
         ];
 
-        // // Sender
-        // Participant::create([
-        //     'thread_id' => $thread->id,
-        //     'user_id' => Auth::id(),
-        //     'last_read' => new Carbon,
-        // ]);
-
-        // // Recipients
-        // if (Request::has('recipients')) {
-        //     $thread->addParticipant($input['recipients']);
-        // }
-
-        // return redirect()->route('messages');
     }
 
     /**
@@ -166,19 +128,20 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function storeThread($post_id, $seller_id, Request $request)
+    public function storeThread($post_id, Request $request)
     {  
-          $thread = Thread::create([
-            'post_id' => $post_id,
-            'seller_id' => $seller_id,
-            'buyer_id' => Auth::id()
+        Thread::create([
+            'post_id' => $post_id, 
+            'buyer_id' => Auth::id(),  
+            'seller_id' => 2,
+           
 
           ]);   
           
           
           Message::create([
+            'user_id' => $user_id, 
             'thread_id' =>  $thread->id,
-            'user_id' => Auth::id(),
             'body' => 'Ahoj'
         ]);
 

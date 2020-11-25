@@ -23,7 +23,9 @@ function PostDescription({ post }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await fetch(`/api/threads/${post.id}/${post.seller_id}`, {
+        console.log(post)
+
+        const response = await fetch(`/api/threads/${post.id}`, {
             method: 'post',
             body: JSON.stringify(values),
             headers: {
@@ -138,9 +140,9 @@ function PostDescription({ post }) {
                         size="large"
                         disableRipple
                         style={{ textTransform: "none" }}
-                        onCLick={handleSubmit}
+                        onClick={handleSubmit}
                     >
-                        Contact seller
+                        Contact seller hovno
                     </Button>
                 {/* </Link> */}
             </Box>

@@ -14,7 +14,8 @@ import MessageContent from './MessageContent';
 import { useParams } from "react-router-dom";
 import List from '@material-ui/core/List';
 import InputError from "../common/InputError/InputError";
-import CookieCsrf from "../csrf"
+import CookieCsrf from "../csrf";
+import PostPrice from "../common/PostPrice/PostPrice";
 
 
 function ThreadShow() {
@@ -144,12 +145,23 @@ function ThreadShow() {
                                 {thread.post.name}
                         </Typography>
                         
-                        
-                        <Typography variant="h6"  color="primary" align='center'>
+                         {/* conditional render on price donate swap */}
+                         
+                         {/* <Box component="h6" fontWeight={900} whiteSpace="nowrap"> */}
+                            
+                            
+                            <PostPrice post={thread.post} width={1}/>
+
+                         {/* </Box>     */}
+
+
+                        {/* <Typography variant="h6"  color="primary" align='center'>
                                 
                                   
                                 {thread.post.price} {thread.post.currency}
-                        </Typography>
+                        </Typography> */}
+
+
                         <FormControl style={{width:"70%"}}> 
                         <InputLabel id="status">Status</InputLabel>
                             <MuiSelect labelId="status">
