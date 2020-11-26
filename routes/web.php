@@ -43,6 +43,9 @@ Route::get("/api/authuser", "Api\UserController@authUser")->middleware('auth');
 Route::post('/user/settings/{id}', "Api\UserController@update")->middleware("auth");
 Route::post('/change-password', 'ChangePasswordController@store')->middleware("auth")->name('change.password');
 
+// decided to not enable user delete, because it is too complicated to think about the solution now
+// Route::delete('/delete-user/{id}', 'Api\UserController@destroy')->middleware("auth");
+
 Route::get("/api/posts", "Api\PostController@index");
 Route::get("/api/posts/{id}", "Api\PostController@show");
 Route::post("/api/posts", "Api\PostController@store")->middleware("auth");

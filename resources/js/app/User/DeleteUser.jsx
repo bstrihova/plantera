@@ -1,8 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
+import { useGlobalContext } from "../context";
+
+
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -12,9 +16,32 @@ const useStyles = makeStyles(() => ({
 
 function DeleteUser() {
     const classes = useStyles();
+    const history = useHistory();
+    const { user } = useGlobalContext();
+
+    const handleSubmit = async event => {
+        event.preventDefault();
+        const response = await fetch(`/delete-user/${user.id}`, {
+            method: "delete",
+            headers: {
+                Accept: "application/json", // tell Laravel (backend) what we want in response
+                "Content-type": "application/json", // tell backend what we are sending
+                "X-CSRF-TOKEN": document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content") // prove to backend that this is authorized
+            }
+        });
+
+        const response_data = await response.json();
+
+        //The user is authenticated,
+        if (response.status === 200) {
+            history.push("/");
+        }
+
+    };
 
     return (
-        <form onSubmit={()=>console.log("submitted delete form")}>
             <div className="main__container">
         <Grid container direction="row" justify="center" alignItems="center">
             <Grid item >
@@ -27,13 +54,13 @@ function DeleteUser() {
                     className={classes.root}
                     color="primary"
                     variant="contained"
+                    onClick={handleSubmit}
                     >
                         Delete
                     </Button>
                 </Grid>
             </Grid>
             </div>
-        </form>
     )
 }
 

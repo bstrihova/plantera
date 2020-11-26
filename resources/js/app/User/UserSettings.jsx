@@ -180,7 +180,7 @@ function UserSettings() {
                 <PasswordChange/>
             </div>
 
-            <Grid item>
+            {/* <Grid item>
                 <Box mt={5}>
                 <Typography variant="h6" color="primary" gutterBottom>
                     Delete Account
@@ -190,7 +190,7 @@ function UserSettings() {
           
             <div className="main__container__shadow main__container__shadow--auth ">
                 <DeleteUser/>
-            </div>
+            </div> */}
 
             </Grid>
             </Box>
