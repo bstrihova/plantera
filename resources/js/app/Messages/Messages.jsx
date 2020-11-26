@@ -9,6 +9,8 @@ import MessagePreviewItem from './MessagePreviewItem';
 import React, { useState, useEffect } from 'react';
 import {useHistory} from "react-router-dom";
 import Divider from '@material-ui/core/Divider';
+import { useGlobalContext } from "../context";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Messages() {
   const classes = useStyles();
   const history = useHistory();
+  const { user } = useGlobalContext();
 
   const [threads, setThreads] = useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -65,17 +68,15 @@ export default function Messages() {
       );
   } else {
       if (threads.length) {
+
+        
         
           threadContent = (
               <>
-              {/* {threads.map((thread, index) => (
-                <div key={index}>
-                    <MessagePreviewItem thread={thread} />
-                </div>
-              ))} */}
-              
-
-            {threads.map((thread, index,arr) => 
+       
+            {threads
+            .filter((thread)=> (user.id === thread.seller_id || user.id === thread.buyer_id))
+            .map((thread, index,arr) => 
             <div 
             key="index"
             >
@@ -83,6 +84,14 @@ export default function Messages() {
               thread={thread} 
               /> {index != (arr.length-1) ? <Divider variant='middle'/> : ''}
             </div>)}
+
+            {/* {posts.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase())))
+                            .filter((post)=>post.available)
+                            .map((post, index) => (
+                            <div key={index}>
+                                <PostPreview post={post}/>
+                            </div>
+                    ))} */}
               </>
         );
       } else {

@@ -17,6 +17,7 @@ import BlockIcon from '@material-ui/icons/Block';
 import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
+import { useGlobalContext } from "../context";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -30,12 +31,13 @@ const useStyles = makeStyles(() => ({
 
 function ThreadShow() {
 
+    const { user } = useGlobalContext();
     const classes = useStyles();
     let { id } = useParams();
     const [thread, setThread] = useState("");
     const [loading, setLoading] = React.useState(true);
    
-   
+    console.log(user)
 
     const [values, setValues] = useState({
         body: '',
@@ -110,6 +112,25 @@ function ThreadShow() {
     let username = "";
     let status = "";
 
+    if (user && thread && thread.buyer && thread.buyer.name && user.id == thread.buyer_id ) {
+        username =  ( <Box p={4}>                                
+                        <Typography variant="h3" 
+                                    color="primary"
+                                    align='center'
+                                    >                      
+                            {thread.seller.name}
+                        </Typography>               
+                        </Box> ) }    
+    else if (user && thread && thread.buyer && thread.buyer.name && user.id != thread.buyer_id){    
+        username =  ( <Box p={4}>                                
+       <Typography variant="h3" 
+                   color="primary"
+                   align='center'
+                   >                      
+          {thread.buyer.name}
+       </Typography>               
+       </Box> )}
+
     if (thread && thread.post.available === 1 ) {
         status = ( <Chip color="primary" 
         icon={<LocalFloristIcon />}
@@ -129,21 +150,6 @@ function ThreadShow() {
         );
     } else {
         if (thread) {
-        username  = ( 
-            <>
-            
-            <Box p={4}>                                
-                <Typography variant="h3" 
-                            color="primary"
-                            align='center'
-                            >                      
-                    {thread.buyer.name}
-                </Typography>               
-            </Box>
-            
-            </>
-        );      
-
             threadContent = (
                 <> 
                 <Box className="boxshadow">   
