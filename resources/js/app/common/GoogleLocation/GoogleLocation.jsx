@@ -45,6 +45,12 @@ export default function GoogleMaps() {
   const [options, setOptions] = React.useState([]);
   const loaded = React.useRef(false);
 
+  const loadLat = async () => {
+    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?place_id=ChIJPYW8bBYFFEcRas3jmHIrCfA&key=AIzaSyDg2YPZBcJdGDzvKnr2Q7EkqKXUPpYENEk`);
+    const data = await response.json();
+    data && console.log(data.results);
+}
+
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
@@ -107,8 +113,7 @@ export default function GoogleMaps() {
 
   return (
     <Autocomplete
-      // id="google-map-demo"
-      style={{ width: 200 }}
+      style={{ width: 205.5 }}
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
       filterOptions={(x) => x}
       options={options}

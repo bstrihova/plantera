@@ -23,7 +23,7 @@ function PostPreview({post}) {
                                 <Link to={profileUrl}>
                                     <Box display="flex" alignItems="center">
                                         <Box mr={0.6}>
-                                            <Avatar alt="username" src={post.user.profile_photo_url} variant="circle"/>
+                                            <Avatar alt="username" src={post.user.profile_photo_url} variant="circular"/>
                                         </Box>
                                         <Typography variant="body2" >
                                             {post.user.name}

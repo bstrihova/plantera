@@ -97,7 +97,7 @@ function PostDescription({ post }) {
                         <Avatar
                             alt={post.user.name}
                             src={post.user.profile_photo_url}
-                            variant="circle"
+                            variant="circular"
                         />
                         <Typography variant="body1">
                             {post.user.name}

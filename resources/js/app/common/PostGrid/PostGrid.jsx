@@ -105,7 +105,7 @@ function PostGrid({searchValue, setSearchValue, specificUser, specificPost}) {
                             label="Search"
                             color="primary"
                             variant="outlined"
-                            value={searchValue}
+                            value={searchValue} 
                             onChange={(e)=>(setSearchValue(e.target.value))}
                             InputProps={{
                             startAdornment: (
