@@ -4,9 +4,10 @@ import Typography from "@material-ui/core/Typography"
 import Box from "@material-ui/core/Box"
 import 'fontsource-roboto';
 import PostGrid from '../common/PostGrid/PostGrid';
-import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 function Home({searchValue, setSearchValue}) {
+    const history = useHistory();
     return (
         <>
             <section className="banner">
@@ -15,12 +16,10 @@ function Home({searchValue, setSearchValue}) {
                     Sell, buy, swap, donate
                 </Typography>
                 <Typography variant="h5" color="primary">
-                    Give your plants a second life
+                    Give your houseplants a second life
                 </Typography>
                 <Box mt={5}>
-                    <Link to="/posts/create"> 
-                        <Button color="primary" variant="contained" size="large">Get Started</Button>
-                    </Link> 
+                        <Button color="primary" variant="contained" size="large" onClick={()=> (history.push("/posts/create"))}>Get Started</Button>
                 </Box>
             </Box>
             </section>

@@ -40,7 +40,8 @@ function PostDescription({ post }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(post.user_id)
+        if (user.id) {
+
 
         const response = await fetch(`/api/newthread/${post.id}/${post.user_id}`, {
             method: 'post',
@@ -65,6 +66,9 @@ function PostDescription({ post }) {
         if (response_data.errors) {
             setErrors(response_data.errors);
         }
+    } else {
+        history.push(`/login`)
+    }
 
     }
 
