@@ -8,13 +8,12 @@ import MuiSelect from "@material-ui/core/Select";
 import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import { useHistory } from "react-router-dom";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import InputError from "../common/InputError/InputError";
 import Grid from "@material-ui/core/Grid";
 import PriceOption from "../common/PriceOption/PriceOption";
 import { Link } from "react-router-dom";
 import CookieCsrf from "../csrf";
-import ImageUpload from "../common/ImageUpload/ImageUpload"
+import ImageUpload from "../common/ImageUpload/ImageUpload";
 
 function PostCreate() {
     const [values, setValues] = useState({
@@ -22,7 +21,8 @@ function PostCreate() {
         description: "",
         price: "",
         status: 1,
-        transaction: "sell"
+        transaction: "sell",
+        image: ""
     });
 
     const history = useHistory();
@@ -63,8 +63,8 @@ function PostCreate() {
                 "name",
                 "transaction",
                 "price",
-                "description"
-                // "image"
+                "description",
+                "image"
             ],
             name = event.target.name,
             value = event.target.value;
@@ -112,7 +112,7 @@ function PostCreate() {
                                     + Add new picture
                                 </Button>{" "}
                             </label> */}
-                            <ImageUpload/>
+                            <ImageUpload />
                         </Grid>
                         <Grid item>
                             <TextField

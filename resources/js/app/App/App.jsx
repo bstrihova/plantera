@@ -9,10 +9,11 @@ import UserProfile from "../User/UserProfile";
 import UserSettings from "../User/UserSettings";
 import Messages from "../Messages/Messages";
 import Header from "../Header/Header";
-import ThreadShow from "../Messages/ThreadShow"
+import ThreadShow from "../Messages/ThreadShow";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import { useGlobalContext } from "../context";
+import PostImageUpload from "../Post/PostImageUpload";
 
 function App() {
     const [searchValue, setSearchValue] = useState("");
@@ -23,11 +24,11 @@ function App() {
         const data = await response_user.json();
         // setUser to authenticated user
         fetchUser(data);
-    }
+    };
 
     useEffect(() => {
         loadUser();
-    }, [])
+    }, []);
 
     return (
         <Router>
@@ -50,6 +51,11 @@ function App() {
                     <Route path="/register" children={<Register />} />
 
                     <Route path="/posts/create" children={<PostCreate />} />
+                    {/* DELETE THE BELOW ROUTE IF IT IS NOT WORKING */}
+                    <Route
+                        path="/posts/picture"
+                        children={<PostImageUpload />}
+                    />
 
                     <Route path="/posts/:id/edit" children={<PostEdit />} />
 
@@ -77,14 +83,17 @@ function App() {
 
                     <Route path="/user/settings" children={<UserSettings />} />
 
-                    
-<Route
+                    <Route
                         path="/messages/:id"
-                        children={<ThreadShow searchValue={searchValue} setSearchValue={setSearchValue}/>}
+                        children={
+                            <ThreadShow
+                                searchValue={searchValue}
+                                setSearchValue={setSearchValue}
+                            />
+                        }
                     />
 
-                    <Route path="/messages" children={<Messages />} />  
-                    
+                    <Route path="/messages" children={<Messages />} />
                 </Switch>
             </main>
             {/* <footer>Copyright Plantera 2020</footer> */}

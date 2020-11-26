@@ -48,7 +48,9 @@ Route::post('/change-password', 'ChangePasswordController@store')->middleware("a
 
 Route::get("/api/posts", "Api\PostController@index");
 Route::get("/api/posts/{id}", "Api\PostController@show");
-Route::post("/api/posts", "Api\PostController@store")->middleware("auth");
+// Route::post("/api/posts", "Api\PostController@store")->middleware("auth");
+Route::post("/api/posts/picture", "Api\ImageUploadController@imageUploadPost")->middleware("auth");
+
 Route::post("/api/posts/{id}/edit", "Api\PostController@update")->middleware("auth");
 Route::delete('/api/posts/{id}/delete', "Api\PostController@destroy")->middleware("auth");
 
