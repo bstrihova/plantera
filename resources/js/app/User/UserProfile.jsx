@@ -6,11 +6,12 @@ import EditIcon from "@material-ui/icons/Edit";
 import Avatar from "@material-ui/core/Avatar";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
 import PostGrid from "../common/PostGrid/PostGrid"
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useGlobalContext } from "../context";
+import IconButton from '@material-ui/core/IconButton';
+
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -23,6 +24,7 @@ function UserProfile({searchValue, setSearchValue}) {
 
     const classes = useStyles();
     const { user } = useGlobalContext();
+    const history = useHistory();
 
     let { id } = useParams();
     const [displayedUser, setDisplayedUser] = useState("");
@@ -46,7 +48,10 @@ function UserProfile({searchValue, setSearchValue}) {
     if (user.id == id) {
         editButton = (
             <Grid item>
-                <EditIcon fontSize="large" color="primary" />
+                <IconButton color="primary"  onClick={()=> history.push("/user/settings")}>
+                    <EditIcon fontSize="large"  />
+                </IconButton>
+                
             </Grid>
         )
     }
@@ -65,9 +70,9 @@ function UserProfile({searchValue, setSearchValue}) {
                     <Grid
                     container
                     direction="row"
-                    justify="space-evenly"
+                    justify="center"
                     alignItems="center"
-                    spacing={2}
+                    spacing={10}
                     >
                         <Grid item>
                             <Avatar alt={displayedUser.name} src={displayedUser.profile_photo_url} variant="circular" className={classes.large}/>

@@ -17,6 +17,8 @@ function PostDescription({ post }) {
 
     const history = useHistory();
 
+    let contactSellerButton = "";
+
     const { user } = useGlobalContext();
 
     let editDeleteButtons = "";
@@ -33,7 +35,23 @@ function PostDescription({ post }) {
                 </Box>
         )
         
+    } else {
+        contactSellerButton = (
+            <Box className="button--post">
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        size="large"
+                        disableRipple
+                        style={{ textTransform: "none" }}
+                        onClick={handleSubmit}
+                    >
+                        Contact seller
+                    </Button>
+            </Box>
+        )
     }
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -149,18 +167,7 @@ function PostDescription({ post }) {
                     </Typography>
                 </Box>
             </div>
-            <Box className="button--post">
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        size="large"
-                        disableRipple
-                        style={{ textTransform: "none" }}
-                        onClick={handleSubmit}
-                    >
-                        Contact seller
-                    </Button>
-            </Box>
+            {contactSellerButton}
         </section>
     );
 }

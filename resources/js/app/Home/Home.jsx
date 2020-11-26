@@ -5,9 +5,25 @@ import Box from "@material-ui/core/Box"
 import 'fontsource-roboto';
 import PostGrid from '../common/PostGrid/PostGrid';
 import { useHistory } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
 function Home({searchValue, setSearchValue}) {
+    let button = "";
+
+    const { user } = useGlobalContext();
     const history = useHistory();
+    
+    if (user.id) {
+        button = (
+            <Button color="primary" variant="contained" size="large" onClick={()=> (history.push("/posts/create"))}>Add Plant</Button>
+        )
+    } else {
+        button = (
+            <Button color="primary" variant="contained" size="large" onClick={()=> (history.push("/register"))}>Get Started</Button>
+        )
+    }
+
+
     return (
         <>
             <section className="banner">
@@ -19,7 +35,7 @@ function Home({searchValue, setSearchValue}) {
                     Give your houseplants a second life
                 </Typography>
                 <Box mt={5}>
-                        <Button color="primary" variant="contained" size="large" onClick={()=> (history.push("/posts/create"))}>Get Started</Button>
+                        {button}
                 </Box>
             </Box>
             </section>
