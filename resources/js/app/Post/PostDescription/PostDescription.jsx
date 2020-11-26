@@ -121,9 +121,11 @@ function PostDescription({ post }) {
                 </Box>
             </div>
             <div className="description">
-                <Typography variant="h4" component="h2">
+                <Box whiteSpace="normal">
+                <Typography variant="h4" component="h2" >
                     Description:
                 </Typography>
+                </Box>
                 ​
                 <Typography
                     variant="subtitle1"

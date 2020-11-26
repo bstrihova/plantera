@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -102,10 +103,11 @@ export default function Header() {
     <Logout version="mobile"/>
 
     <MenuItem>
-      
+      <Box mx="auto">
         <Button color="primary" variant="contained" size="large" onClick={()=> {handleMenuClose();  history.push("/posts/create");}}>
           Add Plant 
         </Button> 
+        </Box>
       
     </MenuItem>
     </>
@@ -157,6 +159,7 @@ export default function Header() {
           </Grid>
   
           <Grid item>
+              
             <Button color="secondary" variant="contained" onClick={()=> (history.push("/posts/create"))}>
               Add plant
             </Button>
