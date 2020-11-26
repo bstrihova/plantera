@@ -2,12 +2,15 @@ import React, {useState, useEffect} from 'react'
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import EditIcon from "@material-ui/icons/Edit";
 import Avatar from "@material-ui/core/Avatar";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import PostGrid from "../common/PostGrid/PostGrid"
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -19,24 +22,34 @@ const useStyles = makeStyles((theme) => ({
 function UserProfile({searchValue, setSearchValue}) {
 
     const classes = useStyles();
+    const { user } = useGlobalContext();
 
     let { id } = useParams();
-    const [user, setUser] = useState("");
+    const [displayedUser, setDisplayedUser] = useState("");
     const [loading, setLoading] = React.useState(true);
 
-    const loadUser = async () => {
+    const loadDisplayedUser = async () => {
         setLoading(true);
         const response = await fetch(`/api/users/${id}`);
         const data = await response.json();
-        data && setUser(data);
+        data && setDisplayedUser(data);
         setLoading(false);
     };
 
     useEffect(() => {
-        loadUser();
+        loadDisplayedUser();
     }, [id]);
 
     let userContent = "";
+    let editButton = "";
+
+    if (user.id == id) {
+        editButton = (
+            <Grid item>
+                <EditIcon fontSize="large" color="primary" />
+            </Grid>
+        )
+    }
 
     if (loading) {
         userContent = (
@@ -45,7 +58,7 @@ function UserProfile({searchValue, setSearchValue}) {
             </div>
         );
     } else {
-        if (user) {
+        if (displayedUser) {
             userContent = (
             <Container maxWidth={false}>
                 <Box mt={4}>
@@ -57,19 +70,17 @@ function UserProfile({searchValue, setSearchValue}) {
                     spacing={2}
                     >
                         <Grid item>
-                            <Avatar alt={user.name} src={user.profile_photo_url} variant="circular" className={classes.large}/>
+                            <Avatar alt={displayedUser.name} src={displayedUser.profile_photo_url} variant="circular" className={classes.large}/>
                         </Grid>
                         <Grid item>
                             <Typography variant="h3" color="primary" gutterBottom>
-                                {user.name}
+                                {displayedUser.name}
                             </Typography>
                             <Typography variant="body1"  gutterBottom>
-                                {user.location}
+                                {displayedUser.location}
                             </Typography>
                         </Grid>
-                        <Grid item>
-                        <Button variant="contained" color="primary">Add Plant</Button>
-                        </Grid>
+                        {editButton}
                     </Grid>
                 </Box>
             </Container>
@@ -83,7 +94,7 @@ function UserProfile({searchValue, setSearchValue}) {
         <div>
             {userContent}
 
-            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue} specificUser={user.id}/>
+            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue} specificUser={displayedUser.id}/>
 
         </div>
     )
