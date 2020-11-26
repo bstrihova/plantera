@@ -84,16 +84,16 @@ export default function Header() {
       <Link to="/messages" onClick={handleMenuClose}>
         <MenuItem>
           <IconButton aria-label="show 4 new mails" color="primary">
-            <Badge badgeContent={4} color="primary">
+            {/* <Badge badgeContent={4} color="primary"> */}
               <MailIcon />
-            </Badge>
+            {/* </Badge> */}
           </IconButton>
           Messages
         </MenuItem>
       </Link>
 
       {/* profile mobile menu */}
-      {/* <Link to={urlUserProfile} onClick={handleMenuClose}>
+      <Link to={urlUserProfile} onClick={handleMenuClose}>
         <MenuItem>
           <IconButton
             aria-label="account of current user"
@@ -105,10 +105,10 @@ export default function Header() {
           </IconButton>
           Profile
         </MenuItem>
-      </Link>   */}
+      </Link>  
 
        {/* account settings mobile menu */}
-      {/* <Link to={urlUserSettings} onClick={handleMenuClose}>   
+      <Link to={urlUserSettings} onClick={handleMenuClose}>   
         <MenuItem>
           <IconButton
             aria-label="account settings"
@@ -119,7 +119,7 @@ export default function Header() {
           </IconButton>
           Account Settings
         </MenuItem> 
-      </Link>  */}
+      </Link> 
 
     <Logout version="mobile"/>
     </>
@@ -144,9 +144,9 @@ export default function Header() {
         {/* icon for messages on desktop */}
         <Link to="/messages">
             <IconButton aria-label="show 4 new mails" color="secondary">
-              <Badge badgeContent={4} color="secondary">
+              {/* <Badge badgeContent={4} color="secondary"> */}
                 <MailIcon />
-              </Badge>
+              {/* </Badge> */}
             </IconButton>
         </Link>
           

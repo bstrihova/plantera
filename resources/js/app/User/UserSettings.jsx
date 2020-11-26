@@ -44,7 +44,7 @@ function UserSettings() {
     if (user) {
         userContent = (
             <Grid item>
-                <Avatar alt={user.name} src={user.profile_photo_url} variant="circle" className={classes.large}/>
+                <Avatar alt={user.name} src={user.profile_photo_url} variant="circular" className={classes.large}/>
             </Grid>
             
         );
