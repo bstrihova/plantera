@@ -21,6 +21,10 @@ function MessagePreviewItem({thread}) {
       history.push(`/messages/${thread.id}`)
     } 
 
+      const handleDelete = () => {
+    console.info('You clicked the delete icon.');
+  };
+
     return (
           <div>
             <Grid item xs={12}>
@@ -79,8 +83,8 @@ function MessagePreviewItem({thread}) {
                 />
                 </Box>
 
-                <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="delete" p={2}>
+                <ListItemSecondaryAction >
+                  <IconButton   edge="end" aria-label="delete" p={2}>
                    <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>

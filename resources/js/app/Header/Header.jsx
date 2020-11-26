@@ -257,7 +257,7 @@ export default function Header() {
         <img src="/logo_plantera.png" alt="logo" width="100px"/>
         </Link>
 
-        ahoj {user.id ? `loaded ${user.id}` : "nothing"} {user.name}
+        {/* ahoj {user.id ? `loaded ${user.id}` : "nothing"} {user.name} */}
 
         <div className={classes.grow} />
     

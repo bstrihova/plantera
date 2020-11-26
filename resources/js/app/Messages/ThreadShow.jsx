@@ -115,7 +115,8 @@ function ThreadShow() {
         icon={<LocalFloristIcon />}
         label= "Available" /> )}
      else { 
-        status = ( <Chip   className={classes.root} 
+        status = ( 
+                     <Chip   className={classes.root} 
                            icon={<BlockIcon style={{ color: "white"}} />}
                            label= "Sold"  /> )} ;
     
@@ -163,36 +164,17 @@ function ThreadShow() {
                    <Grid container 
                          direction="column"
                          alignItems="center">
-
+                        <Box p={3}>
                         <Typography variant="h6"  align="center">
-                                {/* Snake plant little baby */}
                                 {thread.post.name}
                         </Typography>
-                        
-                         {/* conditional render on price donate swap */}
-                         
-                         {/* <Box component="h6" fontWeight={900} whiteSpace="nowrap"> */}
-                            
-                            
-                            <PostPrice post={thread.post} width={1}/>
-
-                         {/* </Box>     */}
-
-
-                        {/* <Typography variant="h6"  color="primary" align='center'>
-                                
-                                  
-                                {thread.post.price} {thread.post.currency}
-                        </Typography> */}
-
-                       
-
-                   
-                    {status}
-
-                                                
-                        
-                       
+                        </Box>
+                        <Box p={3}>
+                        <PostPrice post={thread.post}/>
+                        </Box>
+                        <Box p={3}>
+                        {status}
+                        </Box>
                     </Grid> 
                 </Grid>
                 </Grid>
@@ -227,17 +209,13 @@ function ThreadShow() {
                     </Grid>
 
                     <Grid item xs={10} lg={6}>    
-                    
-                    {/* <Box className="boxshadow">    */}
                       {threadContent}
-                    {/* </Box> */}
-                   
                     </Grid>   
 
 
                     <Grid container
                       justify="center">
-                <Grid item xs={10} lg={6}> 
+                     <Grid item xs={10} lg={6}> 
                         <List>
                             {messageContent}
                         </List> 
