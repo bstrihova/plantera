@@ -7,10 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import MuiSelect from "@material-ui/core/Select";
 import MuiMenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import Grid from "@material-ui/core/Grid";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import InputError from "../common/InputError/InputError";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
@@ -18,6 +15,7 @@ import PriceOption from "../common/PriceOption/PriceOption";
 
 function PostEdit() {
     let { id } = useParams();
+    
 
     const history = useHistory();
 

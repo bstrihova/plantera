@@ -3,7 +3,8 @@ import ImageUploading from "react-images-uploading";
 import Button from "@material-ui/core/button"
 import Grid from "@material-ui/core/Grid"
 
-export function ImageUpload() {
+
+function ImageUpload() {
   const [images, setImages] = React.useState([]);
   const maxNumber = 1;
 
@@ -72,4 +73,7 @@ export function ImageUpload() {
     </div>
   );
 }
+
+export default ImageUpload
+
 

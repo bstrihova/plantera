@@ -9,6 +9,7 @@ import PostPrice from "../../common/PostPrice/PostPrice";
 import { Link } from "react-router-dom";
 import CookieCsrf from "../../csrf"
 import { useHistory } from "react-router-dom";
+import { useGlobalContext } from "../../context";
 
 function PostDescription({ post }) {
     const urlDelete = `/posts/${post.id}/delete`;
@@ -16,7 +17,25 @@ function PostDescription({ post }) {
 
     const history = useHistory();
 
+    const { user } = useGlobalContext();
+
     // const [errors, setErrors] = useState({});
+
+    let editDeleteButtons = "";
+
+    if (user && user.id === post.user.id) {
+        editDeleteButtons = (
+            <Box display="flex" alignSelf="flex-end">
+                    <Link to={urlEdit}>
+                        <EditIcon fontSize="large" color="primary" />
+                    </Link>
+                    <Link to={urlDelete}>
+                        <DeleteIcon fontSize="large" color="primary" />{" "}
+                    </Link>
+                </Box>
+        )
+        
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -60,14 +79,7 @@ function PostDescription({ post }) {
                 fontWeight={900}
                 color="primary.main"
             >
-                <Box display="flex" alignSelf="flex-end">
-                    <Link to={urlEdit}>
-                        <EditIcon fontSize="large" color="primary" />
-                    </Link>
-                    <Link to={urlDelete}>
-                        <DeleteIcon fontSize="large" color="primary" />{" "}
-                    </Link>
-                </Box>
+                {editDeleteButtons}
                 <Typography variant="h3">
                     <Box fontWeight="fontWeightMedium">{post.name}</Box>
                 </Typography>
@@ -133,7 +145,6 @@ function PostDescription({ post }) {
                 </Box>
             </div>
             <Box className="button--post">
-                {/* <Link to="/messages/create"> */}
                     <Button
                         color="primary"
                         variant="contained"
@@ -142,9 +153,8 @@ function PostDescription({ post }) {
                         style={{ textTransform: "none" }}
                         onClick={handleSubmit}
                     >
-                        Contact seller hovno
+                        Contact seller
                     </Button>
-                {/* </Link> */}
             </Box>
         </section>
     );

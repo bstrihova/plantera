@@ -14,6 +14,7 @@ import Grid from "@material-ui/core/Grid";
 import PriceOption from "../common/PriceOption/PriceOption";
 import { Link } from "react-router-dom";
 import CookieCsrf from "../csrf";
+import ImageUpload from "../common/ImageUpload/ImageUpload"
 
 function PostCreate() {
     const [values, setValues] = useState({
@@ -95,7 +96,7 @@ function PostCreate() {
                         alignItems="center"
                     >
                         <Grid item>
-                            <label htmlFor="upload-photo">
+                            {/* <label htmlFor="upload-photo">
                                 <input
                                     style={{ display: "none" }}
                                     id="upload-photo"
@@ -110,7 +111,8 @@ function PostCreate() {
                                 >
                                     + Add new picture
                                 </Button>{" "}
-                            </label>
+                            </label> */}
+                            <ImageUpload/>
                         </Grid>
                         <Grid item>
                             <TextField
