@@ -245,13 +245,7 @@ export default function Header() {
         <Link to="/">
         <img src="/logo_plantera.png" alt="logo" width="100px"/>
         </Link>
-<<<<<<< HEAD
-
-        {/* ahoj {user.id ? `loaded ${user.id}` : "nothing"} {user.name} */}
-
-=======
         {user.id ? `logged in: ${user.id}` : "no user"} {user.name}
->>>>>>> a0bb5e399a8f5e2708e57796a3061b7fef0008ec
         <div className={classes.grow} />
     
         {/* desktop menu - right side */}

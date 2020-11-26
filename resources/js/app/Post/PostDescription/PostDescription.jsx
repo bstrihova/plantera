@@ -19,8 +19,6 @@ function PostDescription({ post }) {
 
     const { user } = useGlobalContext();
 
-    // const [errors, setErrors] = useState({});
-
     let editDeleteButtons = "";
 
     if (user && user.id === post.user.id) {
@@ -109,6 +107,7 @@ function PostDescription({ post }) {
                         display="flex"
                         flexDirection="column"
                         alignItems="center"
+                        onClick={()=> {history.push(`/user/profile/${post.user_id}`)}} style={{cursor:"pointer"}}
                     >
                         <Avatar
                             alt={post.user.name}

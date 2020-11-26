@@ -21,6 +21,7 @@ function Post({ searchValue, setSearchValue }) {
 
     useEffect(() => {
         loadPost();
+        window.scrollTo(0, 0);
     }, [ id ]);
 
     let postContent = "";

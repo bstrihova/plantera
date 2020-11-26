@@ -4,10 +4,11 @@ import Avatar from "@material-ui/core/Avatar"
 import Box from "@material-ui/core/Box"
 import PostPrice from "../PostPrice/PostPrice"
 import { Link } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 function PostPreview({post}) {
     const postUrl = `/posts/${post.id}`
-    const profileUrl = `/user/profile/${post.user.id}`
+    const history = useHistory();
     return (
         
             <figure className="postgrid__figure">
@@ -20,8 +21,7 @@ function PostPreview({post}) {
                             {post.name}
                         </Typography>
                         <Box display="flex" alignItems="center" justifyContent="space-between" mt={-1}>
-                                <Link to={profileUrl}>
-                                    <Box display="flex" alignItems="center">
+                                    <Box display="flex" alignItems="center" onClick={()=> {history.push(`/user/profile/${post.user_id}`)}} style={{cursor:"pointer"}}>
                                         <Box mr={0.6}>
                                             <Avatar alt="username" src={post.user.profile_photo_url} variant="circular"/>
                                         </Box>
@@ -29,7 +29,6 @@ function PostPreview({post}) {
                                             {post.user.name}
                                         </Typography>
                                     </Box>
-                                </Link>
                             <Box component="h1" fontWeight={900} whiteSpace="nowrap">
                             <PostPrice post={post}/>
                             </Box>

@@ -21,11 +21,14 @@
 }
 
 .main__container__shadow--post {
-    width: 70%;
+    // width: 70%;
+    height: 50vh;
 }
 
 .containerRight {
     padding: 2em;
+    height: 100%;
+    width: 50%;
 }
 
 // .containerRight__upperPart {
@@ -73,7 +76,7 @@
 }
 
 .imagePost {
-    width: 50%;
+    height: 100%;
     border-top-left-radius: 32px;
     border-bottom-left-radius: 32px;
     // max-width: 600px;
