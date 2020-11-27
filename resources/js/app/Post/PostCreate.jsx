@@ -126,12 +126,12 @@ function PostCreate() {
                                 helperText={<InputError errors={errors.name} />}
                             />
                         </Grid>
-                        <Grid container direction="column" spacing={3}>
+                        {/* <Grid container direction="column" spacing={3}> */}
                             <Grid item>
                                 <FormControl
                                     variant="filled"
-                                    // style={{ width: "30%" }}
-                                    fullWidth
+                                    // style={{ width: "100%" }}
+                                    // fullWidth
                                 >
                                     <InputLabel>Selling?</InputLabel>
                                     <MuiSelect
@@ -162,8 +162,8 @@ function PostCreate() {
                                     handleChange={handleChange}
                                 />
                             </Grid>
-                        </Grid>
-                        <Grid container justify="center">
+                        {/* </Grid> */}
+                        {/* <Grid container justify="center"> */}
                             <Grid item>
                                 <TextField
                                     label="Description"
@@ -183,9 +183,10 @@ function PostCreate() {
                                     }
                                 />
                             </Grid>
-                        </Grid>
+                        
                         {/* <Link to="/messages/create">  */}
-                        <Box mb={2}>
+                        <Grid item>
+                        {/* <Box mb={2}> */}
                             <Button
                                 // className="button--post"
                                 color="primary"
@@ -198,7 +199,8 @@ function PostCreate() {
                             >
                                 Post new plant
                             </Button>
-                        </Box>
+                        {/* </Box> */}
+                        </Grid>
 
                         {/* </Link> */}
                     </Grid>

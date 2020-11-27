@@ -23,8 +23,8 @@ class ThreadSeeder extends Seeder
 
         $p = new Thread;
                
-        $p->seller_id = 1;
-        $p->buyer_id = 2;
+        $p->seller_id = 3;
+        $p->buyer_id = 1;
         $p->post_id = 2;
         $p->save();
 

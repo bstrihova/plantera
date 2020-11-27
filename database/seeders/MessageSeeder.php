@@ -33,37 +33,37 @@ class MessageSeeder extends Seeder
         $p->save();
 
         $p = new Message;
-        $p->body = "Thread 2 Message 1 User 1";
-        $p->user_id = 2;
+        $p->body = "Hello there";
+        $p->user_id = 3;
         $p->thread_id = 2;
         $p->save();
 
         $p = new Message;
-        $p->body = "Thread 2 Message 2 User 2";
+        $p->body = "I would like your plant a lot!!!! is it still available?";
         $p->user_id = 1;
         $p->thread_id = 2;
         $p->save();
 
         $p = new Message;
-        $p->body = "Thread 2 Message 3 User 1";
-        $p->user_id = 2;
+        $p->body = "yes it is, where can we meet?";
+        $p->user_id = 3;
         $p->thread_id = 2;
         $p->save();
 
         $p = new Message;
-        $p->body = "Thread 3 Message 1 User 2";
+        $p->body = "hello!";
         $p->user_id = 1;
         $p->thread_id = 3;
         $p->save();
 
         $p = new Message;
-        $p->body = "Thread 3 Message 2 User 1";
+        $p->body = "hi!";
         $p->user_id = 2;
         $p->thread_id = 3;
         $p->save();
 
         $p = new Message;
-        $p->body = "Thread 3 Message 3 User 2";
+        $p->body = "what a pretty plant!";
         $p->user_id = 1;
         $p->thread_id =3;
         $p->save();
