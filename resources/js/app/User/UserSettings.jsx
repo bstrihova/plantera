@@ -118,7 +118,7 @@ function UserSettings() {
             <Grid item>
                 <Box mt={5} mb={2}>
                     <Typography variant="h6" color="primary" gutterBottom>
-                        Profile Information
+                        Change your username
                     </Typography>
                 </Box>
             </Grid> 
@@ -131,7 +131,7 @@ function UserSettings() {
                 alignItems="center" 
                 spacing={4}
                 >
-                <Grid item >
+                {/* <Grid item >
                     <Button
                     className="button"
                     color="primary"
@@ -139,7 +139,7 @@ function UserSettings() {
                     >
                         Upload new profile picture
                     </Button>
-                </Grid>
+                </Grid> */}
                 <Grid item>
                     <TextField
                     color="primary"

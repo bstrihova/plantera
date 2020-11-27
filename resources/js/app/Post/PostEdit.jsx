@@ -22,10 +22,10 @@ function PostEdit() {
     const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);
     const [values, setValues] = useState({
-        name: post.name,
-        available: 0,
+        name: "",
+        available: 1,
         price: 0,
-        transaction: "",
+        transaction: "sell",
         description: ""
     });
 
@@ -52,8 +52,8 @@ function PostEdit() {
         const response_data = await response.json();
 
         //The user is authenticated,
-        if (response.status === 201) {
-            history.push("/");
+        if (response.status === 200) {
+            history.push(`/posts/${id}`);
         }
 
         if (response_data.errors) {
@@ -110,7 +110,7 @@ function PostEdit() {
                             <figure className="myPictures">
                                 <img src={post.photo} alt={post.name} />
                             </figure>
-                            <Button
+                            {/* <Button
                                 className="button"
                                 color="primary"
                                 variant="contained"
@@ -118,7 +118,7 @@ function PostEdit() {
                                 type="submit"
                             >
                                 Modify plant picture
-                            </Button>
+                            </Button> */}
                             <div className="texField--postName">
                                 <TextField
                                     color="primary"
@@ -177,12 +177,12 @@ function PostEdit() {
                                     </MuiSelect>
                                 </FormControl>
                                 {/* Component to have Price option available */}
-                                {/* <PriceOption
+                                <PriceOption
                                     transaction={values.transaction}
                                     price={values.price}
                                     errors={errors.price}
                                     handleChange={handleChange}
-                                /> */}
+                                />
                             </div>
                             <div className="texField--postDescription">
                                 <Box>

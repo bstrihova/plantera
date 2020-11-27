@@ -22,7 +22,7 @@ function PostCreate() {
         price: "",
         status: 1,
         transaction: "sell",
-        image: ""
+        // image: ""
     });
 
     const history = useHistory();
@@ -64,7 +64,7 @@ function PostCreate() {
                 "transaction",
                 "price",
                 "description",
-                "image"
+                // "image"
             ],
             name = event.target.name,
             value = event.target.value;
@@ -95,7 +95,7 @@ function PostCreate() {
                         justify="center"
                         alignItems="center"
                     >
-                        <Grid item>
+                        {/* <Grid item> */}
                             {/* <label htmlFor="upload-photo">
                                 <input
                                     style={{ display: "none" }}
@@ -112,8 +112,8 @@ function PostCreate() {
                                     + Add new picture
                                 </Button>{" "}
                             </label> */}
-                            <ImageUpload />
-                        </Grid>
+                            {/* <ImageUpload /> */}
+                        {/* </Grid> */}
                         <Grid item>
                             <TextField
                                 color="primary"

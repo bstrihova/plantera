@@ -53,17 +53,17 @@ function PostDelete() {
         <div className="main__container">
             <Box mt={4}>
                 <Typography variant="h3" color="primary" gutterBottom>
-                    Delete your post
+                    Archive your post
                 </Typography>
             </Box>
             <section className="main__container__shadow--delete main__container__shadow">
                 <Box mt={4}>
-                    <Typography variant="h4" gutterBottom>
-                        Are you sure you want to delete this post?
+                    <Typography variant="h5" gutterBottom>
+                        Are you sure you want to archive this post?
                     </Typography>
                 </Box>
                 <Box mt={2}>
-                    <Typography fontWeight={900} variant="h3" color="primary">
+                    <Typography fontWeight={900} variant="h5" color="primary">
                         {post.name}
                     </Typography>
                 </Box>
@@ -78,14 +78,14 @@ function PostDelete() {
                         disableRipple
                         style={{ textTransform: "none" }}
                     >
-                        Delete
+                        Archive
                     </Button>
                     <Button
                         onClick={() => history.push(`/posts/${id}`)}
                         className="button"
                         color="primary"
                         variant="outlined"
-                        size="small"
+                        size="large"
                         disableRipple
                         style={{ textTransform: "none" }}
                     >

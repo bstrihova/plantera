@@ -99,7 +99,12 @@ function ThreadShow() {
 
     const loadThread = async () => {
         setLoading(true);
-        const response = await fetch(`/api/threads/${id}`);
+        const response = await fetch(`/api/threads/${id}`, {
+            headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+            }
+          });
         const data = await response.json();
         data && setThread(data.thread);
         setLoading(false);
@@ -143,7 +148,7 @@ function ThreadShow() {
         status = ( 
                      <Chip   className={classes.root} 
                            icon={<BlockIcon style={{ color: "white"}} />}
-                           label= "Sold"  /> )} ;
+                           label= "Not available"  /> )} ;
     
 
     if (loading) {

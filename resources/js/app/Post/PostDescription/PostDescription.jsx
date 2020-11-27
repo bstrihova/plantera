@@ -4,12 +4,13 @@ import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+// import DeleteIcon from "@material-ui/icons/Delete";
 import PostPrice from "../../common/PostPrice/PostPrice";
 import { Link } from "react-router-dom";
 import CookieCsrf from "../../csrf"
 import { useHistory } from "react-router-dom";
 import { useGlobalContext } from "../../context";
+import ArchiveIcon from '@material-ui/icons/Archive';
 
 function PostDescription({ post }) {
     const urlDelete = `/posts/${post.id}/delete`;
@@ -29,7 +30,7 @@ function PostDescription({ post }) {
                         <EditIcon fontSize="large" color="primary" />
                     </Link>
                     <Link to={urlDelete}>
-                        <DeleteIcon fontSize="large" color="primary" />{" "}
+                        <ArchiveIcon fontSize="large" color="primary" />{" "}
                     </Link>
                 </Box>
         )
