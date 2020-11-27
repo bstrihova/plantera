@@ -4,32 +4,55 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
+// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+// import DeleteIcon from '@material-ui/icons/Delete';
+// import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import Moment from 'react-moment';
-import {useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom";
+import { useGlobalContext } from "../context";
 
 function MessagePreviewItem({thread}) {
 
     let history = useHistory();
+    const { user } = useGlobalContext();
 
-    const redirect = () => {
-      history.push(`/messages/${thread.id}`)
-    } 
+    console.log(thread.post)
 
-      const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-  };
+    let username = "";
+    
+    if (user && thread && thread.buyer && thread.buyer.name && user.id == thread.buyer_id ) {
+      username =  ( <Box p={4}>                                
+                      <Typography variant="h3" 
+                                  color="primary"
+                                  align='center'
+                                  >                      
+                          {thread.seller.name}
+                      </Typography>               
+                      </Box> ) }    
+
+  else if (user && thread && thread.buyer && thread.buyer.name && user.id != thread.buyer_id){    
+      username =  ( <Box p={4}>                                
+     <Typography variant="h3" 
+                 color="primary"
+                 align='center'
+                 >                      
+        {thread.buyer.name}
+     </Typography>               
+     </Box> )}
+
+    console.log(username)
 
     return (
           <div>
             <Grid item xs={12}>
-            <Link href="#" onClick={redirect}> 
-              <ListItem secondaryaction="true" >          
+            <Link href="#" onClick={() => {
+                  history.push(`/messages/${thread.id}`)
+                } }> 
+
+              <ListItem /* secondaryaction="true" */ >          
                   <ListItemAvatar p={2}>
                     <Avatar alt={thread.messages[0].user.name} src={thread.messages[0].user.profile_photo_url} />
                  </ListItemAvatar>
@@ -42,7 +65,7 @@ function MessagePreviewItem({thread}) {
                     color="textPrimary"
                     align="center">
                     
-                    {thread.post.name}
+                    {thread.post.name} {username}
                     
                     </Typography>
                     }
@@ -83,11 +106,12 @@ function MessagePreviewItem({thread}) {
                 />
                 </Box>
 
+{/*           THIS IS A DELETE ICON - not implemented
                 <ListItemSecondaryAction >
                   <IconButton   edge="end" aria-label="delete" p={2}>
                    <DeleteIcon />
                   </IconButton>
-                </ListItemSecondaryAction>
+                </ListItemSecondaryAction> */}
 
             </ListItem>    
 
@@ -100,6 +124,7 @@ function MessagePreviewItem({thread}) {
 
 export default MessagePreviewItem
 
-/* if (document.getElementById('MessagePreviewItem')) {
+/*  for testing connection with Laravel blades
+    if (document.getElementById('MessagePreviewItem')) {
     ReactDOM.render(<MessagePreviewItem />, document.getElementById('MessagePreviewItem'));
 } */

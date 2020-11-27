@@ -78,7 +78,7 @@ export default function Messages() {
             .filter((thread)=> (user.id === thread.seller_id || user.id === thread.buyer_id))
             .map((thread, index,arr) => 
             <div 
-            key="index"
+            key={thread.id}
             >
               <MessagePreviewItem 
               thread={thread} 

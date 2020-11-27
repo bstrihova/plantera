@@ -18,6 +18,8 @@ import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
 import { useGlobalContext } from "../context";
+import {useHistory} from "react-router-dom";
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -36,6 +38,8 @@ function ThreadShow() {
     let { id } = useParams();
     const [thread, setThread] = useState("");
     const [loading, setLoading] = React.useState(true);
+    let history = useHistory();
+
    
     console.log(user)
 
@@ -162,23 +166,25 @@ function ThreadShow() {
                 
                 <Grid item xs={12} lg={5}>    
                 {/* conditional rendering on image class for desktop */}
-
+                    <Link href="#" onClick={() => {
+                    history.push(`/posts/${thread.post.id}`)
+                    } }> 
                     <img className="imageMessage" src={thread.post.photo} alt={thread.post.name}/>
-
+                    </Link>
                 </Grid>   
                    <Grid item xs={12} lg={7} >  
                    <Grid container 
                          direction="column"
                          alignItems="center">
-                        <Box p={3}>
+                        <Box p={2}>
                         <Typography variant="h6"  align="center">
                                 {thread.post.name}
                         </Typography>
                         </Box>
-                        <Box p={3}>
+                        <Box p={2}>
                         <PostPrice post={thread.post}/>
                         </Box>
-                        <Box p={3}>
+                        <Box p={2}>
                         {status}
                         </Box>
                     </Grid> 
@@ -193,7 +199,7 @@ function ThreadShow() {
             messageContent = (
                 <>
                 {thread.messages.map((message, index) => (
-                  <div key={index}>
+                  <div key={message.id}>
                     <MessageContent message={message} seller={thread.seller_id} />
                   </div>
                 ))}
