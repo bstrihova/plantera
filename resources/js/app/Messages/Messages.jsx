@@ -74,7 +74,7 @@ export default function Messages() {
         
         if (filteredThreadArray.length === 0) {
            
-          threadContent = ( <Typography> "No threads found.";</Typography>)
+          threadContent = ( <Typography> No messages found :( </Typography>)
       } else {
 
           threadContent = (
