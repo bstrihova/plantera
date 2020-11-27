@@ -17,7 +17,6 @@ function PostDescription({ post }) {
 
     const history = useHistory();
 
-    let contactSellerButton = "";
     let editDeleteButtons = "";
 
 
@@ -36,11 +35,6 @@ function PostDescription({ post }) {
         )
         
     }
-
-    
-
-
-  
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -161,7 +155,6 @@ function PostDescription({ post }) {
                         Contact seller
                     </Button>
             </Box>
-            {contactSellerButton}
         </section>
     );
 }
