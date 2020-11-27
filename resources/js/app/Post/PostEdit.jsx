@@ -23,12 +23,14 @@ function PostEdit() {
     const [loading, setLoading] = React.useState(true);
     const [values, setValues] = useState({
         name: post.name,
-        available: post.available,
-        price: post.price,
-        transaction: post.transaction,
-        description: post.description
+        available: 0,
+        price: 0,
+        transaction: "",
+        description: ""
     });
-    console.log(post);
+
+    
+    
 
     const [errors, setErrors] = useState({});
 
@@ -94,7 +96,7 @@ function PostEdit() {
 
     let content = "";
 
-    if (post) {
+    if (post, values) {
         content = (
             <div className="main__container">
                 <Box mt={4}>
@@ -139,7 +141,7 @@ function PostEdit() {
                                     <InputLabel>Status</InputLabel>
                                     <MuiSelect
                                         name="available"
-                                        value={values.available}
+                                        value={values.available || ""}
                                         onChange={handleChange}
                                     >
                                         <MuiMenuItem value="1">
@@ -175,12 +177,12 @@ function PostEdit() {
                                     </MuiSelect>
                                 </FormControl>
                                 {/* Component to have Price option available */}
-                                <PriceOption
+                                {/* <PriceOption
                                     transaction={values.transaction}
                                     price={values.price}
                                     errors={errors.price}
                                     handleChange={handleChange}
-                                />
+                                /> */}
                             </div>
                             <div className="texField--postDescription">
                                 <Box>

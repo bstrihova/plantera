@@ -150,7 +150,7 @@ export default function Header() {
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
               >
-                <AccountCircle color="secondary"/>
+                <AccountCircle color="secondary"/> 
               </IconButton>
             </Grid>
         

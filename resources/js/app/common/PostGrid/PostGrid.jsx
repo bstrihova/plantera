@@ -49,7 +49,10 @@ function PostGrid({searchValue, setSearchValue, specificUser, specificPost}) {
         if (posts.length) {
             let postsOfSpecificUser = posts.filter((post) => post.user_id === specificUser);
             let specificPostNotUsed = posts.filter((post) => post.id !== specificPost);
+            let searchedPost = posts.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase())))
+            .filter((post)=>post.available);
             if (specificUser) {
+                if (postsOfSpecificUser.length) {
                 gridContent = (
                     <>
                     {postsOfSpecificUser.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase())))
@@ -58,10 +61,14 @@ function PostGrid({searchValue, setSearchValue, specificUser, specificPost}) {
                         <div key={index}>
                             <PostPreview post={post}/>
                         </div>
-                    ))}
+                        )
+                    )}
                     </>
-                )
+                )} else {
+                    gridContent = "No posts yet."
+                }
             } else if (specificPost) {
+                if (specificPostNotUsed.length) {
                 gridContent = (
                     <>
                     {specificPostNotUsed.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase())))
@@ -73,20 +80,25 @@ function PostGrid({searchValue, setSearchValue, specificUser, specificPost}) {
                     ))}
                     </>
                 )
+            } else if (!searchedPost.length) {
+                gridContent = "No posts found."
+            }
             } else {
+                if (searchedPost.length) {
                 gridContent = (
                     <>
-                    {posts.filter((post) => (post.name.toLowerCase().includes(searchValue.toLowerCase())))
-                            .filter((post)=>post.available)
-                            .map((post, index) => (
+                    {
+                            searchedPost.map((post, index) => (
                             <div key={index}>
                                 <PostPreview post={post}/>
                             </div>
                     ))}
                     </>
                 );
+            } else {
+                gridContent = "No posts found."
             }
-        } else {
+        }} else {
             
             gridContent = "No posts.";
         }
@@ -124,6 +136,6 @@ function PostGrid({searchValue, setSearchValue, specificUser, specificPost}) {
             </section>
         </Box>
     )
-}
+                        }
 
 export default PostGrid

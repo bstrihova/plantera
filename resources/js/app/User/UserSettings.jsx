@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -152,9 +152,9 @@ function UserSettings() {
                     helperText={<InputError errors={errors.name}/>}
                     />
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                     <GoogleLocation/>
-                </Grid>
+                </Grid> */}
                 <Grid item>
                     <Button
                     className="button"
