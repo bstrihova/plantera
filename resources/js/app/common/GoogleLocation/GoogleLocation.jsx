@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
+import { useGlobalContext } from "../../context";
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -39,22 +40,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function GoogleMaps() {
+
+  const { userLocation, setUserLocation} = useGlobalContext();
+
   const classes = useStyles();
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState('');
-  const [options, setOptions] = React.useState([]);
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState('');
+  const [options, setOptions] = useState([]);
   const loaded = React.useRef(false);
 
-  const loadLat = async () => {
-    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?place_id=ChIJPYW8bBYFFEcRas3jmHIrCfA&key=AIzaSyDg2YPZBcJdGDzvKnr2Q7EkqKXUPpYENEk`);
-    const data = await response.json();
-    data && console.log(data.results);
-}
 
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDg2YPZBcJdGDzvKnr2Q7EkqKXUPpYENEk&libraries=places',
+        `https://maps.googleapis.com/maps/api/js?key=AIzaSyDg2YPZBcJdGDzvKnr2Q7EkqKXUPpYENEk&libraries=places&region=CZ`,
         document.querySelector('head'),
         'google-maps',
       );
@@ -93,16 +92,21 @@ export default function GoogleMaps() {
 
         if (value) {
           newOptions = [value];
-          console.log("value",value)
+          // console.log("value", value)
+          // console.log("name", value.description)
+          // console.log("place_id", value.place_id)
         }
 
         if (results) {
           newOptions = [...newOptions, ...results];
-          console.log("result",results)
+          setUserLocation(results[0].description);
+          console.log(userLocation)
+          // console.log("result",results)
+          // console.log("location", location)
         }
 
         setOptions(newOptions);
-        console.log("newoptions",newOptions)
+        // console.log("newoptions",newOptions)
       }
     });
 
@@ -153,6 +157,7 @@ export default function GoogleMaps() {
         );
 
         return (
+          <>
           <Grid container alignItems="center">
             <Grid item>
               <LocationOnIcon className={classes.icon} />
@@ -163,12 +168,14 @@ export default function GoogleMaps() {
                   {part.text}
                 </span>
               ))}
-
               <Typography variant="body2" color="textSecondary">
                 {option.structured_formatting.secondary_text}
               </Typography>
             </Grid>
+            <Grid item>
+            </Grid>
           </Grid>
+          </>
         );
       }}
     />

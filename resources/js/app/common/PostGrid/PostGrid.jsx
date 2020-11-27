@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
-import GoogleLocation from "../GoogleLocation/GoogleLocation"
+// import GoogleLocation from "../GoogleLocation/GoogleLocation"
 
 
 
@@ -97,9 +97,9 @@ function PostGrid({searchValue, setSearchValue, specificUser, specificPost}) {
             <section className="main__container--postGrid">
                 <Box display="flex" bgcolor="white" borderRadius={15} alignItems="center" p={0.3} pr={2}>
                     <Grid container spacing={1} alignItems="flex-end">
-                        <Grid item>
+                        {/* <Grid item>
                             <GoogleLocation/>  
-                        </Grid>
+                        </Grid> */}
                         <Grid item>
                             <TextField
                             label="Search"

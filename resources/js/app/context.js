@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-    const [user, setUser] = useState({ id: "", name: "", profile_photo_url: "" });
+    const [user, setUser] = useState({ id: "", name: "", profile_photo_url: ""});
     // const [alert, setAlert] = useState({
     //     isAlert: false,
     //     type: "info",
@@ -23,9 +23,12 @@ const AppProvider = ({ children }) => {
             // name: response.data.name,
             id: response.id,
             name: response.name,
-            profile_photo_url : response.profile_photo_url
+            profile_photo_url : response.profile_photo_url,
+            // location: response.location,
         });
     };
+
+    // const [userLocation, setUserLocation] = useState("string");
 
 
     return (
@@ -33,6 +36,8 @@ const AppProvider = ({ children }) => {
             value={{
                 user,
                 fetchUser,
+                // userLocation,
+                // setUserLocation,
                 // alert,
                 // createAlert,
                 // resetAlert,

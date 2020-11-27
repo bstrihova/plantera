@@ -91,6 +91,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        // this is not fully done yet, it needs to delete all the posts, which the user created as well, otherwise the page does not work at all
+
         // $user = User::findOrFail($id);
         // $user->delete();
         // return [

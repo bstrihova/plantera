@@ -97,10 +97,11 @@ class PostController extends Controller
 
         $post->save();
 
-        return [
-            'status' => 'success',
-            "post_id" => $post->id
-        ];
+        // return [
+        //     'status' => 'success',
+        //     "post_id" => $post->id
+        // ];
+        return $post->id;
     }
 
 

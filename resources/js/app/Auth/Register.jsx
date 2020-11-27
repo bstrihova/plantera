@@ -3,26 +3,27 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import GoogleLocation from "../common/GoogleLocation/GoogleLocation";
+// import GoogleLocation from "../common/GoogleLocation/GoogleLocation";
 import Grid from "@material-ui/core/Grid";
 import { Link } from 'react-router-dom';
 import InputError from "../common/InputError/InputError";
 import { useHistory } from "react-router-dom";
 import { useGlobalContext } from "../context";
+
 import CookieCsrf from "../csrf"
 
 function Register() {
 
-    const { fetchUser } = useGlobalContext();
-
+    const { fetchUser} = useGlobalContext();
     const history = useHistory();
 
     const [values, setValues] = useState({
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
     });
+
 
     const [errors, setErrors] = useState({});
 
@@ -108,7 +109,6 @@ function Register() {
                             error={errors.email ? true : false}
                             helperText={<InputError errors={errors.email}/>}
                         />
-                        {values.email}
                     </Grid>
                     <Grid item>
                         <TextField
@@ -150,10 +150,9 @@ function Register() {
                             helperText={<InputError errors={errors.password_confirmation}/>}
                         />
                     </Grid>
-                    <Grid item>
-                        {/* location is not posted yet */}
+                 {/* <Grid item>
                         <GoogleLocation/>
-                    </Grid>
+                    </Grid> */}
                     <Grid item>
                         <Button
                             className="button"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
@@ -18,10 +18,10 @@ function PostDescription({ post }) {
     const history = useHistory();
 
     let contactSellerButton = "";
+    let editDeleteButtons = "";
+
 
     const { user } = useGlobalContext();
-
-    let editDeleteButtons = "";
 
     if (user && user.id === post.user.id) {
         editDeleteButtons = (
@@ -35,29 +35,17 @@ function PostDescription({ post }) {
                 </Box>
         )
         
-    } else {
-        contactSellerButton = (
-            <Box className="button--post">
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        size="large"
-                        disableRipple
-                        style={{ textTransform: "none" }}
-                        onClick={handleSubmit}
-                    >
-                        Contact seller
-                    </Button>
-            </Box>
-        )
     }
 
+    
+
+
+  
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (user.id) {
-
+        console.log(post.user_id)
 
         const response = await fetch(`/api/newthread/${post.id}/${post.user_id}`, {
             method: 'post',
@@ -82,9 +70,6 @@ function PostDescription({ post }) {
         if (response_data.errors) {
             setErrors(response_data.errors);
         }
-    } else {
-        history.push(`/login`)
-    }
 
     }
 
@@ -99,7 +84,7 @@ function PostDescription({ post }) {
                 fontWeight={900}
                 color="primary.main"
             >
-                {editDeleteButtons}
+               {editDeleteButtons}
                 <Typography variant="h3">
                     <Box fontWeight="fontWeightMedium">{post.name}</Box>
                 </Typography>
@@ -125,7 +110,6 @@ function PostDescription({ post }) {
                         display="flex"
                         flexDirection="column"
                         alignItems="center"
-                        onClick={()=> {history.push(`/user/profile/${post.user_id}`)}} style={{cursor:"pointer"}}
                     >
                         <Avatar
                             alt={post.user.name}
@@ -139,11 +123,9 @@ function PostDescription({ post }) {
                 </Box>
             </div>
             <div className="description">
-                <Box whiteSpace="normal">
-                <Typography variant="h4" component="h2" >
+                <Typography variant="h4" component="h2">
                     Description:
                 </Typography>
-                </Box>
                 ​
                 <Typography
                     variant="subtitle1"
@@ -154,7 +136,7 @@ function PostDescription({ post }) {
                     {post.description}
                 </Typography>
                 ​
-                <Box>
+                {/* <Box>
                     <Typography variant="h5" component="h2">
                         Location:{" "}
                     </Typography>
@@ -165,8 +147,20 @@ function PostDescription({ post }) {
                     >
                         {post.user.location}
                     </Typography>
-                </Box>
+                </Box> */}
             </div>
+            <Box className="button--post">
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        size="large"
+                        disableRipple
+                        style={{ textTransform: "none" }}
+                        onClick={handleSubmit}
+                    >
+                        Contact seller
+                    </Button>
+            </Box>
             {contactSellerButton}
         </section>
     );

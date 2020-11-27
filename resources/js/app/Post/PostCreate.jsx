@@ -22,8 +22,7 @@ function PostCreate() {
         price: "",
         status: 1,
         transaction: "sell",
-        image: "",
-        image_file: null
+        image: ""
     });
 
     const history = useHistory();
@@ -47,32 +46,11 @@ function PostCreate() {
         });
 
         const response_data = await response.json();
-        if (response_data.status == "success" && values.image_file) {
-            var formData = new FormData();
-            formData.append("image", values.image_file);
-
-            const upload_response = await fetch(
-                `/api/posts/picture/${response_data.post_id}`,
-                {
-                    method: "post",
-                    body: formData,
-                    headers: {
-                        Accept: "application/json", // tell Laravel (backend) what we want in response
-                        "Content-type": "application/json", // tell backend what we are sending
-                        // "X-CSRF-TOKEN": document
-                        //     .querySelector('meta[name="csrf-token"]')
-                        //     .getAttribute("content") // prove to backend that this is authorized
-                        "X-XSRF-TOKEN": CookieCsrf()
-                    }
-                }
-            );
-        }
-        // const response_data = await response.json();
-        // console.log(response_data);
+        console.log(response_data);
 
         //The user is authenticated,
         if (response.status === 200) {
-            history.push(`/posts/${response_data.post_id}`);
+            history.push(`/posts/${response_data}`);
         }
 
         if (response_data.errors) {
@@ -101,22 +79,6 @@ function PostCreate() {
         }
     };
 
-    const handleFileSelected = event => {
-        setValues(prev_values => {
-            const files = Array.from(event.target.files);
-            let value = null;
-
-            if (files.length) {
-                value = files[0];
-            }
-            console.log(value);
-            return {
-                ...prev_values,
-                image_file: value
-            };
-        });
-    };
-
     return (
         <div className="main__container">
             <Box mt={4}>
@@ -134,24 +96,23 @@ function PostCreate() {
                         alignItems="center"
                     >
                         <Grid item>
-                            <label htmlFor="upload-photo">
+                            {/* <label htmlFor="upload-photo">
                                 <input
-                                    // style={{ display: "none" }}
+                                    style={{ display: "none" }}
                                     id="upload-photo"
                                     name="upload-photo"
                                     type="file"
-                                    onChange={handleFileSelected}
                                 />
-                                {/* <Button
+                                <Button
                                     color="primary"
                                     variant="contained"
                                     component="span"
                                     type="submit"
                                 >
                                     + Add new picture
-                                </Button>{" "} */}
-                            </label>
-                            {/* <ImageUpload /> */}
+                                </Button>{" "}
+                            </label> */}
+                            <ImageUpload />
                         </Grid>
                         <Grid item>
                             <TextField
