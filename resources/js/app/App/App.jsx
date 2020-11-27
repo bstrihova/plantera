@@ -52,10 +52,10 @@ function App() {
 
                     <Route path="/posts/create" children={<PostCreate />} />
                     {/* DELETE THE BELOW ROUTE IF IT IS NOT WORKING */}
-                    <Route
+                    {/* <Route
                         path="/posts/picture"
                         children={<PostImageUpload />}
-                    />
+                    /> */}
 
                     <Route path="/posts/:id/edit" children={<PostEdit />} />
 

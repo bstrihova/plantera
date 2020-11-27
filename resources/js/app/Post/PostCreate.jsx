@@ -163,22 +163,26 @@ function PostCreate() {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid item>
-                            <TextField
-                                label="Description"
-                                name="description"
-                                onChange={handleChange}
-                                value={values.description}
-                                multiline
-                                rows={4}
-                                columns={50}
-                                variant="filled"
-                                // style={{ width: "100%" }}
-                                error={errors.description ? true : false}
-                                helperText={
-                                    <InputError errors={errors.description} />
-                                }
-                            />
+                        <Grid container justify="center">
+                            <Grid item>
+                                <TextField
+                                    label="Description"
+                                    name="description"
+                                    onChange={handleChange}
+                                    value={values.description}
+                                    multiline
+                                    rows={4}
+                                    columns={50}
+                                    variant="filled"
+                                    // style={{ width: "100%" }}
+                                    error={errors.description ? true : false}
+                                    helperText={
+                                        <InputError
+                                            errors={errors.description}
+                                        />
+                                    }
+                                />
+                            </Grid>
                         </Grid>
                         {/* <Link to="/messages/create">  */}
                         <Box mb={2}>
