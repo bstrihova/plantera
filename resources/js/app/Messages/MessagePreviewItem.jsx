@@ -19,31 +19,38 @@ function MessagePreviewItem({thread}) {
     let history = useHistory();
     const { user } = useGlobalContext();
 
-    console.log(thread.post)
-
     let username = "";
+    let avatar = "";
+
+    if (user && thread && thread.buyer && thread.buyer.name && user.id == thread.buyer_id ) {
+      avatar =  ( <Avatar alt={thread.seller.name} src={thread.seller.name} />                                 
+      ) }  
+
+  else if (user && thread && thread.buyer && thread.buyer.name && user.id != thread.buyer_id){    
+      avatar =  (  <Avatar alt={thread.buyer.name} src={thread.buyer.name} />                      
+      )}
     
     if (user && thread && thread.buyer && thread.buyer.name && user.id == thread.buyer_id ) {
-      username =  ( <Box p={4}>                                
-                      <Typography variant="h3" 
-                                  color="primary"
-                                  align='center'
+      username =  (<Typography
+                     component="span"
+                     variant="body2"
+                     color="primary"
+                     align='center'
                                   >                      
                           {thread.seller.name}
                       </Typography>               
-                      </Box> ) }    
+      ) }  
 
   else if (user && thread && thread.buyer && thread.buyer.name && user.id != thread.buyer_id){    
-      username =  ( <Box p={4}>                                
-     <Typography variant="h3" 
-                 color="primary"
-                 align='center'
-                 >                      
+      username =  ( <Typography
+        component="span"
+        variant="body2"
+        color="primary"               
+        align='center'
+                                >                      
         {thread.buyer.name}
      </Typography>               
-     </Box> )}
-
-    console.log(username)
+      )}
 
     return (
           <div>
@@ -54,7 +61,9 @@ function MessagePreviewItem({thread}) {
 
               <ListItem /* secondaryaction="true" */ >          
                   <ListItemAvatar p={2}>
-                    <Avatar alt={thread.messages[0].user.name} src={thread.messages[0].user.profile_photo_url} />
+                  {/*   avatar for user with last message in the conversation
+                    <Avatar alt={thread.messages[0].user.name} src={thread.messages[0].user.profile_photo_url} /> */}
+                    {avatar}
                  </ListItemAvatar>
                 
                 <ListItemText
@@ -65,7 +74,7 @@ function MessagePreviewItem({thread}) {
                     color="textPrimary"
                     align="center">
                     
-                    {thread.post.name} {username}
+                    {thread.post.name}
                     
                     </Typography>
                     }
@@ -76,18 +85,14 @@ function MessagePreviewItem({thread}) {
 
                 secondary={
                 <React.Fragment>
-                    <Typography
-                        component="span"
-                        variant="body2"
-                        color="primary"
-                    >
-                    {/* {Object.keys(thread.messages).map(function(user) {
-                    return {user}, Value: {user[name]};
-                  })} */}
-
-                        {thread.messages[0].user.name}
-                    </Typography>
-                    {/* {" — "} */} {thread.messages[thread.messages.length-1].body}
+                
+                        {/* {thread.messages[0].user.name} showing author of the last message */}
+                        {username}
+                    
+                        {/* showing last message in the conversation  */}
+                        <Box>
+                        {thread.messages[thread.messages.length-1].body}
+                        </Box>
                      </React.Fragment>
                 }
                 />

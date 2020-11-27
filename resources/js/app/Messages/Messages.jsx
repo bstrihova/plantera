@@ -69,13 +69,20 @@ export default function Messages() {
   } else {
       if (threads.length) {
 
+        const filteredThreadArray = threads
+        .filter((thread)=> (user.id === thread.seller_id || user.id === thread.buyer_id))
         
-        
+        if (filteredThreadArray.length === 0) {
+           
+          threadContent = ( <Typography> "No threads found.";</Typography>)
+      } else {
+
           threadContent = (
-              <>
-       
-            {threads
-            .filter((thread)=> (user.id === thread.seller_id || user.id === thread.buyer_id))
+
+      <Box className="boxshadow">                             
+             <List>
+
+             {filteredThreadArray
             .map((thread, index,arr) => 
             <div 
             key={thread.id}
@@ -92,13 +99,17 @@ export default function Messages() {
                                 <PostPreview post={post}/>
                             </div>
                     ))} */}
-              </>
+              
+               
+              </List>
+              </Box> 
+       
+            
         );
-      } else {
-          
-          threadContent = "No threads found.";
       }
-    }
+      } }
+      
+  
 
   return (
     <div>
@@ -119,20 +130,12 @@ export default function Messages() {
             </Box>
           </Grid>
 
+
+
          
         <Grid item xs={12} lg={6}> 
-          <Box className="boxshadow">                             
-             <List>
-
-            
-               { threadContent }
-
-               
-              </List>
-              </Box> 
-              </Grid>
-                          
-            
+          {threadContent}
+         </Grid>
          </Grid>
     </Container>
   </div>
