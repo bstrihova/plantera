@@ -10,17 +10,15 @@ import InputLabel from "@material-ui/core/InputLabel";
 import { useHistory } from "react-router-dom";
 import InputError from "../common/InputError/InputError";
 import Grid from "@material-ui/core/Grid";
-import PriceOption from "../common/PriceOption/PriceOption";
-import { Link } from "react-router-dom";
 import CookieCsrf from "../csrf";
 import ImageUpload from "../common/ImageUpload/ImageUpload";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 function PostCreate() {
     const [values, setValues] = useState({
         name: "",
         description: "",
         price: "",
-        status: 1,
         transaction: "sell",
         // image: ""
     });
@@ -46,9 +44,8 @@ function PostCreate() {
         });
 
         const response_data = await response.json();
-        console.log(response_data);
 
-        //The user is authenticated,
+        //The user is authenticated
         if (response.status === 200) {
             history.push(`/posts/${response_data}`);
         }
@@ -60,12 +57,12 @@ function PostCreate() {
 
     const handleChange = event => {
         const allowed_names = [
-                "name",
-                "transaction",
-                "price",
-                "description",
-                // "image"
-            ],
+            "name",
+            "transaction",
+            "price",
+            "description",
+            // "image"
+        ],
             name = event.target.name,
             value = event.target.value;
 
@@ -79,24 +76,39 @@ function PostCreate() {
         }
     };
 
+
     return (
-        <div className="main__container">
-            <Box mt={4}>
-                <Typography variant="h3" color="primary" gutterBottom>
-                    Post new plant
-                </Typography>
-            </Box>
-            <div className="main__container__shadow main__container__shadow--auth">
+        <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+        >
+            <Grid item xs={10} lg={6}>
+                <Box p={4}>
+                    <Typography
+                        variant="h3"
+                        color="primary"
+                        gutterBottom
+                    >
+                        Přidat novou kytku
+                    </Typography>
+                </Box>
+            </Grid>
+            <Grid item xs={10} lg={6}>
                 <form action="/create" method="post" onSubmit={handleSubmit}>
                     <Grid
                         container
-                        spacing={4}
-                        direction="column"
+                        className="
+                            main__container__shadow 
+                            paddingContainer
+                            "
                         justify="center"
-                        alignItems="center"
+                        align="center"
+                        spacing={3}
                     >
                         {/* <Grid item> */}
-                            {/* <label htmlFor="upload-photo">
+                        {/* <label htmlFor="upload-photo">
                                 <input
                                     style={{ display: "none" }}
                                     id="upload-photo"
@@ -112,12 +124,13 @@ function PostCreate() {
                                     + Add new picture
                                 </Button>{" "}
                             </label> */}
-                            {/* <ImageUpload /> */}
+                        {/* <ImageUpload /> */}
                         {/* </Grid> */}
-                        <Grid item>
+                        <Grid item xs={12}>
                             <TextField
+                                fullWidth
                                 color="primary"
-                                label="Name of the plant"
+                                label="Název rostliny"
                                 variant="filled"
                                 name="name"
                                 value={values.name || ""}
@@ -126,87 +139,86 @@ function PostCreate() {
                                 helperText={<InputError errors={errors.name} />}
                             />
                         </Grid>
-                        {/* <Grid container direction="column" spacing={3}> */}
-                            <Grid item>
-                                <FormControl
+                        <Grid item xs={6} sm={4} lg={3}>
+                            <FormControl
+                                variant="filled"
+                                fullWidth
+                            >
+                                <InputLabel>Kytku chci:</InputLabel>
+                                <MuiSelect
                                     variant="filled"
-                                    // style={{ width: "100%" }}
-                                    // fullWidth
-                                >
-                                    <InputLabel>Selling?</InputLabel>
-                                    <MuiSelect
-                                        variant="filled"
-                                        name="transaction"
-                                        value={values.transaction || ""}
-                                        onChange={handleChange}
-                                    >
-                                        <MuiMenuItem value="swap">
-                                            Swap
-                                        </MuiMenuItem>
-                                        <MuiMenuItem value="sell">
-                                            Sell
-                                        </MuiMenuItem>
-                                        <MuiMenuItem value="donate">
-                                            Donate
-                                        </MuiMenuItem>
-                                    </MuiSelect>
-                                </FormControl>
-                            </Grid>
-
-                            <Grid item>
-                                {/* Component to have Price option available */}
-                                <PriceOption
-                                    transaction={values.transaction}
-                                    price={values.price}
-                                    errors={errors.price}
-                                    handleChange={handleChange}
-                                />
-                            </Grid>
-                        {/* </Grid> */}
-                        {/* <Grid container justify="center"> */}
-                            <Grid item>
-                                <TextField
-                                    label="Description"
-                                    name="description"
+                                    name="transaction"
+                                    value={values.transaction || ""}
                                     onChange={handleChange}
-                                    value={values.description}
-                                    multiline
-                                    rows={4}
-                                    columns={50}
+                                >
+                                    <MuiMenuItem value="swap">
+                                        Vyměnit
+                                    </MuiMenuItem>
+                                    <MuiMenuItem value="sell">
+                                        Prodat
+                                    </MuiMenuItem>
+                                    <MuiMenuItem value="donate">
+                                        Darovat
+                                    </MuiMenuItem>
+                                </MuiSelect>
+                            </FormControl>
+                        </Grid>
+                        {values.transaction === "sell" ? (
+                            <Grid item xs={6} sm={4} lg={3}>
+                                <TextField
+                                    fullWidth
+                                    color="primary"
+                                    label="Cena"
                                     variant="filled"
-                                    // style={{ width: "100%" }}
-                                    error={errors.description ? true : false}
-                                    helperText={
-                                        <InputError
-                                            errors={errors.description}
-                                        />
-                                    }
+                                    name="price"
+                                    type="number"
+                                    value={values.price || ""}
+                                    onChange={handleChange}
+                                    error={errors.price ? true : false}
+                                    helperText={<InputError errors={errors.price} />}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">Kč</InputAdornment>
+                                        )
+                                    }}
                                 />
                             </Grid>
-                        
-                        {/* <Link to="/messages/create">  */}
-                        <Grid item>
-                        {/* <Box mb={2}> */}
+                        ) : ""}
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Popis"
+                                name="description"
+                                onChange={handleChange}
+                                value={values.description}
+                                multiline
+                                rows={4}
+                                columns={50}
+                                variant="filled"
+                                error={errors.description ? true : false}
+                                helperText={
+                                    <InputError
+                                        errors={errors.description}
+                                    />
+                                }
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
                             <Button
-                                // className="button--post"
                                 color="primary"
                                 variant="contained"
                                 type="submit"
                                 size="large"
-                                disableRipple
-                                style={{ textTransform: "none" }}
-                                style={{ width: "100%" }}
+                            // disableRipple
+                            // style={{ width: "100%" }}
                             >
-                                Post new plant
+                                Přidat
                             </Button>
-                        {/* </Box> */}
                         </Grid>
-
-                        {/* </Link> */}
                     </Grid>
                 </form>
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
 }
 

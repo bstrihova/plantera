@@ -31,7 +31,7 @@ class PostSeeder extends Seeder
         $p->name = "Pothos lime";
         $p->description = "Very beautiful lime green pothos for your living room warm <3<3<3. Available for handover in Prague 4. I do not send flowers by post. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed ut perspiciatis unde omnis iste natus ";
         $p->price = 250;
-        $p->currency = "€";
+        $p->currency = "Kč";
         $p->transaction = "sell";
         $p->available = true;
         $p->photo = "https://images.unsplash.com/photo-1591958911259-bee2173bdccc?ixlib=rb-1.2.1&
@@ -62,7 +62,9 @@ class PostSeeder extends Seeder
         $p = new Post;
         $p->name = "Succulent Magic";
         $p->description = "Create your own succulent garden with this magic plant. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit ";
-        $p->transaction = "donate";
+        $p->transaction = "sell";
+        $p->price = 250;
+        $p->currency = "Kč";
         $p->available = true;
         $p->photo = "https://images.unsplash.com/photo-1553290322-4cdbb1da4fab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80";
         $p->user_id = 2;

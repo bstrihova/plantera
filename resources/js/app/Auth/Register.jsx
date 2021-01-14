@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -14,7 +14,7 @@ import CookieCsrf from "../csrf"
 
 function Register() {
 
-    const { fetchUser} = useGlobalContext();
+    const { fetchUser } = useGlobalContext();
     const history = useHistory();
 
     const [values, setValues] = useState({
@@ -34,8 +34,8 @@ function Register() {
             method: 'post',
             body: JSON.stringify(values),
             headers: {
-                'Accept' : 'application/json', // tell Laravel (backend) what we want in response
-                'Content-type' : 'application/json', // tell backend what we are sending
+                'Accept': 'application/json', // tell Laravel (backend) what we want in response
+                'Content-type': 'application/json', // tell backend what we are sending
                 // 'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
                 'X-XSRF-TOKEN': CookieCsrf()
             }
@@ -62,7 +62,7 @@ function Register() {
     // copy this whole function and only modify const allowed_names, nothing else
     const handleChange = (event) => {
         const allowed_names = ['name', 'email', 'password', 'password_confirmation'],
-            name  = event.target.name,
+            name = event.target.name,
             value = event.target.value
 
         if (-1 !== allowed_names.indexOf(name)) {
@@ -83,92 +83,92 @@ function Register() {
         <div className="main__container">
             <Box mt={4}>
                 <Typography variant="h3" color="primary" gutterBottom>
-                    Register
+                    Registrace
                 </Typography>
             </Box>
             <div className="main__container__shadow main__container__shadow--auth">
-            <form action="/register" method="post" onSubmit={ handleSubmit }> 
-                <Grid
-                    container
-                    spacing={4}
-                    direction="column"
-                    justify="center"
-                    alignItems="center"
+                <form action="/register" method="post" onSubmit={handleSubmit}>
+                    <Grid
+                        container
+                        spacing={4}
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
 
-                >
-                    <Grid item>
-                        <TextField
-                            label="Email"
-                            type="email"
-                            variant="filled"
-                            autoComplete="email"
-                            // here starts the important part for every input to have in order to be sent by POST to db
-                            name="email"
-                            value={ values.email } 
-                            onChange={ handleChange }
-                            error={errors.email ? true : false}
-                            helperText={<InputError errors={errors.email}/>}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            color="primary"
-                            label="Username"
-                            variant="filled"
-                            name="name" 
-                            autoComplete="username"
-                            value={ values.name } 
-                            onChange={ handleChange }
-                            error={errors.name ? true : false}
-                            helperText={<InputError errors={errors.name}/>}
+                    >
+                        <Grid item>
+                            <TextField
+                                label="Email"
+                                type="email"
+                                variant="filled"
+                                autoComplete="email"
+                                // here starts the important part for every input to have in order to be sent by POST to db
+                                name="email"
+                                value={values.email}
+                                onChange={handleChange}
+                                error={errors.email ? true : false}
+                                helperText={<InputError errors={errors.email} />}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                color="primary"
+                                label="Uživatelské jméno"
+                                variant="filled"
+                                name="name"
+                                autoComplete="username"
+                                value={values.name}
+                                onChange={handleChange}
+                                error={errors.name ? true : false}
+                                helperText={<InputError errors={errors.name} />}
 
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            label="Password"
-                            type="password"
-                            variant="filled"
-                            name="password" 
-                            autoComplete="new-password"
-                            value={ values.password } 
-                            onChange={ handleChange }
-                            error={errors.password ? true : false}
-                            helperText={<InputError errors={errors.password}/>}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            label="Confirm password"
-                            type="password"
-                            variant="filled"
-                            name="password_confirmation" 
-                            autoComplete="new-password"
-                            value={ values.password_confirmation } 
-                            onChange={ handleChange }
-                            error={errors.password_confirmation ? true : false}
-                            helperText={<InputError errors={errors.password_confirmation}/>}
-                        />
-                    </Grid>
-                 {/* <Grid item>
+                            />
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                label="Heslo"
+                                type="password"
+                                variant="filled"
+                                name="password"
+                                autoComplete="new-password"
+                                value={values.password}
+                                onChange={handleChange}
+                                error={errors.password ? true : false}
+                                helperText={<InputError errors={errors.password} />}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                label="Heslo znovu"
+                                type="password"
+                                variant="filled"
+                                name="password_confirmation"
+                                autoComplete="new-password"
+                                value={values.password_confirmation}
+                                onChange={handleChange}
+                                error={errors.password_confirmation ? true : false}
+                                helperText={<InputError errors={errors.password_confirmation} />}
+                            />
+                        </Grid>
+                        {/* <Grid item>
                         <GoogleLocation/>
                     </Grid> */}
-                    <Grid item>
-                        <Button
-                            className="button"
-                            color="primary"
-                            variant="contained"
-                            size="large"
-                            type="submit"
-                        >
-                            Register
+                        <Grid item>
+                            <Button
+                                className="button"
+                                color="primary"
+                                variant="contained"
+                                size="large"
+                                type="submit"
+                            >
+                                Registrovat
                         </Button>
+                        </Grid>
+                        <Grid item>
+                            <Link to="/login">Přihlásit se</Link>
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <Link to="/login">Already registered?</Link>
-                    </Grid>
-            </Grid>
-            </form> 
+                </form>
             </div>
         </div>
     );

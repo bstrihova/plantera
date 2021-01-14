@@ -4,7 +4,7 @@ import Home from "../Home/Home";
 import Post from "../Post/Post";
 import PostCreate from "../Post/PostCreate";
 import PostEdit from "../Post/PostEdit";
-import PostDelete from "../Post/PostDelete";
+import PostArchive from "../Post/PostArchive";
 import UserProfile from "../User/UserProfile";
 import UserSettings from "../User/UserSettings";
 import Messages from "../Messages/Messages";
@@ -59,7 +59,7 @@ function App() {
 
                     <Route path="/posts/:id/edit" children={<PostEdit />} />
 
-                    <Route path="/posts/:id/delete" children={<PostDelete />} />
+                    <Route path="/posts/:id/archive" children={<PostArchive />} />
 
                     <Route
                         path="/posts/:id"

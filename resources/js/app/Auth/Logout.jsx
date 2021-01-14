@@ -6,7 +6,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 
-function Logout({version}) {
+function Logout({ version }) {
 
     const history = useHistory();
 
@@ -21,19 +21,19 @@ function Logout({version}) {
 
     if (version === "desktop") {
         content = (
-                <IconButton onClick={handleSubmit}>
-                    <LogoutIcon aria-label="logout" color="secondary"/>
-                </IconButton>
-            )
+            <IconButton onClick={handleSubmit}>
+                <LogoutIcon aria-label="logout" color="secondary" />
+            </IconButton>
+        )
     } else if (version === "mobile") {
         content = (
             <MenuItem onClick={handleSubmit}>
                 <IconButton>
-                    <LogoutIcon color="primary"/>
+                    <LogoutIcon color="primary" />
                 </IconButton>
-                <p>Logout</p>
+                <p>Odhlásit se</p>
             </MenuItem>
-            )
+        )
     }
 
     return content

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-function PostDelete() {
+function PostArchive() {
     let { id } = useParams();
     const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);
@@ -49,52 +50,96 @@ function PostDelete() {
     useEffect(() => {
         loadPost();
     }, []);
-    return (
-        <div className="main__container">
-            <Box mt={4}>
-                <Typography variant="h3" color="primary" gutterBottom>
-                    Archive your post
-                </Typography>
-            </Box>
-            <section className="main__container__shadow--delete main__container__shadow">
-                <Box mt={4}>
-                    <Typography variant="h5" gutterBottom>
-                        Are you sure you want to archive this post?
+
+    let postContent = "";
+
+    if (loading) {
+        postContent = (
+            <div className="logo--pulsating">
+                <img src="/heart_plantera_inversed.png" />
+            </div>
+        );
+    } else if (post) {
+        postContent = (
+            <Grid
+                container
+                className="
+                    main__container__shadow
+                    "
+                justify="center"
+                align="center"
+                spacing={4}
+            >
+                <Grid item>
+                    <Typography variant="h5">
+                        Opravdu chceš archivovat: <Box
+                            fontWeight={900}
+                            color="primary.main"
+                        >
+                            {post.name}
+                        </Box>
                     </Typography>
-                </Box>
-                <Box mt={2}>
-                    <Typography fontWeight={900} variant="h5" color="primary">
-                        {post.name}
-                    </Typography>
-                </Box>
-                <img src={post.photo} alt={post.name} />
-                <div className="button--deleteGroup">
+                </Grid>
+                <Grid item style={{ fontSize: 0 }}>
+                    <img
+                        src={post.photo}
+                        alt={post.name}
+                        className="imagePost--archive"
+                    />
+                </Grid>
+                <Grid item xs={9} sm={6} md={4} lg={3}>
                     <Button
+                        fullWidth
                         onClick={handleSubmit}
                         className="button"
                         color="primary"
                         variant="contained"
                         size="large"
                         disableRipple
-                        style={{ textTransform: "none" }}
                     >
-                        Archive
+                        Archivovat
                     </Button>
+                </Grid>
+                <Grid item xs={9} sm={6} md={4} lg={3}>
                     <Button
+                        fullWidth
                         onClick={() => history.push(`/posts/${id}`)}
                         className="button"
                         color="primary"
                         variant="outlined"
                         size="large"
                         disableRipple
-                        style={{ textTransform: "none" }}
                     >
-                        No
+                        Ne
                     </Button>
-                </div>
-            </section>
-        </div>
+                </Grid>
+            </Grid>
+        );
+    }
+
+    return (
+        <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+        >
+            <Grid item xs={10} md={6}>
+                <Box p={4}>
+                    <Typography
+                        variant="h3"
+                        color="primary"
+                        gutterBottom
+                    >
+                        Archivovat nabídku
+                    </Typography>
+                </Box>
+            </Grid>
+            <Grid item xs={10} md={6}>
+                {postContent}
+            </Grid>
+        </Grid>
     );
 }
 
-export default PostDelete;
+export default PostArchive;

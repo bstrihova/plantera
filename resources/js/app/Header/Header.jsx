@@ -67,124 +67,124 @@ export default function Header() {
 
   const urlUserProfile = `/user/profile/${user.id}`
   const urlUserSettings = `/user/settings`
-  
+
   let authContentMobile = "";
-  let authContentDesktop= "";
+  let authContentDesktop = "";
 
   if (user.id) {
     authContentMobile = (
       <>
-      {/* messages icon inside hamburger mobile menu */}
-      <MenuItem onClick={()=>{handleMenuClose();  history.push("/messages"); }}>
+        {/* messages icon inside hamburger mobile menu */}
+        <MenuItem onClick={() => { handleMenuClose(); history.push("/messages"); }}>
           <IconButton color="primary">
             {/* <Badge badgeContent={4} color="primary"> */}
-              <MailIcon />
+            <MailIcon />
             {/* </Badge> */}
           </IconButton>
-          Messages
+          Zprávy
       </MenuItem>
 
-      {/* profile mobile menu */}
-      <MenuItem onClick={()=> {handleMenuClose();  history.push(`/user/profile/${user.id}`);}}>
+        {/* profile mobile menu */}
+        <MenuItem onClick={() => { handleMenuClose(); history.push(`/user/profile/${user.id}`); }}>
           <IconButton color="primary">
             <AccountCircle />
           </IconButton>
-          Profile
+          Profil
       </MenuItem>
 
-       {/* account settings mobile menu */}
-       <MenuItem onClick={()=> {handleMenuClose();  history.push("/user/settings");}}>
+        {/* account settings mobile menu */}
+        <MenuItem onClick={() => { handleMenuClose(); history.push("/user/settings"); }}>
           <IconButton color="primary">
             <SettingsIcon />
           </IconButton>
-          Account Settings
+          Nastavení účtu
       </MenuItem>
 
-    <Logout version="mobile"/>
+        <Logout version="mobile" />
 
-    <MenuItem>
-      <Box mx="auto">
-        <Button color="primary" variant="contained" size="large" onClick={()=> {handleMenuClose();  history.push("/posts/create");}}>
-          Add Plant 
-        </Button> 
-        </Box>
-      
-    </MenuItem>
-    </>
+        <MenuItem>
+          <Box mx="auto">
+            <Button color="primary" variant="contained" size="large" onClick={() => { handleMenuClose(); history.push("/posts/create"); }}>
+              Nabídnout kytku
+        </Button>
+          </Box>
+
+        </MenuItem>
+      </>
     )
   } else {
     authContentMobile = (
       <>
-    <MenuItem onClick={()=> {handleMenuClose();  history.push("/login");}}>
-      <IconButton>
-          <LoginIcon color="primary"/>
-      </IconButton>
-      Login
+        <MenuItem onClick={() => { handleMenuClose(); history.push("/login"); }}>
+          <IconButton>
+            <LoginIcon color="primary" />
+          </IconButton>
+      Přihlásit se
     </MenuItem>
-    
-    <MenuItem onClick={()=> {handleMenuClose();  history.push("/register");}}>
-      <Button color="primary" variant="contained" size="large" >
-        Get Started
-      </Button> 
-  </MenuItem>    
-  </>
+
+        <MenuItem onClick={() => { handleMenuClose(); history.push("/register"); }}>
+          <Button color="primary" variant="contained" size="large" >
+            Nabídnout kytku
+      </Button>
+        </MenuItem>
+      </>
     )
   }
   if (user.id) {
     authContentDesktop = (
       <Grid container spacing={1} alignItems="center" justify="flex-end">
-          {/* icon for messages on desktop */}
-          <Grid item>
-                <IconButton onClick={()=> (history.push("/messages"))}>
-                  {/* <Badge badgeContent={4} color="secondary"> */}
-                    <MailIcon color="secondary" />
-                  {/* </Badge> */}
-                </IconButton>
-          </Grid>
-            
-            {/* profile icon on desktop */}
-            <Grid item>
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-              >
-                <AccountCircle color="secondary"/> 
-              </IconButton>
-            </Grid>
-        
-          <Grid item>
-            <Logout version="desktop"/>
-          </Grid>
-  
-          <Grid item>
-              
-            <Button color="secondary" variant="contained" onClick={()=> (history.push("/posts/create"))}>
-              Add plant
-            </Button>
-          </Grid> 
+        {/* icon for messages on desktop */}
+        <Grid item>
+          <IconButton onClick={() => (history.push("/messages"))}>
+            {/* <Badge badgeContent={4} color="secondary"> */}
+            <MailIcon color="secondary" />
+            {/* </Badge> */}
+          </IconButton>
         </Grid>
+
+        {/* profile icon on desktop */}
+        <Grid item>
+          <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+          >
+            <AccountCircle color="secondary" />
+          </IconButton>
+        </Grid>
+
+        <Grid item>
+          <Logout version="desktop" />
+        </Grid>
+
+        <Grid item>
+
+          <Button color="secondary" variant="contained" onClick={() => (history.push("/posts/create"))}>
+            Nabídnout kytku
+            </Button>
+        </Grid>
+      </Grid>
     )
   } else {
     authContentDesktop = (
       <Grid container spacing={2} alignItems="center">
-      <Grid item>
-         <IconButton
-         edge="end"
-         aria-label="login icon"
-         color="secondary"
-         onClick={()=> (history.push("/login"))}
-       >
-         <LoginIcon />
-       </IconButton>
+        <Grid item>
+          <IconButton
+            edge="end"
+            aria-label="login icon"
+            color="secondary"
+            onClick={() => (history.push("/login"))}
+          >
+            <LoginIcon />
+          </IconButton>
+        </Grid>
+        <Grid item>
+          <Button color="secondary" variant="contained" onClick={() => (history.push("/register"))}>
+            Nabídnout kytku
+          </Button>
+        </Grid>
       </Grid>
-     <Grid item>
-       <Button color="secondary" variant="contained" onClick={()=> (history.push("/register"))}>
-         Get Started
-       </Button> 
-     </Grid>
-     </Grid>
     )
   }
   const renderMenu = (
@@ -200,41 +200,41 @@ export default function Header() {
 
 
       {/* popup menu profile menu item */}
-        <MenuItem onClick={()=> {handleMenuClose();  history.push(urlUserProfile);}}>
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="primary"
-          >
-            <AccountCircle />
-          </IconButton>
-          Profile
+      <MenuItem onClick={() => { handleMenuClose(); history.push(urlUserProfile); }}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="primary"
+        >
+          <AccountCircle />
+        </IconButton>
+          Profil
         </MenuItem>
 
       {/* popup menu account settings menu item */}
-        <MenuItem onClick={()=> {handleMenuClose();  history.push(urlUserSettings);}}>
-          <IconButton
-            aria-label="account settings"
-            aria-haspopup="true"
-            color="primary"
-          >
-            <SettingsIcon />
-          </IconButton>
-          Account Settings
-        </MenuItem> 
+      <MenuItem onClick={() => { handleMenuClose(); history.push(urlUserSettings); }}>
+        <IconButton
+          aria-label="account settings"
+          aria-haspopup="true"
+          color="primary"
+        >
+          <SettingsIcon />
+        </IconButton>
+          Nastavení účtu
+        </MenuItem>
     </Menu>
   );
   const renderMobileMenu = (
     // whole hamburger mobile menu
     <Menu
-    anchorEl={mobileMoreAnchorEl}
-    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-    keepMounted
-    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-    open={isMobileMenuOpen}
-    onClose={handleMobileMenuClose}
-  >
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
       {authContentMobile}
     </Menu>
   );
@@ -244,35 +244,35 @@ export default function Header() {
       <AppBar position="static">
         {/* content of whole navbar */}
         <Toolbar>
-        {/* Logo */}
-        <Link to="/">
-        <img src="/logo_plantera.png" alt="logo" width="100px"/>
-        </Link>
-        {user.id ? `logged in: ${user.id}` : "no user"} {user.name}
-        <div className={classes.grow} />
-    
-        {/* desktop menu - right side */}
-        <div className={classes.sectionDesktop}>
-     
-        {authContentDesktop}
+          {/* Logo */}
+          <Link to="/">
+            <img src="/logo_plantera.png" alt="logo" width="100px" style={{ marginRight: "30px" }} />
+          </Link>
+          {/* {user.id ? ` ${user.name}` : "no user"} */}
+          <div className={classes.grow} />
 
-        </div>
-        
-        {/* shows mobile menu on right side of nav */}
-        <div className={classes.sectionMobile}>
-          {/* hamburger button */}
-          <IconButton
-            aria-label="open mobile menu"
-            aria-haspopup="true"
-            onClick={handleMobileMenuOpen}
-            color="inherit"
-            edge="start"
-          >
-            <MenuIcon />
-          </IconButton>
-        
-        </div>
-       
+          {/* desktop menu - right side */}
+          <div className={classes.sectionDesktop}>
+
+            {authContentDesktop}
+
+          </div>
+
+          {/* shows mobile menu on right side of nav */}
+          <div className={classes.sectionMobile}>
+            {/* hamburger button */}
+            <IconButton
+              aria-label="open mobile menu"
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+              edge="start"
+            >
+              <MenuIcon />
+            </IconButton>
+
+          </div>
+
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

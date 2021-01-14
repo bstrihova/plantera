@@ -10,27 +10,37 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputError from "../common/InputError/InputError";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
-import PriceOption from "../common/PriceOption/PriceOption";
+import Grid from '@material-ui/core/Grid';
+import Carousel from 'react-material-ui-carousel'
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 function PostEdit() {
     let { id } = useParams();
-    
-
-    const history = useHistory();
 
     const [post, setPost] = useState("");
     const [loading, setLoading] = React.useState(true);
     const [values, setValues] = useState({
         name: "",
-        available: 1,
-        price: 0,
-        transaction: "sell",
-        description: ""
+        description: "",
+        price: "",
+        transaction: "",
+        available: "",
     });
 
-    
-    
+    const images = [
+        {
+            src: "https://images.unsplash.com/photo-1598880940371-c756e015fea1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+            alt: "sansevieria"
+        },
+        {
+            src: "https://images.unsplash.com/photo-1600958568384-51f4289e943a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+            alt: "lady hugging sansevieria"
+        }
+    ]
+
+    const history = useHistory();
 
     const [errors, setErrors] = useState({});
 
@@ -51,7 +61,7 @@ function PostEdit() {
 
         const response_data = await response.json();
 
-        //The user is authenticated,
+        // changes in form were successfully saved
         if (response.status === 200) {
             history.push(`/posts/${id}`);
         }
@@ -63,22 +73,31 @@ function PostEdit() {
 
     const handleChange = event => {
         const allowed_names = [
-                "name",
-                "available",
-                "price",
-                "transaction",
-                "description"
-            ],
+            "name",
+            "transaction",
+            "price",
+            "description",
+            "available"
+        ],
             name = event.target.name,
             values = event.target.value;
 
         if (-1 !== allowed_names.indexOf(name)) {
-            setValues(prev_values => {
-                return {
-                    ...prev_values,
-                    [name]: values
-                };
-            });
+            if (name === "available") {
+                setValues(prev_values => {
+                    return {
+                        ...prev_values,
+                        [name]: event.target.checked
+                    };
+                });
+            } else {
+                setValues(prev_values => {
+                    return {
+                        ...prev_values,
+                        [name]: values
+                    };
+                });
+            }
         }
     };
 
@@ -87,6 +106,15 @@ function PostEdit() {
         const response = await fetch(`/api/posts/${id}`);
         const data = await response.json();
         data && setPost(data);
+        // load current from db to the form
+        console.log(data)
+        data && setValues({
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            transaction: data.transaction,
+            available: data.available,
+        });
         setLoading(false);
     };
 
@@ -96,69 +124,111 @@ function PostEdit() {
 
     let content = "";
 
-    if (post, values) {
+    if (loading) {
         content = (
-            <div className="main__container">
-                <Box mt={4}>
-                    <Typography variant="h3" color="primary" gutterBottom>
-                        Edit your post
-                    </Typography>
-                </Box>
-                <Box className="main__container__shadow">
-                    <form action="/edit" method="post" onSubmit={handleSubmit}>
-                        <div className="main__container">
-                            <figure className="myPictures">
-                                <img src={post.photo} alt={post.name} />
-                            </figure>
-                            {/* <Button
-                                className="button"
-                                color="primary"
-                                variant="contained"
-                                size="large"
-                                type="submit"
-                            >
-                                Modify plant picture
-                            </Button> */}
-                            <div className="texField--postName">
+            <div className="logo--pulsating">
+                <img src="/heart_plantera_inversed.png" />
+            </div>
+        );
+    } else if (post, values) {
+        content = (
+            <form action="/edit" method="post" onSubmit={handleSubmit}>
+                <Grid
+                    container
+                    className="
+                        main__container__shadow 
+                        "
+                    justify="center"
+                    align="center"
+                >
+                    <Grid item md={5} style={{ fontSize: "0" }}>
+                        {/* <Carousel
+                            autoPlay={false}
+                            animation="slide"
+                            fullHeightHover={true}
+                            className="carousel"
+                        >
+                            {
+                                images.map((image, i) => {
+                                return (
+                                    <img 
+                                        src={image.src} 
+                                        alt={image.alt} 
+                                        key={i} 
+                                        className="imagePost"
+                                    />
+                                ) 
+                                } 
+                                )
+                            }
+                        </Carousel> */}
+                        <img
+                            src={post.photo}
+                            alt={post.name}
+                            className="imagePost"
+                        />
+                    </Grid>
+                    <Grid item md={7}>
+                        <Grid
+                            container
+                            spacing={3}
+                            align="center"
+                            justify="center"
+                            className="paddingContainer"
+                        >
+                            <Grid item xs={12}>
                                 <TextField
+                                    fullWidth
                                     color="primary"
-                                    label="Name of the plant"
+                                    label="Název rostliny"
                                     variant="filled"
                                     name="name"
                                     value={values.name || ""}
                                     onChange={handleChange}
                                     error={errors.name ? true : false}
-                                    helperText={
-                                        <InputError errors={errors.name} />
-                                    }
+                                    helperText={<InputError errors={errors.name} />}
                                 />
-                            </div>
-                            <div className="texField--postName">
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
                                 <FormControl
                                     variant="filled"
-                                    // style={{ width: "30%" }}
                                 >
-                                    <InputLabel>Status</InputLabel>
-                                    <MuiSelect
-                                        name="available"
-                                        value={values.available || ""}
-                                        onChange={handleChange}
-                                    >
-                                        <MuiMenuItem value="1">
-                                            Available
-                                        </MuiMenuItem>
-                                        <MuiMenuItem value="0">
-                                            Sold
-                                        </MuiMenuItem>
-                                    </MuiSelect>
+                                    {/* <InputLabel>
+                                            Status
+                                        </InputLabel>
+                                        <MuiSelect
+                                            name="available"
+                                            value={values.available || ""}
+                                            onChange={handleChange}
+                                        >
+                                            <MuiMenuItem value="1">
+                                                Available
+                                            </MuiMenuItem>
+                                            <MuiMenuItem value="0">
+                                                Sold
+                                            </MuiMenuItem>
+                                        </MuiSelect> */}
+                                    <FormControlLabel
+                                        control={
+                                            <Switch
+                                                color="primary"
+                                                checked={values.available ? true : false}
+                                                name="available"
+                                                onChange={handleChange}
+                                            />
+                                        }
+                                        label="K dispozici"
+                                        labelPlacement="start"
+                                    />
                                 </FormControl>
-                            </div>
-                            <div className="input__group--post">
+                            </Grid>
+                            <Grid item xs={6} sm={4}>
                                 <FormControl
                                     variant="filled"
-                                    style={{ width: "30%" }}
                                 >
-                                    <InputLabel>Selling?</InputLabel>
+                                    <InputLabel>
+                                        Kytku chci:
+                                    </InputLabel>
                                     <MuiSelect
                                         variant="filled"
                                         name="transaction"
@@ -166,70 +236,97 @@ function PostEdit() {
                                         onChange={handleChange}
                                     >
                                         <MuiMenuItem value="swap">
-                                            Swap
+                                            Vyměnit
                                         </MuiMenuItem>
                                         <MuiMenuItem value="sell">
-                                            Sell
+                                            Prodat
                                         </MuiMenuItem>
                                         <MuiMenuItem value="donate">
-                                            Donate
+                                            Darovat
                                         </MuiMenuItem>
                                     </MuiSelect>
                                 </FormControl>
-                                {/* Component to have Price option available */}
-                                <PriceOption
-                                    transaction={values.transaction}
-                                    price={values.price}
-                                    errors={errors.price}
-                                    handleChange={handleChange}
-                                />
-                            </div>
-                            <div className="texField--postDescription">
-                                <Box>
+                            </Grid>
+                            {values.transaction === "sell" ? (
+                                <Grid item xs={6} sm={4}>
                                     <TextField
-                                        label="Description"
-                                        name="description"
-                                        onChange={handleChange}
-                                        value={values.description || ""}
-                                        multiline
-                                        rows={4}
-                                        columns={50}
+                                        color="primary"
+                                        label="Cena"
                                         variant="filled"
-                                        style={{ width: "100%" }}
-                                        error={
-                                            errors.description ? true : false
-                                        }
-                                        helperText={
-                                            <InputError
-                                                errors={errors.description}
-                                            />
-                                        }
+                                        name="price"
+                                        type="number"
+                                        value={values.price || ""}
+                                        onChange={handleChange}
+                                        error={errors.price ? true : false}
+                                        helperText={<InputError errors={errors.price} />}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">Kč</InputAdornment>
+                                            )
+                                        }}
                                     />
-                                </Box>
-                            </div>
-                            <Box mb={2}>
-                                {/* <Link to="/messages/create">  */}
-                                <Button
-                                    color="primary"
-                                    variant="contained"
-                                    size="large"
-                                    disableRipple
-                                    type="submit"
-                                    style={{ textTransform: "none" }}
-                                    style={{ width: "100%" }}
-                                >
-                                    Confirm changes
-                                </Button>
-                            </Box>
-                            {/* </Link> */}
-                        </div>
-                    </form>
-                </Box>
-            </div>
+                                </Grid>
+                            ) : ""}
+                            <Grid item xs={12}>
+                                <TextField
+                                    fullWidth
+                                    label="Popis"
+                                    name="description"
+                                    onChange={handleChange}
+                                    value={values.description}
+                                    multiline
+                                    rows={4}
+                                    columns={50}
+                                    variant="filled"
+                                    error={errors.description ? true : false}
+                                    helperText={
+                                        <InputError
+                                            errors={errors.description}
+                                        />
+                                    }
+                                />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            type="submit"
+                            size="large"
+                            className="button--archive"
+                        >
+                            Uložit změny
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form>
         );
     }
 
-    return content;
+    return (
+        <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+        >
+            <Grid item xs={10} lg={6}>
+                <Box p={4}>
+                    <Typography
+                        variant="h3"
+                        color="primary"
+                        gutterBottom
+                    >
+                        Upravit nabídku
+                    </Typography>
+                </Box>
+            </Grid>
+            <Grid item xs={10} lg={6}>
+                {content}
+            </Grid>
+        </Grid>
+    );
 }
 
 export default PostEdit;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GoogleMaps() {
 
-  const { userLocation, setUserLocation} = useGlobalContext();
+  const { userLocation, setUserLocation } = useGlobalContext();
 
   const classes = useStyles();
   const [value, setValue] = useState(null);
@@ -53,7 +53,7 @@ export default function GoogleMaps() {
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
-        `https://maps.googleapis.com/maps/api/js?key=AIzaSyDg2YPZBcJdGDzvKnr2Q7EkqKXUPpYENEk&libraries=places&region=CZ`,
+        `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&libraries=places&region=CZ`,
         document.querySelector('head'),
         'google-maps',
       );
@@ -88,7 +88,7 @@ export default function GoogleMaps() {
     fetch({ input: inputValue }, (results) => {
       if (active) {
         let newOptions = [];
-  
+
 
         if (value) {
           newOptions = [value];
@@ -134,20 +134,20 @@ export default function GoogleMaps() {
       }}
       renderInput={(params) => (
         <TextField
-                {...params}
-                label="Location"
-                color="primary"
-                variant="outlined"
-                fullWidth
-                InputProps={{
-                  ...params.InputProps,
-                  startAdornment: (
-                      <InputAdornment position="start">
-                      <LocationOnIcon color="primary"/>
-                      </InputAdornment>
-                  ),
-                }}
-                />
+          {...params}
+          label="Oblast"
+          color="primary"
+          variant="outlined"
+          fullWidth
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: (
+              <InputAdornment position="start">
+                <LocationOnIcon color="primary" />
+              </InputAdornment>
+            ),
+          }}
+        />
       )}
       renderOption={(option) => {
         const matches = option.structured_formatting.main_text_matched_substrings;
@@ -158,23 +158,23 @@ export default function GoogleMaps() {
 
         return (
           <>
-          <Grid container alignItems="center">
-            <Grid item>
-              <LocationOnIcon className={classes.icon} />
+            <Grid container alignItems="center">
+              <Grid item>
+                <LocationOnIcon className={classes.icon} />
+              </Grid>
+              <Grid item xs>
+                {parts.map((part, index) => (
+                  <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                    {part.text}
+                  </span>
+                ))}
+                <Typography variant="body2" color="textSecondary">
+                  {option.structured_formatting.secondary_text}
+                </Typography>
+              </Grid>
+              <Grid item>
+              </Grid>
             </Grid>
-            <Grid item xs>
-              {parts.map((part, index) => (
-                <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
-                  {part.text}
-                </span>
-              ))}
-              <Typography variant="body2" color="textSecondary">
-                {option.structured_formatting.secondary_text}
-              </Typography>
-            </Grid>
-            <Grid item>
-            </Grid>
-          </Grid>
           </>
         );
       }}

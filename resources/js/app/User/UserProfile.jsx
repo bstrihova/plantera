@@ -1,16 +1,14 @@
-import React, {useState, useEffect} from 'react'
-import Box from "@material-ui/core/Box";
+import React, { useState, useEffect } from 'react'
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import EditIcon from "@material-ui/icons/Edit";
 import Avatar from "@material-ui/core/Avatar";
-import Container from "@material-ui/core/Container";
 import { makeStyles } from '@material-ui/core/styles';
 import PostGrid from "../common/PostGrid/PostGrid"
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useGlobalContext } from "../context";
-import IconButton from '@material-ui/core/IconButton';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function UserProfile({searchValue, setSearchValue}) {
+function UserProfile({ searchValue, setSearchValue }) {
 
     const classes = useStyles();
     const { user } = useGlobalContext();
@@ -42,67 +40,102 @@ function UserProfile({searchValue, setSearchValue}) {
         loadDisplayedUser();
     }, [id]);
 
-    let userContent = "";
-    let editButton = "";
-
-    if (user.id == id) {
-        editButton = (
-            <Grid item>
-                <IconButton color="primary"  onClick={()=> history.push("/user/settings")}>
-                    <EditIcon fontSize="large"  />
-                </IconButton>
-                
-            </Grid>
-        )
-    }
+    let content = "";
 
     if (loading) {
-        userContent = (
+        content = (
             <div className="logo--pulsating">
                 <img src="/heart_plantera_inversed.png" />
             </div>
         );
-    } else {
-        if (displayedUser) {
-            userContent = (
-            <Container maxWidth={false}>
-                <Box mt={4}>
+    } else if (displayedUser) {
+        content = (
+            <>
+                <Grid item xs={10}>
                     <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                    spacing={10}
+                        container
+                        justify="center"
+                        align="center"
+                        className="alignItemsCenter"
+                        spacing={3}
                     >
-                        <Grid item>
-                            <Avatar alt={displayedUser.name} src={displayedUser.profile_photo_url} variant="circular" className={classes.large}/>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="h3" color="primary" gutterBottom>
+                        <Grid item xs={12} sm={6}>
+                            <Avatar
+                                alt={displayedUser.name}
+                                src={displayedUser.profile_photo_url} variant="circular"
+                                className={classes.large}
+                            />
+                            <Typography
+                                variant="h3"
+                                color="primary"
+                                gutterBottom
+                            >
                                 {displayedUser.name}
                             </Typography>
-                            <Typography variant="body1"  gutterBottom>
-                                {displayedUser.location}
-                            </Typography>
                         </Grid>
-                        {editButton}
+                        <Grid item xs={12} sm={6}>
+                            <Grid
+                                container
+                                justify="center"
+                                align="center"
+                                spacing={2}
+                            >
+                                <Grid item>
+                                    <Typography
+                                        variant="h5"
+                                        color="primary"
+                                        gutterBottom
+                                    >
+                                        Oblast:
+                                </Typography>
+                                    <Typography
+                                        variant="body1"
+                                        gutterBottom
+                                    >
+                                        {/* {displayedUser.location}
+                                    */}
+                                    Prague, Czech Republic
+                                </Typography>
+                                </Grid>
+                                {user.id == id ? (
+                                    <Grid item>
+                                        <Button
+                                            variant="contained"
+                                            onClick={() => history.push("/user/settings")}
+                                            color="primary"
+                                            size="small"
+                                            startIcon={<EditIcon />}
+                                        >
+                                            Upravit profil
+                                    </Button>
+                                    </Grid>
+                                ) : ""}
+                            </Grid>
+                        </Grid>
                     </Grid>
-                </Box>
-            </Container>
-               
-            );
-        }
+                </Grid>
+                <Grid item>
+                    <PostGrid
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue} specificUser={displayedUser.id}
+                    />
+                </Grid>
+            </>
+        );
     }
 
-
     return (
-        <div>
-            {userContent}
-
-            <PostGrid searchValue={searchValue} setSearchValue={setSearchValue} specificUser={displayedUser.id}/>
-
-        </div>
+        <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            className="marginTopContainer"
+        >
+            {content}
+        </Grid>
     )
+
 }
 
 export default UserProfile

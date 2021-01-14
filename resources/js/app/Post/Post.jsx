@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PostGrid from "../common/PostGrid/PostGrid";
-import PostDescription from "./PostDescription/PostDescription";
-import { useParams } from "react-router-dom";
+import PostDescription from "./PostDescription"
 
-function Post({ searchValue, setSearchValue }) {
+import { useParams } from "react-router-dom";
+import Grid from '@material-ui/core/Grid';
+
+function Post ({ searchValue, setSearchValue }) {
     let { id } = useParams();
     const [post, setPost] = useState("");
+    const [threads, setThreads] = useState([]);
     const [loading, setLoading] = React.useState(true);
 
 
@@ -17,10 +20,16 @@ function Post({ searchValue, setSearchValue }) {
         setLoading(false);
     };
 
-    //fetch user here and compare if post.user_id = authUser
+    const loadThreads = async () => {
+        const response = await fetch(`/api/threads`);
+        const data = await response.json();
+        data && setThreads(data);
+    };
+
 
     useEffect(() => {
         loadPost();
+        loadThreads();
         window.scrollTo(0, 0);
     }, [ id ]);
 
@@ -32,31 +41,31 @@ function Post({ searchValue, setSearchValue }) {
                 <img src="/heart_plantera_inversed.png" />
             </div>
         );
-    } else {
-        if (post) {
-            postContent = (
-                <>
-                    <img
-                        className="imagePost"
-                        alt={post.name}
-                        src={post.photo}
-                    />
-                    <PostDescription post={post} />
-                </>
-            );
-        }
+    } else if (post) {
+        postContent = (
+            <>
+                <PostDescription post={post} threads={threads} />
+            </>
+        );
     }
     return (
-        <div className="main__container">
-            <section className="main__container__shadow main__container__shadow--post">
+        <Grid  
+            container 
+            direction="column"
+            justify="center"
+            alignItems="center"
+        > 
+            <Grid item xs={10} sm={7}>
                 {postContent}
-            </section>
-            <PostGrid
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-                specificPost={post.id}
-            />
-        </div>
+            </Grid>
+            <Grid item>
+                <PostGrid
+                    searchValue={searchValue}
+                    setSearchValue={setSearchValue}
+                    specificPost={post.id}
+                />
+            </Grid>
+        </Grid>
     );
 }
 

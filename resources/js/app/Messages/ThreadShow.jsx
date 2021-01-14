@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
-import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import SendIcon from '@material-ui/icons/Send';
-import MessageContent from './MessageContent';
+import ThreadShowItem from './ThreadShowItem';
 import { useParams } from "react-router-dom";
-import List from '@material-ui/core/List';
-import InputError from "../common/InputError/InputError";
 import CookieCsrf from "../csrf";
 import PostPrice from "../common/PostPrice/PostPrice";
 import BlockIcon from '@material-ui/icons/Block';
@@ -18,17 +18,17 @@ import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
 import { useGlobalContext } from "../context";
-import {useHistory} from "react-router-dom";
-import Link from '@material-ui/core/Link';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
-    root: {
+    chip: {
         backgroundColor: "#FF0000",
         color: "white",
         icon: "white",
-    }
-
-    
+    },
+    root: {
+        flexGrow: 1,
+    },
 }));
 
 function ThreadShow() {
@@ -40,48 +40,33 @@ function ThreadShow() {
     const [loading, setLoading] = React.useState(true);
     let history = useHistory();
 
-   
-    console.log(user)
-
     const [values, setValues] = useState({
         body: '',
     });
 
-
-    const [errors, setErrors] = useState({});
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
-       
+
 
         const response = await fetch(`/api/threads/${id}`, {
             method: 'post',
             body: JSON.stringify(values),
             headers: {
-                'Accept' : 'application/json', // tell Laravel (backend) what we want in response
-                'Content-type' : 'application/json', // tell backend what we are sending
-                // 'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content') // prove to backend that this is authorized
+                'Accept': 'application/json', // tell Laravel (backend) what we want in response
+                'Content-type': 'application/json', // tell backend what we are sending
                 'X-XSRF-TOKEN': CookieCsrf()
             }
-            
+
         })
-        
-        const response_data = await response.json();
-      
+
         if (response.status === 200) {
             window.location.reload();
         }
-
-        if (response_data.errors) {
-            setErrors(response_data.errors);
-        }
-
     }
 
     const handleChange = (event) => {
         const allowed_names = ['body'],
-            name  = event.target.name,
+            name = event.target.name,
             value = event.target.value
 
         if (-1 !== allowed_names.indexOf(name)) {
@@ -101,10 +86,10 @@ function ThreadShow() {
         setLoading(true);
         const response = await fetch(`/api/threads/${id}`, {
             headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }
-          });
+        });
         const data = await response.json();
         data && setThread(data.thread);
         setLoading(false);
@@ -112,179 +97,194 @@ function ThreadShow() {
 
     useEffect(() => {
         loadThread();
-    
-    }, []);
+    }, [id]);
 
- 
-    let threadContent = "";
+    let pageContent = "";
+
     let messageContent = "";
-    let username = "";
-    let status = "";
 
-    if (user && thread && thread.buyer && thread.buyer.name && user.id == thread.buyer_id ) {
-        username =  ( <Box p={4}>                                
-                        <Typography variant="h3" 
-                                    color="primary"
-                                    align='center'
-                                    >                      
-                            {thread.seller.name}
-                        </Typography>               
-                        </Box> ) }    
-    else if (user && thread && thread.buyer && thread.buyer.name && user.id != thread.buyer_id){    
-        username =  ( <Box p={4}>                                
-       <Typography variant="h3" 
-                   color="primary"
-                   align='center'
-                   >                      
-          {thread.buyer.name}
-       </Typography>               
-       </Box> )}
+    let recipient = "";
 
-    if (thread && thread.post.available === 1 ) {
-        status = ( <Chip color="primary" 
-        icon={<LocalFloristIcon />}
-        label= "Available" /> )}
-     else { 
-        status = ( 
-                     <Chip   className={classes.root} 
-                           icon={<BlockIcon style={{ color: "white"}} />}
-                           label= "Not available"  /> )} ;
-    
+    if (user && thread && thread.buyer && thread.buyer.name && user.id == thread.buyer_id) {
+        recipient = thread.seller.name
+
+    } else if (user && thread && thread.buyer && thread.buyer.name && user.id != thread.buyer_id) {
+        recipient = thread.buyer.name
+    }
 
     if (loading) {
-        threadContent = (
+        pageContent = (
             <div className="logo--pulsating">
                 <img src="/heart_plantera_inversed.png" />
             </div>
         );
     } else {
-        if (thread) {
-            threadContent = (
-                <> 
-                <Box className="boxshadow">   
-
-                <Grid  container 
-                    direction="row"
-                    justify='center'
-                    alignItems='center'
-    >                     
-                
-                <Grid item xs={12} lg={5}>    
-                {/* conditional rendering on image class for desktop */}
-                    <Link href="#" onClick={() => {
-                    history.push(`/posts/${thread.post.id}`)
-                    } }> 
-                    <img className="imageMessage" src={thread.post.photo} alt={thread.post.name}/>
-                    </Link>
-                </Grid>   
-                   <Grid item xs={12} lg={7} >  
-                   <Grid container 
-                         direction="column"
-                         alignItems="center">
-                        <Box p={2}>
-                        <Typography variant="h6"  align="center">
-                                {thread.post.name}
+        pageContent = (
+            <>
+                {/* heading with recipient */}
+                <Grid item xs={10} lg={6}>
+                    <Box p={4}>
+                        <Typography
+                            variant="h3"
+                            color="primary"
+                            gutterBottom
+                        >
+                            {recipient}
                         </Typography>
-                        </Box>
-                        <Box p={2}>
-                        <PostPrice post={thread.post}/>
-                        </Box>
-                        <Box p={2}>
-                        {status}
-                        </Box>
-                    </Grid> 
+                    </Box>
                 </Grid>
+
+                {/* post description */}
+                <Grid item xs={11} sm={6} md={5} lg={3}>
+                    <Grid
+                        container
+                        className="
+                        main__container__shadow 
+                        "
+                        justify="center"
+                        align="center"
+                    >
+                        <Grid
+                            item xs={5}
+                            style={{ fontSize: 0 }}
+                        >
+                            <img
+                                className="imagePost--threadShow"
+                                src={thread.post.photo}
+                                alt={thread.post.name}
+                                onClick={() => {
+                                    history.push(`/posts/${thread.post.id}`)
+                                }}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            xs={7}
+                        >
+                            <Grid
+                                container
+                                direction="column"
+                                alignItems="center"
+                                className="paddingContainer"
+                                spacing={2}
+                            >
+                                <Grid item>
+                                    <Typography variant="h5">
+                                        <Box
+                                            fontWeight={900}
+                                        >
+                                            {thread.post.name}
+                                        </Box>
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Box
+                                        fontWeight={400}
+                                    >
+                                        <PostPrice post={thread.post} isPost={true} />
+                                    </Box>
+                                </Grid>
+                                <Grid item>
+                                    {/* show if item is still available */}
+                                    {thread.post.available ? (
+                                        <Chip
+                                            color="primary"
+                                            icon={
+                                                <LocalFloristIcon />
+                                            }
+                                            label="Available"
+                                        />) : (
+                                            <Chip
+                                                className={classes.chip}
+                                                icon={
+                                                    <BlockIcon
+                                                        style={{ color: "white" }}
+                                                    />
+                                                }
+                                                label="Not available"
+                                            />
+                                        )}
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
-                </Box>
-               
-                </>
 
-            );
+                {/* messages */}
+                <Grid item xs={11} sm={9} md={7} lg={5}>
+                    {thread ?
+                        <Grid
+                            container
+                            spacing={3}
+                            className="paddingContainer"
+                            align="center"
+                        >
+                            {thread.messages.map((message, index) => (
+                                <ThreadShowItem
+                                    message={message}
+                                    seller={thread.seller_id}
+                                    key={index}
+                                />
+                            ))}
+                        </Grid>
+                        : ""}
 
-            messageContent = (
-                <>
-                {thread.messages.map((message, index) => (
-                  <div key={message.id}>
-                    <MessageContent message={message} seller={thread.seller_id} />
-                  </div>
-                ))}
-                </>
-          );
-        }
+                    {/* form to send new message */}
+                    <Grid item xs={12} mb={2}>
+                        <FormControl
+                            variant="outlined"
+                            fullWidth
+                            style={{ marginBottom: "2rem" }}
+                        >
+                            <InputLabel htmlFor="body">
+                                Your new message
+                        </InputLabel>
+                            <OutlinedInput
+                                value={values.body}
+                                type="submit"
+                                name="body"
+                                multiline
+                                autoFocus
+                                rows={1}
+                                rowsMax={4}
+                                // when Enter is pressed, the message is sent, when Shift+Enter is pressed, a new line is made
+                                onKeyDown={(e) => {
+                                    if (e.which === 13 && e.keyCode === 13 && e.key === "Enter" && e.shiftKey) {
+                                        e.stopPropagation()
+                                    } else if (e.keyCode == 13 && !e.shiftKey) {
+                                        handleSubmit(e);
+                                    }
+                                }}
+                                onChange={handleChange}
+                                labelWidth={130}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="action send message"
+                                            edge="end"
+                                            color="primary"
+                                            type="submit"
+                                        >
+                                            <SendIcon />
+                                        </IconButton>
+                                    </InputAdornment>}
+                            />
+                        </FormControl>
+                    </Grid>
+                </Grid>
+            </>
+        );
+
     }
     return (
-    <div>
-        
-            <Grid  container 
-                   direction="column"
-                   justify="center"
-                   alignItems="center"
-                    > 
-
-               <Grid item xs={10} lg={6}>               
-                        {username}
-                    </Grid>
-
-                    <Grid item xs={10} lg={6}>    
-                      {threadContent}
-                    </Grid>   
-
-
-                    <Grid container
-                      justify="center">
-                     <Grid item xs={10} lg={6}> 
-                        <List>
-                            {messageContent}
-                        </List> 
-                    </Grid> 
-                    </Grid>
-                
-                       
-                <Grid container
-                      justify="center"
-                      p={5}>
-                <Grid item xs={10} lg={6}>
-                    
-                <form onSubmit={ handleSubmit }>    
-                <FormControl fullWidth 
-                margin="dense" 
-                hiddenLabel 
-                variant="filled"
-                >
-
-                <FilledInput fullWidth
-                            name="body"
-                            type= "text"
-                            placeholder="Write a message"
-                            // autoComplete="message"
-                            value={ values.body } 
-                            onChange={ handleChange }
-                            error={errors.body ? true : false}
-                            helpertext={<InputError errors={errors.body}/>}
-                
-                // sending icon 
-                    endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                        aria-label="action send message"
-                        edge="end"
-                        color="primary"
-                        type="submit"
-                        >
-                        <SendIcon />
-                        </IconButton>
-                    </InputAdornment>
-                    }
-                />
-                </FormControl>
-                </form>
-             </Grid>
-                
-             </Grid>   
-             
-             </Grid> 
-            
-    </div>    
+        <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+        >
+            {pageContent}
+        </Grid>
     );
 }
 
